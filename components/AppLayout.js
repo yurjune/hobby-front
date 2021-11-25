@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import MiniHeader from '../components/MiniHeader';
+import HeaderTop from '../components/HeaderTop';
 
 export const layoutWidth = "1000px";
 
@@ -34,7 +34,7 @@ const AppLayout = ({ children }) => {
   return (
     <Grid>
       <GridHeader>
-        <MiniHeader />
+        <HeaderTop />
         <Header />
       </GridHeader>
       <GridItem>{children}</GridItem>
