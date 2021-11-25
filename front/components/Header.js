@@ -30,6 +30,9 @@ const MenuItem = styled.a`
   padding: 0.5rem 0;
   cursor: pointer;
   position: relative;
+  &:visited {
+    color: red;
+  }
   &::after {
     content: "";
     position: absolute;
