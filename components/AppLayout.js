@@ -30,11 +30,11 @@ const GridFooter = styled.div`
   grid-row-end: 4;
 `
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ children, openLogInForm, closeLoginForm }) => {
   return (
     <Grid>
       <GridHeader>
-        <HeaderTop />
+        <HeaderTop openLogInForm={openLogInForm} />
         <Header />
       </GridHeader>
       <GridItem>{children}</GridItem>

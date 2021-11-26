@@ -4,7 +4,7 @@ import Link from 'next/Link';
 
 const Wrapper = styled.div`
   display: flex;
-  width: 1300px;
+  maxWidth: 1300px;
   height: 40px;
   align-items: center;
   margin: 0 auto;

@@ -17,8 +17,8 @@ export const END_TIMER = 'END_TIMER';
 
 const initialState = {
   hours: 0,
-  minutes: 0,
-  seconds: 0,
+  minutes: 59,
+  seconds: 50,
   start: false,
 };
 

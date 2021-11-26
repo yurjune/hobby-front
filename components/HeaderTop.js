@@ -4,7 +4,7 @@ import Link from 'next/Link';
 
 const Wrapper = styled.div`
   display: flex;
-  width: 1300px;
+  maxWidth: 1300px;
   height: 40px;
   margin: 0 auto;
   position: relative;
@@ -21,15 +21,16 @@ const Menu = styled.div`
 const MenuItem = styled.a`
 `
 
-const MiniHeader = () => {
+const HeaderTop = ({ openLogInForm }) => {
   return (
     <Wrapper>
       <Menu>
         <MenuItem>고객센터</MenuItem>
         <MenuItem>마이페이지</MenuItem>
+        <MenuItem onClick={openLogInForm}>로그인</MenuItem>
       </Menu>
     </Wrapper>
   );
 };
 
-export default MiniHeader;
+export default HeaderTop;
