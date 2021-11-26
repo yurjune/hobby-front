@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
 import Timer from '../components/Timer';
-import LogInForm from '../components/LogInForm';
+import { LogInForm } from '../components/LoginForm';
+import useFetch from '../hooks/useFetch';
 
 const Home = () => {
   const [isOpened, setIsOpened] = useState(false);
+  const { data, error, isLoading } = useFetch('/user')
+  
+  if (error) return <div>에러 발생</div>;
+  if (isLoading) return <div>로딩 중</div>;
+  
   const openLogInForm = () => {
     setIsOpened(true);
     console.log(isOpened)
@@ -22,6 +27,8 @@ const Home = () => {
       >
         <Timer />
         {isOpened ? <LogInForm closeLogInForm={closeLogInForm} /> : ""}
+        <div>{data.id}</div>
+        <div>{data.email}</div>
       </AppLayout>
     </>
   );
