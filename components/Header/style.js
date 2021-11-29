@@ -1,16 +1,18 @@
 import styled from 'styled-components';
+import { layoutWidth } from '../AppLayout/style';
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 1300px;
-  height: 40px;
+  max-width: ${layoutWidth};
+  height: 45px;
   align-items: center;
   margin: 0 auto;
   position: relative;
+  background-color: skyblue;
 `
 const Logo = styled.div`
   font-size: 20px;
-  color: orange;
+  margin-left: 20px;
 `
 const Menu = styled.div`
   display: flex;
@@ -39,8 +41,12 @@ const MenuItem = styled.a`
     width: 100%;
     height: 0.25rem;
     background-color: white;
-    // transform: scaleX(0);
-    // transition: transform 0.6s cubic-bezier(1, 0, 0, 1);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s cubic-bezier(1, 0, 0, 1);
+  }
+  &:hover::after {
+    transform: scaleX(1);
   }
 `
 const Profile = styled.div`

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { layoutWidth } from '../AppLayout/style';
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 1300px;
+  max-width: ${layoutWidth};
   height: 40px;
   margin: 0 auto;
   position: relative;

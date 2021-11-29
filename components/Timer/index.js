@@ -1,15 +1,11 @@
 import React, { useRef, useEffect, useReducer } from 'react';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 40px 0;
-  font-size: 20px;
-`
-const Time = styled.div`
-`
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlayCircle, faStopCircle } from '@fortawesome/free-regular-svg-icons';
+import {
+  Wrapper,
+  Count,
+  Time,
+} from './style';
 
 export const INCREASE_TIME = 'INCREASE_TIME';
 export const START_TIMER = 'START_TIMER';
@@ -98,16 +94,20 @@ const Timer = () => {
     if (time < 10) return '0' + time;
     return time;
   };
-
+  const iconStyle = {
+    cursor: "pointer",
+  }
   return (
     <Wrapper>
-      <Time>{convertTime(state.hours)}</Time>
-      <div>:</div>
-      <Time>{convertTime(state.minutes)}</Time>
-      <div>:</div>
-      <Time>{convertTime(state.seconds)}</Time>
-      <button onClick={startTimer}>시작</button>
-      <button onClick={clearTimer}>중지</button>
+      <Time>
+        <Count>{convertTime(state.hours)}</Count>
+        <Count>:</Count>
+        <Count>{convertTime(state.minutes)}</Count>
+        <Count>:</Count>
+        <Count>{convertTime(state.seconds)}</Count>
+      </Time>
+      <FontAwesomeIcon icon={faPlayCircle} size="3x" onClick={startTimer} style={iconStyle} />
+      <FontAwesomeIcon icon={faStopCircle} size="3x" onClick={clearTimer} style={iconStyle} />
     </Wrapper>
   );
 };
