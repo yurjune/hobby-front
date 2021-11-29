@@ -44,13 +44,13 @@ const ContentsTable = () => {
             {tableHeadItems.map(value => <th key={value}>{value}</th>)}
           </tr>
         </thead>
-        {dummyUsers.map(items => (
-          <tbody key={items.user[0]}>
-            <tr>
+        <tbody>
+          {dummyUsers.map(items => (
+            <tr key={items.user[0]}>
               {items.user.map(value => <td key={value[1]}>{value}</td>)}
             </tr>
-          </tbody>
-        ))}
+          ))}
+        </tbody>
       </Table>
     </Box>
   );
