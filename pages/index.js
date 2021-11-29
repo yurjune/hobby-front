@@ -20,13 +20,22 @@ const Home = () => {
     setIsOpened(false);
   };
 
+  const webSocket = new WebSocket("ws://localhost:3060");
+  webSocket.onOpen = function () {
+    console.log('서버와 웹소켓 연결 성공');
+  };
+  webSocket.onmessage = function (event) {
+    console.log(event.data);
+    webSocket.send('클라이언트에서 서버로 답장');
+  };
+
   return (
     <>
       <AppLayout openLogInForm={openLogInForm}>
         <Timer />
-        {/* {isOpened ? <LogInForm closeLogInForm={closeLogInForm} /> : ""}
+        {isOpened ? <LogInForm closeLogInForm={closeLogInForm} /> : ""}
         <div>{data.id}</div>
-        <div>{data.email}</div> */}
+        <div>{data.email}</div>
         <ContentsTable />
       </AppLayout>
     </>
