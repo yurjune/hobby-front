@@ -40,9 +40,17 @@ const ContentsTable = () => {
       </Title>
       <Table>
         <thead>
-          {tableHeadItems.map(value => <th key={value}>{value}</th>)}
+          <tr>
+            {tableHeadItems.map(value => <th key={value}>{value}</th>)}
+          </tr>
         </thead>
-        {dummyUsers.map(items => <tbody>{items.user.map(value => <td>{value}</td>)}</tbody>)}
+        {dummyUsers.map(items => (
+          <tbody key={items.user[0]}>
+            <tr>
+              {items.user.map(value => <td key={value[1]}>{value}</td>)}
+            </tr>
+          </tbody>
+        ))}
       </Table>
     </Box>
   );
