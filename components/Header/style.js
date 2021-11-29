@@ -1,10 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/Link';
 
 const Wrapper = styled.div`
   display: flex;
-  maxWidth: 1300px;
+  max-width: 1300px;
   height: 40px;
   align-items: center;
   margin: 0 auto;
@@ -58,24 +56,11 @@ const Profile = styled.div`
 const ProfileItem = styled.div`
 `
 
-const Header = () => {
-  return (
-    <>
-      <Wrapper>
-        <Logo>로고</Logo>
-        <Menu>
-          <Link href="#"><MenuItem>타이머</MenuItem></Link>
-          <Link href="#"><MenuItem>랭킹</MenuItem></Link>
-          <Link href="#"><MenuItem>커뮤니티</MenuItem></Link>
-        </Menu>
-        <Profile>
-          <ProfileItem>허니</ProfileItem>
-          <ProfileItem>01 : 24</ProfileItem>
-          <ProfileItem>수영</ProfileItem>
-        </Profile>
-      </Wrapper>
-    </>
-  );
-};
-
-export default Header;
+export {
+  Wrapper,
+  Logo,
+  Menu,
+  MenuItem,
+  Profile,
+  ProfileItem,
+}

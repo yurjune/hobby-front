@@ -1,7 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Modal = styled.div`
   position: absolute; 
@@ -29,6 +26,8 @@ const ModalContents = styled.div`
 `
 const Title = styled.h1`
   margin: 30px 0 60px 0;
+  font-size: 20px;
+  font-weight: bold;
 `
 const Label = styled.label`
   align-self: flex-start;
@@ -75,26 +74,15 @@ const iconStyle = {
   right: 0,
 };
 
-const LogInForm = ({ closeLogInForm }) => {
-  return (
-    <Modal>
-      <ModalBody>
-        <ModalContents>
-          <Title>로그인</Title>
-          <Label htmlFor="user-email">이메일</Label>
-          <Input type="text" id="user-email" placeholder="example@email.com" />
-          <Label htmlFor="user-password">비밀번호</Label>
-          <Input type="password" id="user-password" placeholder="********" />
-          <ButtonWrapper>
-            <LogInButton>로그인</LogInButton>
-            <LogInButton>회원가입</LogInButton>
-          </ButtonWrapper>
-          <Forgot>Forgot Password?</Forgot>
-          <FontAwesomeIcon icon={faTimes} style={iconStyle} onClick={closeLogInForm} />
-        </ModalContents>
-      </ModalBody>
-    </Modal>
-  );
+export {
+  Modal,
+  ModalBody,
+  ModalContents,
+  Title,
+  Label,
+  Input,
+  ButtonWrapper,
+  LogInButton,
+  Forgot,
+  iconStyle,
 };
-
-export default LogInForm;

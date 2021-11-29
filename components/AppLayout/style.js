@@ -1,7 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
-import HeaderTop from '../components/HeaderTop';
 
 export const layoutWidth = "1000px";
 
@@ -30,17 +27,9 @@ const GridFooter = styled.div`
   grid-row-end: 4;
 `
 
-const AppLayout = ({ children, openLogInForm, closeLoginForm }) => {
-  return (
-    <Grid>
-      <GridHeader>
-        <HeaderTop openLogInForm={openLogInForm} />
-        <Header />
-      </GridHeader>
-      <GridItem>{children}</GridItem>
-      <GridFooter></GridFooter>
-    </Grid>
-  );
-};
-
-export default AppLayout;
+export {
+  Grid,
+  GridHeader,
+  GridItem,
+  GridFooter,
+}
