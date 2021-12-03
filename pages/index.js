@@ -7,7 +7,11 @@ import ContentsTable from '../components/ContentsTable';
 
 const Home = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const { data, error, isLoading } = useFetch('/user')
+  const [hours, setHours] = useState(31);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [isStop, setIsStop] = useState(true);
+  const { data, error, isLoading } = useFetch('/user');
   
   if (error) return <div>에러 발생</div>;
   if (isLoading) return <div>로딩 중</div>;
@@ -26,13 +30,29 @@ const Home = () => {
   };
   webSocket.onmessage = function (event) {
     console.log(event.data);
-    webSocket.send('클라이언트에서 서버로 답장');
+    webSocket.send(JSON.stringify({
+      hours,
+    }));
   };
+
+  const operateTimer = (message) => () => {
+    if (message === 'start') {
+      setIsStop(false);
+    } else {
+      setIsStop(true);
+    }
+    console.log(isStop)
+  }
 
   return (
     <>
       <AppLayout openLogInForm={openLogInForm}>
-        <Timer />
+        <Timer
+          hours={hours}
+          minutes={minutes}
+          seconds={seconds}
+          operateTimer={operateTimer}
+        />
         {isOpened ? <LogInForm closeLogInForm={closeLogInForm} /> : ""}
         <div>{data.id}</div>
         <div>{data.email}</div>
