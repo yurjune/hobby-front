@@ -44,7 +44,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   gap: 5px;
 `
-const LogInButton = styled.button`
+const LoginButton = styled.button`
   margin-top: 20px;
   padding: 8px 10px;
   background-color: #ffaa55;
@@ -82,7 +82,7 @@ export {
   Label,
   Input,
   ButtonWrapper,
-  LogInButton,
+  LoginButton,
   Forgot,
   iconStyle,
 };

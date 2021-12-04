@@ -9,12 +9,12 @@ import {
   Label,
   Input,
   ButtonWrapper,
-  LogInButton,
+  LoginButton,
   Forgot,
   iconStyle,
 } from './style';
 
-const JoinForm = ({ onClickJoin, closeLogInForm }) => {
+const JoinForm = ({ onClickJoin, closeLoginForm }) => {
   return (
     <Modal>
       <ModalBody>
@@ -26,8 +26,8 @@ const JoinForm = ({ onClickJoin, closeLogInForm }) => {
           <Input type="password" placeholder="********" />
           <Label>비밀번호 확인</Label>
           <Input type="password" placeholder="********" />
-          <LogInButton onClick={onClickJoin}>가입하기</LogInButton>
-          <FontAwesomeIcon icon={faTimes} style={iconStyle} onClick={closeLogInForm} />
+          <LoginButton onClick={onClickJoin}>가입하기</LoginButton>
+          <FontAwesomeIcon icon={faTimes} style={iconStyle} onClick={closeLoginForm} />
         </ModalContents>
       </ModalBody>
     </Modal>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../Header';
 import HeaderTop from '../HeaderTop';
-import LogInModal from '../LogInModal';
-
+import LoginModal from '../LoginModal';
 import useFetch from '../../hooks/useFetch';
 import {
   Grid,
@@ -15,19 +14,19 @@ const AppLayout = ({ children }) => {
   const [isOpened, setIsOpened] = useState(false);
   const { data, error, isLoading } = useFetch('/user');
     
-  const openLogInForm = () => setIsOpened(true);
-  const closeLogInForm = () => setIsOpened(false);
+  const openLoginForm = () => setIsOpened(true);
+  const closeLoginForm = () => setIsOpened(false);
 
   if (error) return <div>에러 발생</div>;
   return (
     <Grid>
       <GridHeader>
-        <HeaderTop openLogInForm={openLogInForm} />
+        <HeaderTop openLoginForm={openLoginForm} />
         <Header me={data} />
       </GridHeader>
       <GridItem>{children}</GridItem>
       <GridItem>
-        {isOpened ? <LogInModal closeLogInForm={closeLogInForm} /> : ""}
+        {isOpened ? <LoginModal closeLoginForm={closeLoginForm} /> : ""}
       </GridItem>
       <GridFooter></GridFooter>
     </Grid>

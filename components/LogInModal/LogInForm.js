@@ -9,12 +9,12 @@ import {
   Label,
   Input,
   ButtonWrapper,
-  LogInButton,
+  LoginButton,
   Forgot,
   iconStyle,
 } from './style';
 
-const LogInForm = ({ closeLogInForm, onClickLogIn, setOpenJoinPage }) => {
+const LoginForm = ({ closeLoginForm, onClickLogin, setOpenJoinPage }) => {
   return (
     <Modal>
       <ModalBody>
@@ -25,15 +25,15 @@ const LogInForm = ({ closeLogInForm, onClickLogIn, setOpenJoinPage }) => {
           <Label>비밀번호</Label>
           <Input type="password" placeholder="********" />
           <ButtonWrapper>
-            <LogInButton onClick={onClickLogIn}>로그인</LogInButton>
-            <LogInButton onClick={() => setOpenJoinPage(true)}>회원가입</LogInButton>
+            <LoginButton onClick={onClickLogin}>로그인</LoginButton>
+            <LoginButton onClick={() => setOpenJoinPage(true)}>회원가입</LoginButton>
           </ButtonWrapper>
           <Forgot>Forgot Password?</Forgot>
-          <FontAwesomeIcon icon={faTimes} style={iconStyle} onClick={closeLogInForm} />
+          <FontAwesomeIcon icon={faTimes} style={iconStyle} onClick={closeLoginForm} />
         </ModalContents>
       </ModalBody>
     </Modal>
   );
 };
 
-export default LogInForm;
+export default LoginForm;

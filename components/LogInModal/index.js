@@ -1,27 +1,27 @@
-// export { default as LogInForm } from './LogInForm';
+// export { default as LoginForm } from './LoginForm';
 
 import React, { useState } from 'react';
-import LogInForm from './LogInForm';
+import LoginForm from './LoginForm';
 import JoinForm from './JoinForm';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:3060';
 axios.defaults.withCredentials = true;
 
-const LogInModal = ({ closeLogInForm }) => {
+const LoginModal = ({ closeLoginForm }) => {
   const [openJoinPage, setOpenJoinPage] = useState(false);
-  const onClickLogIn = async () => await axios.post('./LogIn');
+  const onClickLogin = async () => await axios.post('./Login');
   const onClickJoin = async () => await axios.post('./join');
   return (
     <>
       { openJoinPage
       ? <JoinForm
           onClickJoin={onClickJoin}
-          closeLogInForm={closeLogInForm}
+          closeLoginForm={closeLoginForm}
         />
-      : <LogInForm
-          onClickLogIn={onClickLogIn}
-          closeLogInForm={closeLogInForm}
+      : <LoginForm
+          onClickLogin={onClickLogin}
+          closeLoginForm={closeLoginForm}
           setOpenJoinPage={setOpenJoinPage}
         />
       }
@@ -29,4 +29,4 @@ const LogInModal = ({ closeLogInForm }) => {
   );
 };
 
-export default LogInModal;
+export default LoginModal;
