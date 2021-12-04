@@ -9,7 +9,7 @@ const Home = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isStop, setIsStop] = useState(true);
-  const { data, error, isLoading } = useFetch('/user');
+  const { data: me, error, isLoading } = useFetch('/user');
   
   if (error) return <div>에러 발생</div>;
   // if (isLoading) return <div>로딩 중</div>;
@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <>
-      <AppLayout>
+      <AppLayout me={me}>
         <Timer
           hours={hours}
           minutes={minutes}

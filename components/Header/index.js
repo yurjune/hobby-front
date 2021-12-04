@@ -9,7 +9,7 @@ import {
   ProfileItem,
 } from './style';
 
-const Header = () => {
+const Header = ({ me }) => {
   return (
     <>
       <Wrapper>
@@ -20,9 +20,14 @@ const Header = () => {
           <Link href="#"><MenuItem>커뮤니티</MenuItem></Link>
         </Menu>
         <Profile>
-          <ProfileItem>허니</ProfileItem>
-          <ProfileItem>01 : 24</ProfileItem>
-          <ProfileItem>수영</ProfileItem>
+          {me ? 
+            <>
+              <ProfileItem>{me.name}</ProfileItem>
+              <ProfileItem>01 : 24</ProfileItem>
+              <ProfileItem>수영</ProfileItem>
+            </>
+            : ''
+          }
         </Profile>
       </Wrapper>
     </>

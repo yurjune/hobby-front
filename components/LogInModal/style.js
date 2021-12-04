@@ -13,7 +13,7 @@ const Modal = styled.div`
 `
 const ModalBody = styled.div`
   width: 370px;
-  height: 500px;
+  height: ${(props) => props.height || "500px"};
   background-color: #fff;
 `
 const ModalContents = styled.div`
