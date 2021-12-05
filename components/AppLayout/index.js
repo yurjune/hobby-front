@@ -23,9 +23,12 @@ const AppLayout = ({ children, me }) => {
         <Header me={me} />
       </GridHeader>
       <GridItem>{children}</GridItem>
-      <GridItem>
-        {isOpened ? <LoginModal closeLoginForm={closeLoginForm} /> : ""}
-      </GridItem>
+      {isOpened ? 
+        <GridItem>
+          <LoginModal closeLoginForm={closeLoginForm} />
+        </GridItem>
+        : ""
+      }
       <GridFooter></GridFooter>
     </Grid>
   );
