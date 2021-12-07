@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const layoutWidth = "1300px";
+export const layoutWidth = "1200px";
 
 const Grid = styled.div`
   display: grid;

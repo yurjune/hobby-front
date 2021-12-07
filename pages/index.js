@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import ContentsTable from '../components/ContentsTable';
 
 const Home = () => {
-  const [hours, setHours] = useState(31);
+  const [hours, setHours] = useState(12);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isStop, setIsStop] = useState(true);
@@ -31,7 +31,6 @@ const Home = () => {
     } else {
       setIsStop(true);
     }
-    console.log(isStop)
   }
 
   return (
