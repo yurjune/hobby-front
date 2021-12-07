@@ -1,11 +1,8 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import {
-  Box,
-  Title,
   Table,
 } from './style'
+import CategoryBar from '../CategoryBar';
 
 const tableHeadItems = [
   '등수',
@@ -33,11 +30,8 @@ const dummyUsers = [
 ]
 const ContentsTable = () => {
   return (
-    <Box>
-      <Title>
-        <div>수영</div>
-        <FontAwesomeIcon icon={faChevronDown} />
-      </Title>
+    <>
+      <CategoryBar />
       <Table>
         <thead>
           <tr>
@@ -52,7 +46,7 @@ const ContentsTable = () => {
           ))}
         </tbody>
       </Table>
-    </Box>
+    </>
   );
 };
 

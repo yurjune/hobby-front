@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'next/Link';
 import { layoutWidth } from '../AppLayout/style';
 
 const Wrapper = styled.div`
@@ -24,7 +25,7 @@ const Menu = styled.div`
   right: 300px;
   background-color: orange;
 `
-const MenuItem = styled.a`
+const MenuItem = styled(Link)`
   text-align: center;
   text-decoration: none;
   padding: 0.5rem 0;
