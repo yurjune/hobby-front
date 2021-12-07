@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle, faStopCircle } from '@fortawesome/free-regular-svg-icons';
 import {
   Wrapper,
+  SmallWrapper,
   Count,
   Time,
 } from './style';
@@ -10,12 +11,13 @@ import {
 const iconStyle = {
   cursor: "pointer",
 };
-const Timer = ({ hours, minutes, seconds, operateTimer }) => {
-  const convertTime = (time) => {
-    if (time < 10) return '0' + time;
-    return time;
-  };
 
+const convertTime = (time) => {
+  if (time < 10) return '0' + time;
+  return time;
+};
+
+export const Timer = ({ hours, minutes, seconds, operateTimer }) => {
   return (
     <Wrapper>
       <Time>
@@ -25,10 +27,22 @@ const Timer = ({ hours, minutes, seconds, operateTimer }) => {
         <Count>:</Count>
         <Count>{convertTime(seconds)}</Count>
       </Time>
-      <FontAwesomeIcon icon={faPlayCircle} size="3x" onClick={operateTimer('start')} style={iconStyle} />
-      <FontAwesomeIcon icon={faStopCircle} size="3x" onClick={operateTimer('stop')} style={iconStyle} />
+      <FontAwesomeIcon icon={faPlayCircle} size="3x" style={iconStyle} />
+      <FontAwesomeIcon icon={faStopCircle} size="3x" style={iconStyle} />
     </Wrapper>
   );
 };
 
-export default Timer;
+export const SmallTimer = ({ hours, minutes, seconds, operateTimer }) => {
+  return (
+    <SmallWrapper>
+      <Time>
+        <Count>{convertTime(hours)}</Count>
+        <Count>:</Count>
+        <Count>{convertTime(minutes)}</Count>
+        <Count>:</Count>
+        <Count>{convertTime(seconds)}</Count>
+      </Time>
+    </SmallWrapper>
+  );
+};

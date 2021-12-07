@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AppLayout from '../components/AppLayout';
-import Timer from '../components/Timer';
+import { Timer } from '../components/Timer';
 import useFetch from '../hooks/useFetch';
 import ContentsTable from '../components/ContentsTable';
 

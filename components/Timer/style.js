@@ -6,6 +6,11 @@ const Wrapper = styled.div`
   justify-content: center;
   margin: 40px 0;
 `
+const SmallWrapper = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  margin: 30px 0;
+`
 const Time = styled.div`
   display: flex;
   gap: 1rem;
@@ -17,6 +22,7 @@ const Count = styled.div`
 `
 export {
   Wrapper,
+  SmallWrapper,
   Count,
   Time
 }
