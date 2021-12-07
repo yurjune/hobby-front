@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Link from 'next/Link';
 import { layoutWidth } from '../AppLayout/style';
 
 const Wrapper = styled.div`
@@ -18,9 +17,6 @@ const Menu = styled.div`
   padding: 0 1rem;
   right: 0;
 `
-const MenuLink = styled(Link)`
-  text-decoration: none;
-`
 const MenuItem = styled.div`
   cursor: pointer;
 `
@@ -28,6 +24,5 @@ const MenuItem = styled.div`
 export {
   Wrapper,
   Menu,
-  MenuLink,
   MenuItem,
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/Link';
 import {
   Wrapper,
   Logo,
@@ -14,20 +15,17 @@ const Header = ({ me }) => {
       <Wrapper>
         <Logo>로고</Logo>
         <Menu>
-          <MenuItem href="/">타이머</MenuItem>
-          <MenuItem href="/">랭킹</MenuItem>
-          <MenuItem href="/community">커뮤니티</MenuItem>
+          <Link href="/"><MenuItem>타이머</MenuItem></Link>
+          <MenuItem>랭킹</MenuItem>
+          <Link href="/community"><MenuItem>커뮤니티</MenuItem></Link>
         </Menu>
-        <Profile>
-          {me ? 
-            <>
-              <ProfileItem>{me.name}</ProfileItem>
-              <ProfileItem>01 : 24</ProfileItem>
-              <ProfileItem>수영</ProfileItem>
-            </>
-            : ''
-          }
-        </Profile>
+        {me ? 
+          <Profile>
+            <ProfileItem>{me.name}</ProfileItem>
+            <ProfileItem>01 : 24</ProfileItem>
+            <ProfileItem>수영</ProfileItem>
+          </Profile>
+        : ''}
       </Wrapper>
     </>
   );

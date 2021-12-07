@@ -1,66 +1,45 @@
 import styled from 'styled-components';
-import Link from 'next/Link';
 import { layoutWidth } from '../AppLayout/style';
 
 const Wrapper = styled.div`
   display: flex;
   max-width: ${layoutWidth};
-  height: 45px;
   align-items: center;
+  justify-content: flex-end;
   margin: 0 auto;
-  position: relative;
   background-color: skyblue;
+  position: relative;
 `
 const Logo = styled.div`
   font-size: 20px;
-  margin-left: 20px;
-`
-const Menu = styled.div`
-  display: flex;
-  gap: 2em;
-  padding: 0 2em;
-  align-items: center;
-  height: 100%;
   position: absolute;
-  right: 300px;
-  background-color: orange;
+  left: 20px;
 `
-const MenuItem = styled(Link)`
+const Menu = styled.ul`
+  display: flex;
+  background-color: gold;
+`
+const MenuItem = styled.li`
+  padding: 1em 1.5em;
   text-align: center;
-  text-decoration: none;
-  padding: 0.5rem 0;
   cursor: pointer;
-  position: relative;
-  &:visited {
-    color: red;
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 0.25rem;
-    background-color: white;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.2s cubic-bezier(1, 0, 0, 1);
-  }
-  &:hover::after {
-    transform: scaleX(1);
+  font-weight: bold;
+  color: #555;
+  transition: 0.5s;
+  &:hover {
+    background-color: crimson;
+    color: white;
+    padding: 1em 2em;
   }
 `
-const Profile = styled.div`
-  display: flex;
-  gap: 2em;
-  padding: 0 2em;
-  align-items: center;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  background-color: orange;
+const Profile = styled(Menu)`
 `
 const ProfileItem = styled.div`
+  padding: 1em;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
 `
 
 export {

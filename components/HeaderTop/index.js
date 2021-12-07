@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/Link';
 import {
   Wrapper,
   Menu,
-  MenuLink,
   MenuItem,
 } from './style';
 
@@ -26,16 +26,15 @@ const HeaderTop = ({ me, openLoginForm }) => {
       <Menu>
         {me ?
         <>
-          <MenuLink href="#">고객센터</MenuLink>
-          <MenuLink href="#">마이페이지</MenuLink>
+          <Link href="#"><MenuItem>고객센터</MenuItem></Link>
+          <Link href="#"><MenuItem>마이페이지</MenuItem></Link>
           <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
         </>
         : 
         <>
-          <MenuLink href="#">고객센터</MenuLink>
+          <MenuItem href="#">고객센터</MenuItem>
           <MenuItem onClick={openLoginForm}>로그인</MenuItem>
-        </>
-        }
+        </>}
       </Menu>
     </Wrapper>
   );
