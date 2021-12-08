@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Table,
 } from './style'
-import CategoryBar from '../CategoryBar';
+import CategoryBarSmall from '../CategoryBarSmall';
 
 const tableHeadItems = [
   '등수',
@@ -31,7 +31,7 @@ const dummyUsers = [
 const ContentsTable = () => {
   return (
     <>
-      <CategoryBar />
+      <CategoryBarSmall />
       <Table>
         <thead>
           <tr>

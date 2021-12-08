@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faSearch } from '@fortawesome/free-solid-svg-icons';
 import {
   Box,
   Select,
   Menu,
+  Search,
+  arrowIconStyle,
+  searchIconStyle,
 } from './style';
 
-const dropdown = [
+export const dropdown = [
   '수영',
   '피아노',
   '러닝',
-  'LOL',
+  'LOL'
 ]
-const CategoryBar = ({ data = '수영' }) => {
-  const [isOpened, setIsOpened] = useState(false);
-  const [working, setWorking] = useState(data);
-  const category = dropdown.filter(value => value !== working);
 
+const CategoryBarSecond = () => {
+  const [isOpened, setIsOpened] = useState(false);
   const onClickIcon = () => {
     if (isOpened === false) {
       return setIsOpened(true);
@@ -25,21 +26,22 @@ const CategoryBar = ({ data = '수영' }) => {
     setIsOpened(false);
   };
   const onClickMenuItem = (item) => () => {
-    setWorking(item);
     setIsOpened(false);
   }
   return (
     <Box>
       <Select>
-        <div>{working}</div>
-        <FontAwesomeIcon icon={faChevronDown} onClick={onClickIcon} />
-      </Select>
-      {isOpened ? <Menu>
-        {category.map(item => <li key={item} onClick={onClickMenuItem(item)}>{item}</li>)}
-      </Menu>
+        <div>카테고리</div>
+        <FontAwesomeIcon icon={faChevronDown} onClick={onClickIcon} style={arrowIconStyle} />
+        {isOpened ? <Menu left="10px" top="60px">
+          {dropdown.map(item => <li key={item} onClick={onClickMenuItem(item)}>{item}</li>)}
+        </Menu>
       : ""}
+      </Select>
+      <Search />
+      <FontAwesomeIcon icon={faSearch} style={searchIconStyle} />
     </Box>
   );
 };
 
-export default CategoryBar;
+export default CategoryBarSecond;

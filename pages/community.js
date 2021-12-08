@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
 import PostCard from '../components/PostCard';
+import CategoryBar from '../components/CategoryBar';
 
 const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
@@ -20,6 +21,7 @@ const article = 'The next generation of the web’s favorite icon library + tool
 const Community = () => {
   return (
     <AppLayout>
+      <CategoryBar />
       <Wrapper>
         <PostCard article={article}></PostCard>
         <PostCard article={article}></PostCard>
