@@ -11,7 +11,7 @@ import {
   TextArea,
 } from './style';
 
-import { Button } from '../Common/Button/style';
+import { Button } from '../Common/button';
 import axios from 'axios';
 import useInput from '../../hooks/useInput';
 

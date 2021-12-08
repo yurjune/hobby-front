@@ -6,6 +6,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  cursor: pointer;
 `
 const Picture = styled.div`
   border-radius: 15px;

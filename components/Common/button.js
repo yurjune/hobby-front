@@ -24,6 +24,7 @@ const LoginButton = styled.button`
 const Button = styled(LoginButton)`
   width: 60px;
   align-self: ${(props) => props.align};
+  margin-right: ${props => props.mr};
 `
 
 export {
