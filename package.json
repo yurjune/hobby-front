@@ -20,6 +20,8 @@
     "@fortawesome/react-fontawesome": "^0.1.16",
     "axios": "^0.24.0",
     "babel-jest": "^27.3.1",
+    "faker": "^5.5.3",
+    "masonry-layout": "^4.2.2",
     "next": "^12.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -29,7 +31,7 @@
     "swr": "^1.0.1"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.13.3",
+    "babel-plugin-styled-components": "^1.10.2",
     "jest": "^27.3.1"
   }
 }
