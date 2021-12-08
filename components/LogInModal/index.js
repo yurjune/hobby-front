@@ -9,15 +9,12 @@ const LoginModal = ({ closeLoginForm }) => {
 
   return (
     <>
-      { openJoinPage
-      ? <JoinForm
-          closeLoginForm={closeLoginForm}
-        />
+      { openJoinPage ?
+        <JoinForm closeLoginForm={closeLoginForm} />
       : <LoginForm
-          closeLoginForm={closeLoginForm}
-          setOpenJoinPage={setOpenJoinPage}
-        />
-      }
+        closeLoginForm={closeLoginForm}
+        setOpenJoinPage={setOpenJoinPage}
+      />}
     </>
   );
 };

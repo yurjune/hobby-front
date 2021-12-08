@@ -11,11 +11,9 @@ import {
   Title,
   Label,
   Input,
-  ButtonWrapper,
-  LoginButton,
-  Forgot,
   iconStyle,
 } from './style';
+import { Button } from '../Common';
 
 axios.defaults.baseURL = 'http://localhost:3060';
 axios.defaults.withCredentials = true;
@@ -61,7 +59,7 @@ const JoinForm = ({ closeLoginForm }) => {
           <Input type="password" placeholder="******" value={password} onChange={handlePassword} />
           <Label>비밀번호 확인</Label>
           <Input type="password" placeholder="******" value={passwordCheck} onChange={handlePasswordCheck} />
-          <LoginButton onClick={onClickJoin}>가입하기</LoginButton>
+          <Button onClick={onClickJoin}>가입하기</Button>
           <FontAwesomeIcon icon={faTimes} style={iconStyle} onClick={closeLoginForm} />
         </ModalContents>
       </ModalBody>

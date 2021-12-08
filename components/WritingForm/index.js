@@ -11,7 +11,7 @@ import {
   TextArea,
 } from './style';
 
-import { Button } from '../Common/button';
+import { FlexC, Button } from '../Common';
 import axios from 'axios';
 import useInput from '../../hooks/useInput';
 
@@ -29,11 +29,6 @@ const WritingForm = ({ me }) => {
   const category = '수영'
   const fileRef = useRef(null);
   const router = useRouter();
-
-  useEffect(() => {
-    console.log('imageList', imageList);
-    console.dir(fileRef.current.files)
-  }, [imageList]);
 
   const onChangeImages = async (e) => {
     try {
@@ -74,7 +69,7 @@ const WritingForm = ({ me }) => {
     fileRef.current.click();
   };
   return (
-    <Box>
+    <FlexC p="15px" flex="2.3">
       {imageList.length >= 1 ? 
         <Grid>{imageList.map(item => (
           <GridItem key={item}>
@@ -101,7 +96,7 @@ const WritingForm = ({ me }) => {
         onChange={onChangeText} 
       />
       <Button align="end" onClick={onSubmit}>작성</Button>
-    </Box>
+    </FlexC>
   );
 };
 

@@ -24,14 +24,13 @@ const ModalContents = styled.div`
   align-items: center;
   position: relative;
 `
-const Title = styled.h1`
-  margin: 30px 0 50px 0;
+const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
+  margin: 30px 0 50px 0;
 `
 const Label = styled.label`
   align-self: flex-start;
-  font-weight: bold;
   margin-bottom: 10px;
 `
 const Input = styled.input`
@@ -40,28 +39,6 @@ const Input = styled.input`
   margin-bottom: 30px;
   padding: 5px;
 `
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 5px;
-`
-const LoginButton = styled.button`
-  margin-top: 20px;
-  padding: 8px 10px;
-  background-color: #ffaa55;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(255, 170, 85, 0.25); /* x축 y축 blur color*/
-  cursor: pointer;
-  transition: 0.3s;
-  &:focus {
-    outline: solid;
-  }
-  &:hover {
-    background-color: rgba(255, 170, 85, 0.9);
-    box-shadow: 0 2px 4px rgba(255, 170, 85, 0.5);
-  }
-`
 const Forgot = styled.a`
   margin-top: 30px;
   text-decoration: none;
@@ -69,8 +46,9 @@ const Forgot = styled.a`
   font-size: 14px;
 `
 const iconStyle = {
+  cursor: 'pointer',
   position: 'absolute',
-  top: '30px',
+  top: '33px',
   right: 0,
 };
 
@@ -81,8 +59,6 @@ export {
   Title,
   Label,
   Input,
-  ButtonWrapper,
-  LoginButton,
   Forgot,
   iconStyle,
 };

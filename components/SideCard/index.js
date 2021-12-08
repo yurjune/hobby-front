@@ -1,22 +1,19 @@
 import React from 'react';
 import {
-  Box,
-  Text,
-  Description,
+  Hr,
 } from './style';
+import { FlexC, Text } from '../Common';
 import { SmallTimer } from '../Timer';
 
 const SideCard = () => {
   return (
-    <Box>
-      <Text>나의 기록! 🔥</Text>
+    <FlexC p="15px" flex="1">
+      <Text size="20px">나의 기록! 🔥</Text>
       <SmallTimer hours={10} minutes={10} seconds={10} />
-      <hr />
-      <Description>
-        <div>일시: 2021/12/25</div>
-        <div>카테고리: 수영</div>
-      </Description>
-    </Box>
+      <Hr />
+      <Text mb="16px" size="18px">일시: 2021/12/25</Text>
+      <Text mb="16px" size="18px">카테고리: 수영</Text>
+    </FlexC>
   );
 };
 

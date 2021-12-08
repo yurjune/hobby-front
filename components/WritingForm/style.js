@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  flex: 2.3;
-`
 const Grid = styled.div`
   @media screen and (max-width: 450px) {
     display: grid;
@@ -39,12 +33,12 @@ const Picture = styled.div`
   border-radius: 15px;
   height: 0px;
   padding-bottom: 100%;
+  position: relative;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(${props => props.url});
   background-color: ${props => props.color};
-  position: relative;
 `
 const ImageInput = styled.input`
   margin-bottom: 20px;
@@ -56,7 +50,6 @@ const TextArea = styled.textarea`
 `
 
 export {
-  Box,
   Grid,
   GridItem,
   Picture,

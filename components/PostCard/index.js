@@ -2,34 +2,32 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
-  Card,
   Picture,
   Description,
-  Profile,
-  ProfileImage,
-  ProfileName,
+  Avatar,
+  Name,
   Paragraph,
-  CommentBox,
   iconStyle,
 } from './style';
+import { Flex, FlexC } from '../Common';
 
-const PostCard = ({ children, image, article, avatar }) => {
+const PostCard = ({ data, avatar }) => {
   return (
     <>
-      <Card>
-        <Picture image={image} />
+      <FlexC>
+        <Picture url={`http://localhost:3060/${data?.Images[0].src}`} />
         <Description>
-          <Profile>
-            <ProfileImage avatar={avatar} />
-            <ProfileName><div>하이</div></ProfileName>
-          </Profile>
-          <Paragraph>{article}</Paragraph>
-          <CommentBox>
+          <Flex mb="10px">
+            <Avatar avatar={avatar} />
+            <Name><div>{data.User.name}</div></Name>
+          </Flex>
+          <Paragraph>{data.content}</Paragraph>
+          <Flex>
             <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} />
             <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} />
-          </CommentBox>
+          </Flex>
         </Description>
-      </Card>
+      </FlexC>
     </>
   );
 };

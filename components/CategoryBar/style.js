@@ -1,16 +1,12 @@
 import styled from 'styled-components';
 
-const Box = styled.div`
-  display: flex;
-`
 const Select = styled.div`
   display: flex;
-  gap: 15px;
   padding: 20px 10px;
-  font-size: 18px;
   flex: 1;
   position: relative;
   align-items: center;
+  font-size: 18px;
 `
 const Menu = styled.ul`
   position: absolute;
@@ -42,7 +38,6 @@ const searchIconStyle = {
 }
 
 export {
-  Box,
   Select,
   Menu,
   Search,

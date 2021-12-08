@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Box = styled.div`
+const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     display: flex;
     padding: 15px;
@@ -11,5 +11,5 @@ const Box = styled.div`
 `
 
 export {
-  Box,
+  Wrapper,
 }

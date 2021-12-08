@@ -11,11 +11,10 @@ import {
   Title,
   Label,
   Input,
-  ButtonWrapper,
-  LoginButton,
   Forgot,
   iconStyle,
 } from './style';
+import { Flex, Button } from '../Common';
 
 axios.defaults.baseURL = 'http://localhost:3060';
 axios.defaults.withCredentials = true;
@@ -54,10 +53,10 @@ const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
           <Input type="text" placeholder="example@email.com" value={email} onChange={handleEmail} />
           <Label>비밀번호</Label>
           <Input type="password" placeholder="******" value={password} onChange={handlePassword} />
-          <ButtonWrapper>
-            <LoginButton onClick={onClickLogin}>로그인</LoginButton>
-            <LoginButton onClick={() => setOpenJoinPage(true)}>회원가입</LoginButton>
-          </ButtonWrapper>
+          <Flex>
+            <Button mr="5px" onClick={onClickLogin}>로그인</Button>
+            <Button onClick={() => setOpenJoinPage(true)}>회원가입</Button>
+          </Flex>
           <Forgot>Forgot Password?</Forgot>
           <FontAwesomeIcon icon={faTimes} style={iconStyle} onClick={closeLoginForm} />
         </ModalContents>

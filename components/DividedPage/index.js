@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  Box,
+  Wrapper,
 } from './style';
 import SideCard from '../SideCard';
 import WritingForm from '../WritingForm';
 
 const DividedPage = ({ me }) => {
   return (
-    <Box>
+    <Wrapper>
       <SideCard />
       <WritingForm me={me} />
-    </Box>
+    </Wrapper>
   );
 };
 

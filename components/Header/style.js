@@ -35,7 +35,7 @@ const MenuItem = styled.li`
 `
 const Profile = styled(Menu)`
 `
-const ProfileItem = styled.div`
+const ProfileItem = styled.li`
   padding: 1em;
   text-align: center;
   cursor: pointer;

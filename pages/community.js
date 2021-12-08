@@ -60,7 +60,7 @@ const Community = () => {
       />
       <Wrapper>
         {postList?.map(item => (
-          <PostCard key={item} article={item.content} onClick={onClickPost}></PostCard>
+          <PostCard key={item} data={item} onClick={onClickPost}></PostCard>
         ))}
       </Wrapper>
     </AppLayout>

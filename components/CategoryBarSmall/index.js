@@ -28,9 +28,10 @@ const CategoryBar = ({ data = '수영' }) => {
       <Select>
         <div>{working}</div>
         <FontAwesomeIcon icon={faChevronDown} onClick={onClickIcon} style={arrowIconStyle} />
-        {isOpened ? <Menu left="0" top="58px">
-          {category.map(item => <li key={item} onClick={onClickMenuItem(item)}>{item}</li>)}
-        </Menu>
+        {isOpened ?
+          <Menu left="0" top="58px">
+            {category.map(item => <li key={item} onClick={onClickMenuItem(item)}>{item}</li>)}
+          </Menu>
         : ""}
       </Select>
     </>
