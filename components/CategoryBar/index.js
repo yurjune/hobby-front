@@ -40,7 +40,7 @@ const CategoryBar = ({ category, addCategory, removeCategory }) => {
           <FontAwesomeIcon icon={faChevronDown} onClick={onClickIcon} style={arrowIconStyle} />
           {isOpened ?
             <Menu left="10px" top="60px">
-              {dropdown.map(item => <li key={item} onClick={onClickMenuItem(item)}>{item}</li>)}
+              {dropdown.map((item, idx) => <li key={item+idx} onClick={onClickMenuItem(item)}>{item}</li>)}
             </Menu>
           : ""}
         </Select>

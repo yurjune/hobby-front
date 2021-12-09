@@ -18,6 +18,8 @@ const Box = styled.div`
   padding-bottom: ${props => props.pb};
   position: ${props => props.pos};
   font-size: ${props => props.fontSize};
+  background-color: ${props => props.bg};
+  color: ${props => props.color};
 `
 const Flex = styled(Box)`
   display: flex;

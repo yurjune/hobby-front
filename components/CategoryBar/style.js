@@ -12,13 +12,16 @@ const Menu = styled.ul`
   position: absolute;
   left: ${props => props.left};
   top: ${props => props.top};
+  border: 1px solid gold;
+  border-radius: 5px;
   li {
-    background-color: violet;
-    width: 100px;
-    height: 30px;
-    line-height: 30px;
-    padding: 5px 10px;
+    background-color: gold;
     cursor: pointer;
+    padding: 10px 15px;
+  }
+  li:hover {
+    background-color: crimson;
+    transition: 0.3s;
   }
 `
 const Search = styled.input`

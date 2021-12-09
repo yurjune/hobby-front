@@ -8,6 +8,8 @@ import {
   Profile,
   ProfileItem,
 } from './style';
+import { Box } from '../Common';
+import { Avatar } from '../PostCard/style';
 
 const Header = ({ me }) => {
   return (
@@ -19,12 +21,15 @@ const Header = ({ me }) => {
           <MenuItem>랭킹</MenuItem>
           <Link href="/community"><MenuItem>커뮤니티</MenuItem></Link>
         </Menu>
-        {me ? 
+        {me ? <> 
+          <Box color="gold" w="30px" />
           <Profile>
+            <Avatar />
             <ProfileItem>{me.name}</ProfileItem>
             <ProfileItem>01 : 24</ProfileItem>
             <ProfileItem>수영</ProfileItem>
           </Profile>
+          </>
         : ''}
       </Wrapper>
     </>

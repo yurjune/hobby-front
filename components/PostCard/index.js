@@ -17,8 +17,8 @@ const PostCard = ({ data, avatar }) => {
       <FlexC>
         <Picture url={`http://localhost:3060/${data?.Images[0].src}`} />
         <Description>
-          <Flex mb="10px">
-            <Avatar avatar={avatar} />
+          <Flex mb="15px">
+            <Avatar avatar={avatar} mr="15px" />
             <Name><div>{data.User.name}</div></Name>
           </Flex>
           <Paragraph>{data.content}</Paragraph>

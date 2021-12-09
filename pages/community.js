@@ -50,7 +50,6 @@ const Community = () => {
   const onClickPost = () => {
 
   };
-
   return (
     <AppLayout me={me}>
       <CategoryBar
@@ -60,7 +59,7 @@ const Community = () => {
       />
       <Wrapper>
         {postList?.map(item => (
-          <PostCard key={item} data={item} onClick={onClickPost}></PostCard>
+          <PostCard key={item.id} data={item} onClick={onClickPost}></PostCard>
         ))}
       </Wrapper>
     </AppLayout>

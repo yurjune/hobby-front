@@ -27,8 +27,9 @@ const Avatar = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 15px;
-  margin-right: 10px;
   background-color: lightgray;
+  align-self: center;
+  margin-right: ${props => props.mr};
 `
 const Name = styled.div`
   display: flex;
@@ -38,11 +39,11 @@ const Name = styled.div`
 `
 const Paragraph = styled.div`
   word-break: break-all;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 `
 
 const iconStyle = {
-  "marginRight": "10px", 
+  "marginRight": "15px", 
 };
 
 export {

@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   margin: 0 auto;
   margin-bottom: 20px;
-  background-color: skyblue;
+  background-color: gold;
   position: relative;
 `
 const Logo = styled.div`
