@@ -19,8 +19,9 @@ const Box = styled.div`
   padding-bottom: ${props => props.pb};
   position: ${props => props.pos};
   font-size: ${props => props.fontSize};
-  background-color: ${props => props.bg};
+  font-weight: ${props => props.weight};
   color: ${props => props.color};
+  background-color: ${props => props.bg};
   cursor: ${props => props.cursor};
 `
 const Flex = styled(Box)`
@@ -31,16 +32,7 @@ const Flex = styled(Box)`
 const FlexC = styled(Flex)`
   flex-direction: column;
 `
-const Text = styled.div`
-  font-size: ${props => props.size};
-  font-weight: ${props => props.weight};
-  color: ${props => props.color};
-  margin: ${props => props.m};
-  margin-left: ${props => props.ml};
-  margin-right: ${props => props.mr};
-  margin-top: ${props => props.mt};
-  margin-bottom: ${props => props.mb};
-  align-self: ${props => props.self};
+const Text = styled(Box)`
 `
 const Bold = styled(Text)`
   font-weight: bold;

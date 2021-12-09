@@ -9,7 +9,7 @@ import {
   ProfileItem,
 } from './style';
 import { Box } from '../Common';
-import { Avatar } from '../PostCard/style';
+import { Avatar } from '../PostCardBig/style';
 
 const Header = ({ me }) => {
   return (

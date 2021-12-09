@@ -7,7 +7,7 @@ import {
   Avatar,
   Paragraph,
   iconStyle,
-} from './style';
+} from '../PostCardBig/style';
 import { Flex, FlexC, Text } from '../Common';
 
 export const localhost = (value) => {
@@ -29,8 +29,8 @@ const PostCard = ({ data }) => {
           </Flex>
           <Paragraph>{data.content}</Paragraph>
           <Flex>
-            <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} />
             <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} />
+            <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} />
           </Flex>
         </FlexC>
       </FlexC>
