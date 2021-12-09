@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-`
 const Picture = styled.div`
   border-radius: 15px;
   height: 0px;
@@ -14,28 +9,15 @@ const Picture = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(${props => props.url});
-  cursor: pointer;
-`
-const Description = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px 5px;
-  border-radius: 15px;
-  cursor: pointer;
+  margin-bottom: ${props => props.mb};
 `
 const Avatar = styled.div`
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
+  width: ${props => props.w || "30px"};
+  height: ${props => props.w || "30px"};
+  margin-right: ${props => props.mr};
+  border-radius: ${props => props.radius || "15px"};
   background-color: lightgray;
   align-self: center;
-  margin-right: ${props => props.mr};
-`
-const Name = styled.div`
-  display: flex;
-  div {
-    align-self: center;
-  }
 `
 const Paragraph = styled.div`
   word-break: break-all;
@@ -47,11 +29,8 @@ const iconStyle = {
 };
 
 export {
-  Card,
   Picture,
-  Description,
   Avatar,
-  Name,
   Paragraph,
   iconStyle,
 }

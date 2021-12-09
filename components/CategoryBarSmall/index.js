@@ -7,6 +7,7 @@ import {
   arrowIconStyle,
 } from '../CategoryBar/style';
 import { dropdown } from '../CategoryBar/index';
+import { Box } from '../Common';
 
 const CategoryBar = ({ data = '수영' }) => {
   const [isOpened, setIsOpened] = useState(false);
@@ -26,7 +27,7 @@ const CategoryBar = ({ data = '수영' }) => {
   return (
     <>
       <Select>
-        <div>{working}</div>
+        <Box mr="15px">{working}</Box>
         <FontAwesomeIcon icon={faChevronDown} onClick={onClickIcon} style={arrowIconStyle} />
         {isOpened ?
           <Menu left="0" top="58px">

@@ -5,6 +5,7 @@ const Box = styled.div`
   align-self: ${props => props.self};
   flex: ${props => props.flex};
   width: ${props => props.w};
+  max-width: ${props => props.maxW};
   height: ${props => props.h};
   margin: ${props => props.m};
   margin-right: ${props => props.mr};
@@ -20,6 +21,7 @@ const Box = styled.div`
   font-size: ${props => props.fontSize};
   background-color: ${props => props.bg};
   color: ${props => props.color};
+  cursor: ${props => props.cursor};
 `
 const Flex = styled(Box)`
   display: flex;
@@ -34,7 +36,9 @@ const Text = styled.div`
   font-weight: ${props => props.weight};
   color: ${props => props.color};
   margin: ${props => props.m};
+  margin-left: ${props => props.ml};
   margin-right: ${props => props.mr};
+  margin-top: ${props => props.mt};
   margin-bottom: ${props => props.mb};
   align-self: ${props => props.self};
 `
@@ -44,6 +48,10 @@ const Bold = styled(Text)`
 
 // custom
 const Button = styled.button`
+  width: ${props => props.w};
+  height: ${props => props.h};
+  margin-right: ${props => props.mr};
+  align-self: ${(props) => props.self};
   padding: 8px 10px;
   background-color: #ffaa55;
   color: white;
@@ -59,8 +67,6 @@ const Button = styled.button`
     background-color: rgba(255, 170, 85, 0.9);
     box-shadow: 0 2px 4px rgba(255, 170, 85, 0.5);
   }
-  margin-right: ${props => props.mr};
-  align-self: ${(props) => props.align};
 `
 
 export {
