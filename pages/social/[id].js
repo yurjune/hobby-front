@@ -16,7 +16,7 @@ const Social = () => {
 
   return (
     <AppLayout me={me}>
-      <PostCardBig me={me} data={postData} />
+      <PostCardBig me={me} postData={postData} />
     </AppLayout>
   );
 };

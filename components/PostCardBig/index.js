@@ -8,78 +8,113 @@ import PostBar from './PostBar';
 import CommenterBar from './CommenterBar';
 import { FlexC, Flex, Bold, Text, Button } from '../Common';
 import { 
-  Avatar,
   Paragraph,
   Picture,
-  Comment,
   ShowComment,
   iconStyle,
 } from './style';
 import { localhost } from '../PostCard';
+import CommentForm from './CommentForm';
 
-const PostCardBig = ({ me, data }) => {
+const PostCardBig = ({ me, postData }) => {
   const [isOpenComment, setIsOpenComment] = useState(false);
-  const [comment, handleComment] = useInput('');
+  const [recommentTargetId, setRecommentTargetId] = useState('');
+  const [comment, handleComment, setComment] = useInput('');
+  const [recomment, handleRecomment, setRecomment] = useInput('');
   const [preComments, setPreComments] = useState([]);
   const [moreComments, setMoreComments] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
-    if (data?.Comments.length >= 3) {
-      const a = data.Comments.slice(0, 2);
+    if (postData?.Comments.length >= 3) {
+      const a = postData.Comments.slice(0, 2);
       setPreComments(a);
-      const b = data.Comments.slice(2, data.Comments.length);
+      const b = postData.Comments.slice(2, postData.Comments.length);
       setMoreComments(b);
-    } else if (data?.Comments.length >= 1) {
-      const a = data.Comments.slice(0, data.Comments.length);
+    } else if (postData?.Comments.length >= 1) {
+      const a = postData.Comments.slice(0, postData.Comments.length);
       setPreComments(a);
     }
     return;
-  }, [data]);
+  }, [postData]);
 
-  const submitComment = async () => {
-    const result = await axios.post(`/post/${data.id}/comment`, {
+  const submitComment = (target) => async () => {
+    const result = await axios.post(`/post/comment`, {
       userId: me.id,
-      postId: data.id,
+      postId: postData.id,
       content: comment,
     });
     alert('댓글이 등록되었습니다!');
+    setComment('');
   };
-  const onClickShowComment = () => {
-    if (isOpenComment === false) {
-      return setIsOpenComment(true);
-    }
-    setIsOpenComment(false);
-  }
-  const onClickUserName = (userId) => () => router.push(``);
 
+  const submitRecomment = (target) => async () => {
+    const result = await axios.post(`/post/recomment`, {
+      userId: me.id,
+      postId: postData.id,
+      content: recomment,
+      commentId: target.id,
+    });
+    alert('대댓글이 등록되었습니다!');
+    setRecomment('');
+  };
+
+  const showComments = () => {
+    if (isOpenComment === false) {
+      setIsOpenComment(true);
+    } else {
+      setIsOpenComment(false);
+    }
+  }
+
+  const openRecommentForm = (value) => () => {
+    // if (value === undefined) return;
+    console.log(recommentTargetId)
+    if (value === recommentTargetId) {
+      setRecommentTargetId('')
+    } else {
+      setRecommentTargetId(value);
+    }
+  };
+
+  const onClickUserName = (userId) => () => router.push(``);
+  console.log(postData);
   return (
     <FlexC maxW="650px" m="0 auto" p="10px">
-      <PostBar item={data}>
+      <PostBar item={postData}>
         <Button h="35px" self="center">팔로우</Button>
       </PostBar>
-      <Picture mb="10px" url={localhost(data?.Images[0].src)} />
+      <Picture mb="10px" url={localhost(postData?.Images[0].src)} />
       <FlexC p="5px">
         <Flex mb="20px">
           <FontAwesomeIcon size="2x" icon={faHeart} style={iconStyle} />
           <FontAwesomeIcon size="2x" icon={faComment} style={iconStyle} />
         </Flex>
         <Paragraph mb="30px">
-          <a>{data?.User.name}</a>{data?.content}
+          <a>{postData?.User.name}</a>{postData?.content}
         </Paragraph>
-        {data?.Comments?.length >= 3 &&
+        {postData?.Comments?.length >= 3 &&
           <>{isOpenComment
-            ? <ShowComment onClick={onClickShowComment}>댓글 접기</ShowComment>
-            : <ShowComment onClick={onClickShowComment}>댓글 {data?.Comments.length}개 모두보기</ShowComment>
+            ? <ShowComment onClick={showComments}>댓글 접기</ShowComment>
+            : <ShowComment onClick={showComments}>댓글 {postData?.Comments.length}개 모두보기</ShowComment>
           }</>}
-        { preComments && preComments.map(item => <CommenterBar key={item.createdAt} item={item} />)}
+        { preComments && preComments.map(item => (
+          <CommenterBar
+            key={item.createdAt}
+            item={item}
+            writing={recomment}
+            handle={handleRecomment}
+            submit={submitRecomment}
+            openRecommentForm={openRecommentForm}
+            recommentTargetId={recommentTargetId}
+          />))}
         { moreComments && isOpenComment && moreComments.map(item => <CommenterBar key={item.createdAt} item={item} />)}
-        { me &&
-        <Flex mb="20px">
-          <Avatar w="36px" radius="18px" mr="10px" />
-          <Comment placeholder="댓글을 남겨주세요" value={comment} onChange={handleComment} />
-          <Button h="35px" self="center" onClick={submitComment}>게시</Button>
-        </Flex>}
+        { me && <CommentForm
+          item={postData}
+          writing={comment}
+          handle={handleComment}
+          submit={submitComment}
+        />}
       </FlexC>
     </FlexC>
   );
