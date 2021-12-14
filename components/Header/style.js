@@ -1,20 +1,20 @@
 import styled from 'styled-components';
-import { layoutWidth } from '../AppLayout/style';
+import { headerWidth } from '../AppLayout/style';
+import { sideGap } from '../AppLayout/style';
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: ${layoutWidth};
+  max-width: ${headerWidth};
   align-items: center;
   justify-content: flex-end;
   margin: 0 auto;
   margin-bottom: 20px;
-  background-color: gold;
   position: relative;
 `
 const Logo = styled.div`
   font-size: 20px;
   position: absolute;
-  left: 20px;
+  left: 10px;
 `
 const Menu = styled.ul`
   display: flex;

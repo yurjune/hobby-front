@@ -24,14 +24,12 @@ const HeaderTop = ({ me, openLoginForm }) => {
   return (
     <Wrapper>
       <Menu>
-        {me ?
-        <>
+        {me ? <>
           <Link href="#"><MenuItem>고객센터</MenuItem></Link>
           <Link href="#"><MenuItem>마이페이지</MenuItem></Link>
           <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
         </>
-        : 
-        <>
+        : <>
           <MenuItem href="#">고객센터</MenuItem>
           <MenuItem onClick={openLoginForm}>로그인</MenuItem>
         </>}

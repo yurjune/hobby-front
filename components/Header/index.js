@@ -13,7 +13,7 @@ import { Avatar } from '../PostCardBig/style';
 
 const Header = ({ me }) => {
   return (
-    <>
+    <Box bg="gold">
       <Wrapper>
         <Logo>로고</Logo>
         <Menu>
@@ -21,7 +21,7 @@ const Header = ({ me }) => {
           <MenuItem>랭킹</MenuItem>
           <Link href="/community"><MenuItem>커뮤니티</MenuItem></Link>
         </Menu>
-        {me ? <> 
+        {me && <> 
           <Box color="gold" w="30px" />
           <Profile>
             <Avatar />
@@ -29,10 +29,9 @@ const Header = ({ me }) => {
             <ProfileItem>01 : 24</ProfileItem>
             <ProfileItem>수영</ProfileItem>
           </Profile>
-          </>
-        : ''}
+        </>}
       </Wrapper>
-    </>
+    </Box>
   );
 };
 

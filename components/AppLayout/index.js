@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import Footer from '../Footer';
 import Header from '../Header';
 import HeaderTop from '../HeaderTop';
 import LoginModal from '../LoginModal';
-import useFetch from '../../hooks/useFetch';
 import {
   Grid,
   GridHeader,
@@ -29,7 +29,9 @@ const AppLayout = ({ children, me }) => {
         </GridItem>
         : ""
       }
-      <GridFooter></GridFooter>
+      <GridFooter>
+        <Footer />
+      </GridFooter>
     </Grid>
   );
 };
