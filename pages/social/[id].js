@@ -13,6 +13,7 @@ const Social = () => {
   if (error) return <div>에러 발생</div>;
   if (postError) return <div>에러 발생</div>;
   if (postIsLoading) return <div>로딩 중...</div>;
+  if (!router.isReady) return <div>로딩중...</div>;
 
   return (
     <AppLayout me={me}>

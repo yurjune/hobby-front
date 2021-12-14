@@ -19,13 +19,13 @@ const PostCard = ({ data }) => {
   const onClickCard = () => router.push(`/social/${data.id}`);
 
   return (
-    <>
+    <>{ data &&
       <FlexC cursor="pointer" onClick={onClickCard}>
-        <Picture url={localhost(data?.Images[0].src)} />
+        <Picture url={localhost(data.Images[0]?.src)} />
         <FlexC p="10px 5px">
           <Flex mb="15px">
             <Avatar mr="15px" />
-            <Text self="center">{data.User.name}</Text>
+            <Text self="center">{data.User?.name}</Text>
           </Flex>
           <Paragraph>{data.content}</Paragraph>
           <Flex>
@@ -34,7 +34,7 @@ const PostCard = ({ data }) => {
           </Flex>
         </FlexC>
       </FlexC>
-    </>
+    }</>
   );
 };
 

@@ -18,28 +18,46 @@ import CommentForm from './CommentForm';
 import next from 'next';
 
 const PostCardBig = ({ me, postData }) => {
-  const [isOpenComment, setIsOpenComment] = useState(false);
-  const [recommentTargetId, setRecommentTargetId] = useState('');
   const [comment, handleComment, setComment] = useInput('');
-  const [recomment, handleRecomment, setRecomment] = useInput('');
-  const [preComments, setPreComments] = useState([]);
-  const [moreComments, setMoreComments] = useState([]);
+  const [reply, handleReply, setReply] = useInput('');
+  const [isOpenComment, setIsOpenComment] = useState(false);
+  const [isShowAllComments, setIsShowAllComments] = useState(false);
+  const [replyTargetId, setReplyTargetId] = useState('');
   const [isFollowing, setIsFollowing] = useState(false);
+
+  const [commentList, setCommentList] = useState([]);
+  const [replyList, setReplyList] = useState([]);
+  const [previewComments, setPreviewComments] = useState([]);
   const router = useRouter();
+
+  useEffect(() => { // 댓글을 댓글과 답글로 분류
+    if (!postData) return;
+    const replyIdList = [];
+    postData.Comments.map(comment => comment.Son.map(son => replyIdList.push(son.id)));
+
+    const reply = [];
+    const comment = [];
+    postData.Comments.forEach(item => {
+      if (replyIdList.includes(item.id)) {
+        reply.push(item);
+      } else {
+        comment.push(item)
+      }
+    })
+    // console.log('reply', reply);
+    // console.log('comment', comment);
+    setCommentList(comment);
+    setReplyList(reply);
+  }, [postData]);
 
   useEffect(() => {
     if (!postData) return;
-    if (postData.Comments.length >= 3) {
-      const a = postData.Comments.slice(0, 2);
-      setPreComments(a);
-      const b = postData.Comments.slice(2, postData.Comments.length);
-      setMoreComments(b);
-    } else if (postData.Comments.length >= 1) {
-      const a = postData.Comments.slice(0, postData.Comments.length);
-      setPreComments(a);
+    if (commentList.length >= 1) {
+      const temp = [];
+      temp.push(commentList[commentList.length - 1])
+      return setPreviewComments(temp);
     }
-    return;
-  }, [postData]);
+  }, [postData, commentList]);
 
   useEffect(() => {
     if (!postData || !me) return;
@@ -62,16 +80,16 @@ const PostCardBig = ({ me, postData }) => {
     }
   };
 
-  const submitRecomment = (target) => async () => {
+  const submitReply = (target) => async () => {
     try {
-    const result = await axios.post(`/post/recomment`, {
+    const result = await axios.post(`/post/reply`, {
       userId: me.id,
       postId: postData.id,
-      content: recomment,
+      content: reply,
       commentId: target.id,
     });
     alert('대댓글이 등록되었습니다!');
-    setRecomment('');
+    setReply('');
     } catch (error) {
       console.log(error);
       next(error);
@@ -81,18 +99,20 @@ const PostCardBig = ({ me, postData }) => {
   const showComments = () => {
     if (isOpenComment === false) {
       setIsOpenComment(true);
+      setIsShowAllComments(true);
     } else {
       setIsOpenComment(false);
+      setIsShowAllComments(false);
     }
   }
 
-  const openRecommentForm = (value) => () => {
+  const openReplyForm = (value) => () => {
     // if (value === undefined) return;
-    console.log(recommentTargetId)
-    if (value === recommentTargetId) {
-      setRecommentTargetId('')
+    console.log(replyTargetId)
+    if (value === replyTargetId) {
+      setReplyTargetId('')
     } else {
-      setRecommentTargetId(value);
+      setReplyTargetId(value);
     }
   };
 
@@ -130,7 +150,7 @@ const PostCardBig = ({ me, postData }) => {
           </PostBar>
           : <PostBar item={postData} />
         }
-        <Picture mb="10px" url={localhost(postData?.Images[0].src)} />
+        <Picture mb="10px" url={localhost(postData.Images[0]?.src)} />
         <FlexC p="5px">
           <Flex mb="20px">
             <FontAwesomeIcon size="2x" icon={faHeart} style={iconStyle} />
@@ -139,22 +159,33 @@ const PostCardBig = ({ me, postData }) => {
           <Paragraph mb="30px">
             <a>{postData?.User.name}</a>{postData?.content}
           </Paragraph>
-          {postData.Comments.length >= 3 &&
+          { postData.Comments.length >= 2 &&
             <>{isOpenComment
               ? <ShowComment onClick={showComments}>댓글 접기</ShowComment>
               : <ShowComment onClick={showComments}>댓글 {postData?.Comments.length}개 모두보기</ShowComment>
             }</>}
-          { preComments && preComments.map(item => (
+          { !isOpenComment && previewComments.length >=1 && previewComments.map(item => (
             <CommenterBar
               key={item.createdAt}
               item={item}
-              writing={recomment}
-              handle={handleRecomment}
-              submit={submitRecomment}
-              openRecommentForm={openRecommentForm}
-              recommentTargetId={recommentTargetId}
-            />))}
-          { moreComments && isOpenComment && moreComments.map(item => <CommenterBar key={item.createdAt} item={item} />)}
+              writing={reply}
+              handle={handleReply}
+              submit={submitReply}
+              openRecommentForm={openReplyForm}
+              recommentTargetId={replyTargetId}
+            />
+          ))}
+          { isOpenComment && commentList.map(item => (
+            <CommenterBar
+              key={item.createdAt}
+              item={item}
+              writing={reply}
+              handle={handleReply}
+              submit={submitReply}
+              openRecommentForm={openReplyForm}
+              recommentTargetId={replyTargetId}
+            />
+          ))}
           { me && <CommentForm
             item={postData}
             writing={comment}
