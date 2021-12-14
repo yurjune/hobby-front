@@ -37,6 +37,9 @@ const Text = styled(Box)`
 const Bold = styled(Text)`
   font-weight: bold;
 `
+const Pointer = styled(Text)`
+  cursor: pointer;
+`
 
 // custom
 const Button = styled.button`
@@ -67,5 +70,6 @@ export {
   FlexC,
   Text,
   Bold,
+  Pointer,
   Button,
 }

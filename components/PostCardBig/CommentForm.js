@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlexC, Flex, Button } from '../Common';
+import { Flex, Button } from '../Common';
 import { 
   Avatar,
   Comment,

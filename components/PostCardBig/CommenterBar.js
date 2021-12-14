@@ -1,42 +1,61 @@
-import React from 'react';
-import { FlexC, Flex, Box, Bold, Text, Button } from '../Common';
+import React, { useState } from 'react';
+import { FlexC, Flex, Box, Bold, Text, Pointer } from '../Common';
 import { Avatar } from './style';
 import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
+import ReplyBar from './ReplyBar';
 
-const CommenterBar = ({ children, item, writing, submit, handle, openRecommentForm, recommentTargetId }) => {
-  return (
-    <>
-      { item && <>
-        <Flex mb="20px" key={item.createdAt}>
-          <Avatar w="36px" radius="18px" mr="10px" />
-          <FlexC flex="1">
-            <Flex mt="4px" mb="8px" fontSize="14px">
-              <Bold mr="10px" cursor="pointer">{item.User.name}</Bold>
-              <Text>{item.content}</Text>
-            </Flex>
-            <Flex color="#22222280" fontSize="13px">
-              <Text mr="15px">{useDayjs(item.createdAt)}</Text>
-              <Text onClick={openRecommentForm(item.id)} cursor="pointer">답글 쓰기</Text>
-              {/* <Text>답글 쓰기</Text> */}
-            </Flex>
-          </FlexC>
-          {children}
+const CommenterBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply, submitReply }) => {
+  const [isOpenReplyBar, setIsOpenReplyBar] = useState(false);
+
+  const showReplies = () => {
+    if (isOpenReplyBar) {
+      setIsOpenReplyBar(false);
+    } else {
+      setIsOpenReplyBar(true);
+    }
+  };
+
+  return (<>
+    <Flex mb="20px" key={item.createdAt}>
+      <Avatar w="36px" radius="18px" mr="10px" />
+      <FlexC flex="1">
+        <Flex mt="4px" mb="8px" fontSize="14px">
+          <Pointer mr="10px" weight="bold">{item.User?.name}</Pointer>
+          <Text>{item.content}</Text>
         </Flex>
-        { item.id === recommentTargetId &&
-          <Flex>
-            <Box w="46px" />
-            <CommentForm
-              item={item}
-              writing={writing}
-              handle={handle}
-              submit={submit}
-            />
-          </Flex>
-        }
-      </>}
-    </>
-  );
+        <Flex color="#22222280" fontSize="13px">
+          <Text mr="15px">{useDayjs(item.createdAt)}</Text>
+          { me && <Pointer onClick={openReplyForm(item.id)}>답글 쓰기</Pointer> }
+        </Flex>
+      </FlexC>
+    </Flex>
+    { item.Son && item.Son.length >= 1 &&
+      <Pointer
+        onClick={showReplies}
+        ml="46px"
+        mb="20px"
+        color="#22222280"
+        fontSize="13px"
+      >
+        { isOpenReplyBar ? `---- 답글 접기` : `---- 답글 ${item.Son.length}개 모두 보기` }
+      </Pointer>
+    }
+    { item.id === replyTargetId &&
+      <Flex>
+        <Box w="46px" />
+        <CommentForm
+          item={item}
+          writing={reply}
+          handle={handleReply}
+          submit={submitReply}
+        />
+      </Flex>
+    }
+    { isOpenReplyBar && item.Son.length >= 1 && item.Son.map(son =>
+      <ReplyBar key={son.createdAt} item={son} />
+    )}
+  </>)
 };
 
 export default CommenterBar;
