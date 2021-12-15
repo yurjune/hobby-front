@@ -176,6 +176,19 @@ const PostCardBig = ({ me, postData }) => {
   
   const editPost = () => router.push(`/edit/${postData.id}`);
 
+  const deletePost = async () => {
+    try {
+      const isDelete = confirm('정말 삭제하시겠습니까?');
+      if (isDelete) {
+        const result = await axios.delete(`/post?postId=${postData.id}`);
+        alert(result.data);
+        router.push('/community')
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (<>
     { postData &&
       <FlexC maxW="650px" m="0 auto" p="10px">
@@ -187,7 +200,7 @@ const PostCardBig = ({ me, postData }) => {
                   { isOpenMenu &&
                     <Menu top="40px" right="15px">
                       <li onClick={editPost}>수정</li>
-                      <li>삭제</li>
+                      <li onClick={deletePost}>삭제</li>
                     </Menu>
                   }
                 </MenuWrapper>
