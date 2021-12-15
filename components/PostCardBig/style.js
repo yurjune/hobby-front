@@ -46,7 +46,7 @@ const ShowComment = styled.div`
 `
 
 const iconStyle = {
-  "marginRight": "15px", 
+  "marginRight": "10px", 
   "cursor": "pointer",
 };
 

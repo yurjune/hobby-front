@@ -30,7 +30,9 @@ const PostCard = ({ data }) => {
           <Paragraph>{data.content}</Paragraph>
           <Flex>
             <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} />
+            <Text self="center" mr="15px">{data.Likers?.length}</Text>
             <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} />
+            <Text self="center" mr="15px">{data.Comments?.length}</Text>
           </Flex>
         </FlexC>
       </FlexC>

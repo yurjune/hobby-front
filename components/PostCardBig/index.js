@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeartSolid }  from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import useInput from '../../hooks/useInput';
 import PostBar from './PostBar';
 import CommentBar from './CommentBar';
-import { FlexC, Flex, Box, Button } from '../Common';
+import { FlexC, Flex, Text, Button } from '../Common';
 import { 
   Paragraph,
   Picture,
@@ -21,6 +22,7 @@ const PostCardBig = ({ me, postData }) => {
   const [reply, handleReply, setReply] = useInput('');
   const [isOpenComment, setIsOpenComment] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const [replyTargetId, setReplyTargetId] = useState('');
 
   const [commentList, setCommentList] = useState([]);
@@ -50,10 +52,16 @@ const PostCardBig = ({ me, postData }) => {
     }
   }, [postData, commentList]);
 
-  useEffect(() => {
+  useEffect(() => { // 팔로우 확인
     if (!postData || !me) return;
     const result = postData.User.Followers.filter(item => item.id === me.id)
     if (result.length >= 1) return setIsFollowing(true);
+  }, [postData]);
+
+  useEffect(() => { // 좋아요 확인
+    if (!postData || !me) return;
+    const result = postData.Likers.filter(item => item.id === me.id)
+    if (result.length >= 1) return setIsLiked(true);
   }, [postData]);
 
   const submitComment = (target) => async () => {
@@ -128,8 +136,32 @@ const PostCardBig = ({ me, postData }) => {
     }
   };
 
+  const likePost = async () => {
+    try {
+      if (!me) return alert('먼저 로그인해주세요');
+      const result = await axios.patch(
+        `/post/like?postId=${postData.User.id}&likerId=${me.id}`
+      );
+      if (result.data === 'success') setIsLiked(true);
+    } catch(error) {
+      console.error(error);
+    }
+  };
+
+  const unlikePost = async () => {
+    try {
+      if (!me) return alert('먼저 로그인해주세요');
+      const result = await axios.patch(
+        `/post/unlike?postId=${postData.User.id}&likerId=${me.id}`
+      );
+      if (result.data === 'success') setIsLiked(false);
+    } catch(error) {
+      console.error(error);
+    }
+  };
+
   const onClickUserName = (userId) => () => router.push(``);
-  // console.log(postData);
+  console.log(postData);
 
   return (<>
     { postData &&
@@ -146,13 +178,18 @@ const PostCardBig = ({ me, postData }) => {
         <Picture mb="10px" url={localhost(postData.Images[0]?.src)} />
         <FlexC p="5px">
           <Flex mb="20px">
-            <FontAwesomeIcon size="2x" icon={faHeart} style={iconStyle} />
-            <FontAwesomeIcon size="2x" icon={faComment} style={iconStyle} />
+            { me && isLiked
+            ? <FontAwesomeIcon size="lg" icon={faHeartSolid} style={iconStyle} onClick={unlikePost} />
+            : <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} onClick={likePost} />
+            }
+            <Text self="center" mr="20px">{postData.Likers?.length}</Text>
+            <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} />
+            <Text self="center" mr="20px">{postData.Comments?.length}</Text>
           </Flex>
           <Paragraph mb="30px">
             <a>{postData.User?.name}</a>{postData.content}
           </Paragraph>
-          { postData.Comments.length >= 2 &&
+          { postData.Comments?.length >= 2 &&
             <ShowComment onClick={showComments}>
               { isOpenComment ? `댓글 접기` : `댓글 ${postData.Comments.length}개 모두 보기`}
             </ShowComment>

@@ -42,7 +42,7 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
       </Flex>
     }
     { isOpenReplyBar && item.Son.length >= 1 && item.Son.map(son =>
-      <Flex>
+      <Flex key={son.createdAt}>
         <Box w="46px" />
         <CommentBody item={son} />
       </Flex>
