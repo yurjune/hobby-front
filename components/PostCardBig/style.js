@@ -45,6 +45,12 @@ const ShowComment = styled.div`
   cursor: pointer;
 `
 
+const MenuWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  jusitfy-contents: center;
+`
+
 const iconStyle = {
   "marginRight": "10px", 
   "cursor": "pointer",
@@ -56,5 +62,6 @@ export {
   Paragraph,
   Comment,
   ShowComment,
+  MenuWrapper,
   iconStyle,
 }

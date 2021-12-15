@@ -5,7 +5,7 @@ import {
 import { FlexC, Text } from '../Common';
 import { SmallTimer } from '../Timer';
 
-const SideCard = () => {
+const SideCard = ({ exPost }) => {
   return (
     <FlexC p="15px" flex="1">
       <Text size="20px">나의 기록! 🔥</Text>

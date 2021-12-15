@@ -5,11 +5,11 @@ import {
 import SideCard from '../SideCard';
 import WritingForm from '../WritingForm';
 
-const DividedPage = ({ me }) => {
+const DividedPage = ({ me, exPost }) => {
   return (
     <Wrapper>
-      <SideCard />
-      <WritingForm me={me} />
+      <SideCard exPost={exPost} />
+      <WritingForm me={me} exPost={exPost} />
     </Wrapper>
   );
 };

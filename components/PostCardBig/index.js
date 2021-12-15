@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as faHeartSolid }  from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faHeartSolid, faEllipsisV }  from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import useInput from '../../hooks/useInput';
@@ -12,14 +12,17 @@ import {
   Paragraph,
   Picture,
   ShowComment,
+  MenuWrapper,
   iconStyle,
 } from './style';
 import { localhost } from '../PostCard';
 import CommentForm from './CommentForm';
+import { Menu } from '../CategoryMenu';
 
 const PostCardBig = ({ me, postData }) => {
   const [comment, handleComment, setComment] = useInput('');
   const [reply, handleReply, setReply] = useInput('');
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenComment, setIsOpenComment] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -114,7 +117,7 @@ const PostCardBig = ({ me, postData }) => {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch('/user/follow', {
         followerId: me.id,
-        followingId: postData.User.id,
+        followingId: postData.UserId,
       });
       alert(`${result.data.name}님을 팔로우하였습니다`);
       router.reload();
@@ -127,7 +130,7 @@ const PostCardBig = ({ me, postData }) => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.delete(
-        `/user/follow?followingId=${postData.User.id}&followerId=${me.id}`
+        `/user/follow?followingId=${postData.UserId}&followerId=${me.id}`
       );
       alert(`${result.data.name}님을 언팔로우하였습니다`);
       router.reload();
@@ -140,7 +143,7 @@ const PostCardBig = ({ me, postData }) => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
-        `/post/like?postId=${postData.User.id}&likerId=${me.id}`
+        `/post/like?postId=${postData.UserId}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(true);
     } catch(error) {
@@ -152,7 +155,7 @@ const PostCardBig = ({ me, postData }) => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
-        `/post/unlike?postId=${postData.User.id}&likerId=${me.id}`
+        `/post/unlike?postId=${postData.UserId}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(false);
     } catch(error) {
@@ -160,19 +163,42 @@ const PostCardBig = ({ me, postData }) => {
     }
   };
 
+  const onClickMenu = () => {
+    if (isOpenMenu === false) {
+      setIsOpenMenu(true);
+    } else {
+      setIsOpenMenu(false);
+    }
+  };
+  
   const onClickUserName = (userId) => () => router.push(``);
   console.log(postData);
+  
+  const editPost = () => router.push(`/edit/${postData.id}`);
 
   return (<>
     { postData &&
       <FlexC maxW="650px" m="0 auto" p="10px">
-        { me && me.id !== postData.User?.id ?
-          <PostBar item={postData}>
-            {isFollowing
-              ? <Button h="35px" self="center" onClick={onClickUnfollow}>언팔로우</Button>
-              : <Button h="35px" self="center" onClick={onClickFollow}>팔로우</Button>
-            }
-          </PostBar>
+        { me ?
+          <>{ me.id === postData.User?.id
+            ? <PostBar item={postData}>
+                <MenuWrapper>
+                  <FontAwesomeIcon size="lg" icon={faEllipsisV} style={iconStyle} onClick={onClickMenu} />
+                  { isOpenMenu &&
+                    <Menu top="40px" right="15px">
+                      <li onClick={editPost}>수정</li>
+                      <li>삭제</li>
+                    </Menu>
+                  }
+                </MenuWrapper>
+              </PostBar>
+            : <PostBar item={postData}>
+                {isFollowing
+                  ? <Button h="35px" self="center" onClick={onClickUnfollow}>언팔로우</Button>
+                  : <Button h="35px" self="center" onClick={onClickFollow}>팔로우</Button>
+                }
+              </PostBar>
+          }</>
           : <PostBar item={postData} />
         }
         <Picture mb="10px" url={localhost(postData.Images[0]?.src)} />

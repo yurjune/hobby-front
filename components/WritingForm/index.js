@@ -23,12 +23,23 @@ const iconStyle = {
   top: "42%",
 };
 
-const WritingForm = ({ me }) => {
+const WritingForm = ({ me, exPost }) => {
   const [imageList, setImageList] = useState([]);
-  const [text, onChangeText] = useInput('');
-  const category = '수영'
+  const [text, onChangeText, setText] = useInput('');
+  const category = '수영';
   const fileRef = useRef(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (exPost) {
+      console.log(exPost);
+      setText(exPost.content);
+      if (exPost.Images.length >= 1) {
+        const array = exPost.Images.map(item => item.src);
+        setImageList(array);
+      }
+    }
+  }, [exPost]);
 
   const onChangeImages = async (e) => {
     try {
@@ -65,17 +76,39 @@ const WritingForm = ({ me }) => {
     }
   };
 
+  const onEdit = async () => {
+    try {
+      if (!text) {
+        return alert("본문을 입력해 주세요!");
+      }
+      const result = await axios.patch(`/post/editpost`, {
+        userId: me.id,
+        postId: exPost.id,
+        category,
+        content: text,
+        image: imageList,
+      });
+      console.log(result);
+      alert('수정이 완료되었습니다');
+      router.push(`/community`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onClickBlankImages = () => {
     fileRef.current.click();
   };
+
   return (
     <FlexC p="15px" flex="2.3">
       {imageList.length >= 1 ? 
-        <Grid>{imageList.map(item => (
-          <GridItem key={item}>
-            <Picture url={`http://localhost:3060/${item}`} />
-          </GridItem>
-        ))}
+        <Grid>
+          {imageList.map(item => (
+            <GridItem key={item}>
+              <Picture url={`http://localhost:3060/${item}`} />
+            </GridItem>
+          ))}
         </Grid>
         : <Grid>
           <GridItem>
@@ -95,7 +128,10 @@ const WritingForm = ({ me }) => {
         value={text}
         onChange={onChangeText} 
       />
-      <Button align="end" onClick={onSubmit}>작성</Button>
+      { exPost
+        ? <Button align="end" onClick={onEdit}>수정</Button>
+        : <Button align="end" onClick={onSubmit}>작성</Button>
+      }
     </FlexC>
   );
 };
