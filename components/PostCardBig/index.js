@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import useInput from '../../hooks/useInput';
 import PostBar from './PostBar';
-import CommenterBar from './CommenterBar';
+import CommentBar from './CommentBar';
 import { FlexC, Flex, Box, Button } from '../Common';
 import { 
   Paragraph,
@@ -102,22 +102,30 @@ const PostCardBig = ({ me, postData }) => {
   };
 
   const onClickFollow = async () => {
-    if (!me) return alert('먼저 로그인해주세요');
-    const result = await axios.patch('/user/follow', {
-      followerId: me.id,
-      followingId: postData.User.id,
-    });
-    alert(`${result.data.name}님을 팔로우하였습니다`);
-    router.reload();
+    try {
+      if (!me) return alert('먼저 로그인해주세요');
+      const result = await axios.patch('/user/follow', {
+        followerId: me.id,
+        followingId: postData.User.id,
+      });
+      alert(`${result.data.name}님을 팔로우하였습니다`);
+      router.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onClickUnfollow = async () => {
-    if (!me) return alert('먼저 로그인해주세요');
-    const result = await axios.delete(
-      `/user/follow?followingId=${postData.User.id}&followerId=${me.id}`
-    );
-    alert(`${result.data.name}님을 언팔로우하였습니다`);
-    router.reload();
+    try {
+      if (!me) return alert('먼저 로그인해주세요');
+      const result = await axios.delete(
+        `/user/follow?followingId=${postData.User.id}&followerId=${me.id}`
+      );
+      alert(`${result.data.name}님을 언팔로우하였습니다`);
+      router.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onClickUserName = (userId) => () => router.push(``);
@@ -150,7 +158,7 @@ const PostCardBig = ({ me, postData }) => {
             </ShowComment>
           }
           { !isOpenComment && previewComments.length >=1 && previewComments.map(item =>
-            <CommenterBar
+            <CommentBar
               key={item.createdAt}
               item={item}
               me={me}
@@ -162,7 +170,7 @@ const PostCardBig = ({ me, postData }) => {
             />
           )}
           { isOpenComment && commentList.map(item => 
-            <CommenterBar
+            <CommentBar
               key={item.createdAt}
               item={item}
               me={me}

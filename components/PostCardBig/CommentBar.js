@@ -3,9 +3,8 @@ import { FlexC, Flex, Box, Bold, Text, Pointer } from '../Common';
 import { Avatar } from './style';
 import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
-import ReplyBar from './ReplyBar';
 
-const CommenterBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply, submitReply }) => {
+const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply, submitReply }) => {
   const [isOpenReplyBar, setIsOpenReplyBar] = useState(false);
 
   const showReplies = () => {
@@ -17,19 +16,9 @@ const CommenterBar = ({ me, item, replyTargetId, openReplyForm, reply, handleRep
   };
 
   return (<>
-    <Flex mb="20px" key={item.createdAt}>
-      <Avatar w="36px" radius="18px" mr="10px" />
-      <FlexC flex="1">
-        <Flex mt="4px" mb="8px" fontSize="14px">
-          <Pointer mr="10px" weight="bold">{item.User?.name}</Pointer>
-          <Text>{item.content}</Text>
-        </Flex>
-        <Flex color="#22222280" fontSize="13px">
-          <Text mr="15px">{useDayjs(item.createdAt)}</Text>
-          { me && <Pointer onClick={openReplyForm(item.id)}>답글 쓰기</Pointer> }
-        </Flex>
-      </FlexC>
-    </Flex>
+    <CommentBody item={item}>
+      { me && <Pointer onClick={openReplyForm(item.id)}>답글 쓰기</Pointer> }
+    </CommentBody>
     { item.Son && item.Son.length >= 1 &&
       <Pointer
         onClick={showReplies}
@@ -53,9 +42,30 @@ const CommenterBar = ({ me, item, replyTargetId, openReplyForm, reply, handleRep
       </Flex>
     }
     { isOpenReplyBar && item.Son.length >= 1 && item.Son.map(son =>
-      <ReplyBar key={son.createdAt} item={son} />
+      <Flex>
+        <Box w="46px" />
+        <CommentBody item={son} />
+      </Flex>
     )}
   </>)
 };
 
-export default CommenterBar;
+const CommentBody = ({ children, item }) => {
+  return (
+    <Flex mb="20px" key={item.createdAt}>
+      <Avatar w="36px" radius="18px" mr="10px" />
+      <FlexC flex="1">
+        <Flex mt="4px" mb="8px" fontSize="14px">
+          <Pointer mr="10px" weight="bold">{item.User?.name}</Pointer>
+          <Text>{item.content}</Text>
+        </Flex>
+        <Flex color="#22222280" fontSize="13px">
+          <Text mr="15px">{useDayjs(item.createdAt)}</Text>
+          {children}
+        </Flex>
+      </FlexC>
+    </Flex>
+  )
+};
+
+export default CommentBar;
