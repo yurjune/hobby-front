@@ -143,7 +143,7 @@ const PostCardBig = ({ me, postData }) => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
-        `/post/like?postId=${postData.UserId}&likerId=${me.id}`
+        `/post/like?postId=${postData.id}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(true);
     } catch(error) {
@@ -155,7 +155,7 @@ const PostCardBig = ({ me, postData }) => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
-        `/post/unlike?postId=${postData.UserId}&likerId=${me.id}`
+        `/post/unlike?postId=${postData.id}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(false);
     } catch(error) {
