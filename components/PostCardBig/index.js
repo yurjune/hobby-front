@@ -77,7 +77,7 @@ const PostCardBig = ({ me, postData }) => {
       alert('댓글이 등록되었습니다!');
       setComment('');
     } catch (error) {
-      console.log(error);
+      alert(error.response.data);
     }
   };
 
@@ -92,7 +92,7 @@ const PostCardBig = ({ me, postData }) => {
       alert('대댓글이 등록되었습니다!');
       setReply('');
     } catch (error) {
-      console.log(error);
+      alert(error.response.data);
     }
   };
 
@@ -122,7 +122,7 @@ const PostCardBig = ({ me, postData }) => {
       alert(`${result.data.name}님을 팔로우하였습니다`);
       router.reload();
     } catch (error) {
-      console.error(error);
+      alert(error.response.data);
     }
   };
 
@@ -135,7 +135,7 @@ const PostCardBig = ({ me, postData }) => {
       alert(`${result.data.name}님을 언팔로우하였습니다`);
       router.reload();
     } catch (error) {
-      console.error(error);
+      alert(error.response.data);
     }
   };
 
@@ -147,7 +147,7 @@ const PostCardBig = ({ me, postData }) => {
       );
       if (result.data === 'success') setIsLiked(true);
     } catch(error) {
-      console.error(error);
+      alert(error.response.data);
     }
   };
 
@@ -159,7 +159,7 @@ const PostCardBig = ({ me, postData }) => {
       );
       if (result.data === 'success') setIsLiked(false);
     } catch(error) {
-      console.error(error);
+      alert(error.response.data);
     }
   };
 
@@ -185,7 +185,7 @@ const PostCardBig = ({ me, postData }) => {
         router.push('/community')
       }
     } catch (error) {
-      console.error(error);
+      alert(error.response.data);
     }
   };
 

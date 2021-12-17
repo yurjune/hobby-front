@@ -1,8 +1,28 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FlexC, Flex, Box, Bold, Text, Pointer } from '../Common';
-import { Avatar } from './style';
+import { Avatar, iconStyle } from './style';
 import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const editComment = () => async() => {
+  try {
+  } catch (error) {
+    alert(error.response.data);
+  }
+};
+
+const deleteComment = (target) => async () => {
+  try {
+    const result = await axios.delete(`/comment?commentId=${target.id}`);
+    alert(result.data);
+  } catch (error) {
+    alert(error.response.data);
+  }
+};
 
 const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply, submitReply }) => {
   const [isOpenReplyBar, setIsOpenReplyBar] = useState(false);
@@ -16,7 +36,7 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
   };
 
   return (<>
-    <CommentBody item={item}>
+    <CommentBody me={me} item={item}>
       { me && <Pointer onClick={openReplyForm(item.id)}>답글 쓰기</Pointer> }
     </CommentBody>
     { item.Son && item.Son.length >= 1 &&
@@ -42,22 +62,28 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
       </Flex>
     }
     { isOpenReplyBar && item.Son.length >= 1 && item.Son.map(son =>
-      <Flex key={son.createdAt}>
+      <Flex key={son.createdAt} flex="1">
         <Box w="46px" />
-        <CommentBody item={son} />
+        <CommentBody me={me} item={son} />
       </Flex>
     )}
   </>)
 };
 
-const CommentBody = ({ children, item }) => {
+const CommentBody = ({ children, me, item }) => {
   return (
-    <Flex mb="20px" key={item.createdAt}>
+    <Flex mb="20px" key={item.createdAt} flex="1">
       <Avatar w="36px" radius="18px" mr="10px" />
       <FlexC flex="1">
         <Flex mt="4px" mb="8px" fontSize="14px">
           <Pointer mr="10px" weight="bold">{item.User?.name}</Pointer>
           <Text>{item.content}</Text>
+          { me && item.User?.id === me.id &&
+            <Flex flex="1" justify="flex-end">
+              <FontAwesomeIcon icon={faEdit} size="sm" style={iconStyle} onClick={editComment(item)} />
+              <FontAwesomeIcon icon={faTimes} size="sm" style={iconStyle} onClick={deleteComment(item)} />
+            </Flex>
+          }
         </Flex>
         <Flex color="#22222280" fontSize="13px">
           <Text mr="15px">{useDayjs(item.createdAt)}</Text>
