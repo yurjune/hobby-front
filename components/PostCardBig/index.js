@@ -69,7 +69,7 @@ const PostCardBig = ({ me, postData }) => {
 
   const submitComment = (target) => async () => {
     try {
-      const result = await axios.post(`/post/comment`, {
+      const result = await axios.post(`/comment`, {
         userId: me.id,
         postId: postData.id,
         content: comment,
@@ -83,7 +83,7 @@ const PostCardBig = ({ me, postData }) => {
 
   const submitReply = (target) => async () => {
     try {
-      const result = await axios.post(`/post/reply`, {
+      const result = await axios.post(`/comment/reply`, {
         userId: me.id,
         postId: postData.id,
         content: reply,
