@@ -20,6 +20,7 @@ const Header = ({ me }) => {
           <Link href="/"><MenuItem>타이머</MenuItem></Link>
           <MenuItem>랭킹</MenuItem>
           <Link href="/community"><MenuItem>커뮤니티</MenuItem></Link>
+          <Link href="/write"><MenuItem>글쓰기</MenuItem></Link>
         </Menu>
         {me && <> 
           <Box color="gold" w="30px" />

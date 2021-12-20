@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import useInput from '../../hooks/useInput';
 import PostBar from './PostBar';
 import CommentBar from './CommentBar';
-import { FlexC, Flex, Text, Button } from '../Common';
+import { FlexC, Flex, Box, Text, Button } from '../Common';
 import { 
   Paragraph,
   Picture,
@@ -163,6 +163,10 @@ const PostCardBig = ({ me, postData }) => {
     }
   };
 
+  const clickComment = () => {
+    if (!me) alert('먼저 로그인해주세요');
+  };
+
   const onClickMenu = () => {
     if (isOpenMenu === false) {
       setIsOpenMenu(true);
@@ -191,7 +195,7 @@ const PostCardBig = ({ me, postData }) => {
 
   return (<>
     { postData &&
-      <FlexC maxW="650px" m="0 auto" p="10px">
+      <FlexC maxW="650px" m="0 auto" mb="100px" p="10px">
         { me ?
           <>{ me.id === postData.User?.id
             ? <PostBar item={postData}>
@@ -214,49 +218,51 @@ const PostCardBig = ({ me, postData }) => {
           }</>
           : <PostBar item={postData} />
         }
-        <Picture mb="10px" url={localhost(postData.Images[0]?.src)} />
-        <FlexC p="5px">
+        <Picture mb="20px" url={localhost(postData.Images[0]?.src)} />
+        <FlexC>
           <Flex mb="20px">
             { me && isLiked
             ? <FontAwesomeIcon size="lg" icon={faHeartSolid} style={iconStyle} onClick={unlikePost} />
             : <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} onClick={likePost} />
             }
             <Text self="center" mr="20px">{postData.Likers?.length}</Text>
-            <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} />
+            <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} onClick={clickComment} />
             <Text self="center" mr="20px">{postData.Comments?.length}</Text>
           </Flex>
           <Paragraph mb="30px">
             <a>{postData.User?.name}</a>{postData.content}
           </Paragraph>
-          { postData.Comments?.length >= 2 &&
-            <ShowComment onClick={showComments}>
-              { isOpenComment ? `댓글 접기` : `댓글 ${postData.Comments.length}개 모두 보기`}
-            </ShowComment>
-          }
-          { !isOpenComment && previewComments.length >=1 && previewComments.map(item =>
-            <CommentBar
-              key={item.createdAt}
-              item={item}
-              me={me}
-              replyTargetId={replyTargetId}
-              openReplyForm={openReplyForm}
-              reply={reply}
-              handleReply={handleReply}
-              submitReply={submitReply}
-            />
-          )}
-          { isOpenComment && commentList.map(item => 
-            <CommentBar
-              key={item.createdAt}
-              item={item}
-              me={me}
-              replyTargetId={replyTargetId}
-              openReplyForm={openReplyForm}
-              reply={reply}
-              handleReply={handleReply}
-              submitReply={submitReply}
-            />
-          )}
+            { postData.Comments?.length >= 2 &&
+              <ShowComment onClick={showComments}>
+                { isOpenComment ? `댓글 접기` : `댓글 ${postData.Comments.length}개 모두 보기`}
+              </ShowComment>
+            }
+          <Box mb="10px">
+            { !isOpenComment && previewComments.length >=1 && previewComments.map(item =>
+              <CommentBar
+                key={item.createdAt}
+                item={item}
+                me={me}
+                replyTargetId={replyTargetId}
+                openReplyForm={openReplyForm}
+                reply={reply}
+                handleReply={handleReply}
+                submitReply={submitReply}
+              />
+            )}
+            { isOpenComment && commentList.map(item => 
+              <CommentBar
+                key={item.createdAt}
+                item={item}
+                me={me}
+                replyTargetId={replyTargetId}
+                openReplyForm={openReplyForm}
+                reply={reply}
+                handleReply={handleReply}
+                submitReply={submitReply}
+              />
+            )}
+          </Box>
           { me && <CommentForm
             item={postData}
             writing={comment}

@@ -47,6 +47,10 @@ const TextArea = styled.textarea`
   min-height: 250px;
   font-size: 16px;
   margin-bottom: 15px;
+  padding: 10px;
+  &:focus {
+    outline: none;
+  }
 `
 
 export {

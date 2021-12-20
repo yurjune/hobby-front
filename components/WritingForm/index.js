@@ -129,8 +129,8 @@ const WritingForm = ({ me, exPost }) => {
         onChange={onChangeText} 
       />
       { exPost
-        ? <Button align="end" onClick={onEdit}>수정</Button>
-        : <Button align="end" onClick={onSubmit}>작성</Button>
+        ? <Button self="end" onClick={onEdit}>수정</Button>
+        : <Button self="end" onClick={onSubmit}>작성</Button>
       }
     </FlexC>
   );
