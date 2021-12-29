@@ -35,12 +35,6 @@ const Home = () => {
     }
   }, [isStop])
 
-  const operateTimer = () => {
-    if (!me) return alert('먼저 로그인해 주세요');
-    if (isStop) return setIsStop(false);
-    return setIsStop(true);
-  }
-
   const calculateTime = (value) => {
     let hours = parseInt(value / 3600)
     let minutes = parseInt(value / 60) - (60 * hours);
@@ -49,6 +43,21 @@ const Home = () => {
     setMinutes(minutes);
     setSeconds(seconds);
   };
+
+  const operateTimer = () => {
+    if (!me) return alert('먼저 로그인해 주세요');
+    if (isStop) return setIsStop(false);
+    return setIsStop(true);
+  }
+
+  const stopTimer = () => {
+    const answer = confirm('정말로 초기화하시겠습니까?');
+    if (answer) {
+      localStorage.removeItem('time');
+      setNow(0);
+      setIsStop(true);
+    }
+  }
 
   return (
     <>
@@ -60,6 +69,7 @@ const Home = () => {
           seconds={seconds}
           isStop={isStop}
           operateTimer={operateTimer}
+          stopTimer={stopTimer}
         />
         <ContentsTable />
       </AppLayout>

@@ -17,7 +17,7 @@ const convertTime = (time) => {
   return time;
 };
 
-export const Timer = ({ me, hours, minutes, seconds, isStop, operateTimer }) => {
+export const Timer = ({ me, hours, minutes, seconds, isStop, operateTimer, stopTimer }) => {
   return (
     <Wrapper>
       { me ?
@@ -34,7 +34,7 @@ export const Timer = ({ me, hours, minutes, seconds, isStop, operateTimer }) => 
         ? <FontAwesomeIcon icon={faPlayCircle} size="3x" style={iconStyle} onClick={operateTimer} />
         : <FontAwesomeIcon icon={faPauseCircle} size="3x" style={iconStyle} onClick={operateTimer} />
       }
-      <FontAwesomeIcon icon={faStopCircle} size="3x" style={iconStyle} />
+      <FontAwesomeIcon icon={faStopCircle} size="3x" style={iconStyle} onClick={stopTimer} />
     </Wrapper>
   );
 };
