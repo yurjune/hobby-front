@@ -8,8 +8,6 @@ import {
 } from './style';
 
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:3060';
-axios.defaults.withCredentials = true;
 
 const HeaderTop = ({ me, openLoginForm }) => {
   const router = useRouter();
@@ -17,6 +15,12 @@ const HeaderTop = ({ me, openLoginForm }) => {
     const result = await axios.get('/auth/logout');
     if (result.data === 'ok') {
       alert('로그아웃 되었습니다');
+      const time = JSON.parse(localStorage.getItem('time'));
+      await axios.patch('/user/time', {
+        userId: me.id,
+        time,
+      });
+      localStorage.removeItem('time');
       return router.reload('/');
     }
   };

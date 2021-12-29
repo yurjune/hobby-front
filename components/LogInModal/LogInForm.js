@@ -36,6 +36,10 @@ const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
       if (result.data === 'ok') {
         alert('로그인이 완료되었습니다.');
         closeLoginForm();
+        const result = await axios.get(`/user/time?email=${email}`);
+        console.log(result.data)
+        const time = JSON.stringify(result.data.time);
+        localStorage.setItem('time', time);
         return router.reload('/');
       }
       alert(result.data);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import AppLayout from '../components/AppLayout';
 import { Timer } from '../components/Timer';
 import useFetch from '../hooks/useFetch';
@@ -10,14 +10,30 @@ const Home = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isStop, setIsStop] = useState(true);
+  const timer = useRef(null);
   const { data: me, error, isLoading } = useFetch('/user');
   
   if (error) return <div>에러 발생</div>;
   // if (isLoading) return <div>로딩 중</div>;
+  
+  useEffect(() => {
+    setNow(JSON.parse(localStorage.getItem('time')));
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem('time', JSON.stringify(now));
+    calculateTime(JSON.parse(localStorage.getItem('time')));
+  }, [now]);
 
   useEffect(() => {
-    calculateTime(now);
-  }, [now])
+    if (isStop) {
+      clearInterval(timer.current)
+    } else {
+      timer.current = setInterval(() => {
+        setNow(prev => prev + 1);
+      }, 1000);
+    }
+  }, [isStop])
 
   const operateTimer = () => {
     if (!me) return alert('먼저 로그인해 주세요');
