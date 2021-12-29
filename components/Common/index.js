@@ -28,11 +28,14 @@ const Flex = styled(Box)`
   display: flex;
   justify-content: ${props => props.justify};
   align-items: ${props => props.align};
+  gap: ${props => props.gap};
 `
 const FlexC = styled(Flex)`
   flex-direction: column;
 `
 const Text = styled(Box)`
+  text-align: ${props => props.textAlign};
+  line-height: ${props => props.lineHeight};
 `
 const Bold = styled(Text)`
   font-weight: bold;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const headerWidth = `calc(100% - 120px)`;
+// export const headerWidth = `calc(100% - 120px)`;
+export const headerWidth = `1200px`;
 export const layoutWidth = "1200px";
 
 const Grid = styled.div`
