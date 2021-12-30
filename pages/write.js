@@ -1,5 +1,5 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
+import SecondLayout from '../components/AppLayout/SecondLayout';
 import DividedPage from '../components/DividedPage';
 import useFetch from '../hooks/useFetch';
 
@@ -9,9 +9,9 @@ const Write = () => {
   if (error) return <div>에러 발생</div>;
 
   return (
-    <AppLayout me={me}>
+    <SecondLayout me={me}>
       <DividedPage me={me} />
-    </AppLayout>
+    </SecondLayout>
   );
 };
 

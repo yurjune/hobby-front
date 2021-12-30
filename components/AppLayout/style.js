@@ -7,7 +7,7 @@ export const layoutWidth = "1200px";
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr minmax(auto, ${layoutWidth}) 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto auto 1fr auto;
   min-height: 100vh;
 `
 const GridHeader = styled.div`
@@ -22,16 +22,23 @@ const GridItem = styled.div`
   grid-row-start: 2;
   grid-row-end: 3;
 `
+const GridItem2 = styled.div`
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+`
 const GridFooter = styled.div`
   grid-column-start: 1;
   grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 5;
 `
 
 export {
   Grid,
   GridHeader,
   GridItem,
+  GridItem2,
   GridFooter,
 }

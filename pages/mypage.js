@@ -1,6 +1,6 @@
 import React from 'react';
 import { Divide } from '../components/DividedPage/style';
-import AppLayout from '../components/AppLayout';
+import SecondLayout from '../components/AppLayout/SecondLayout';
 import SideMenu from '../components/SideMenu';
 import useFetch from '../hooks/useFetch';
 import MyProfile from '../components/MyProfile';
@@ -11,12 +11,12 @@ const MyPage = () => {
   if (error) return <div>에러 발생</div>;
 
   return (
-    <AppLayout me={me}>
+    <SecondLayout me={me}>
       <Divide>
         <SideMenu />
         <MyProfile me={me} />
       </Divide>
-    </AppLayout>
+    </SecondLayout>
   );
 };
 

@@ -10,9 +10,8 @@ import {
   GridItem2,
   GridFooter,
 } from './style';
-import { Timer } from '../Timer';
 
-const AppLayout = ({ children, me }) => {
+const SecondLayout = ({ children, me }) => {
   const [isOpened, setIsOpened] = useState(false);
     
   const openLoginForm = () => setIsOpened(true);
@@ -24,8 +23,7 @@ const AppLayout = ({ children, me }) => {
         <HeaderTop me={me} openLoginForm={openLoginForm} />
         <Header me={me} />
       </GridHeader>
-      <GridItem><Timer me={me} /></GridItem>
-      <GridItem2>{children}</GridItem2>
+      <GridItem>{children}</GridItem>
       {isOpened ? 
         <GridItem>
           <LoginModal closeLoginForm={closeLoginForm} />
@@ -36,4 +34,4 @@ const AppLayout = ({ children, me }) => {
   );
 };
 
-export default AppLayout;
+export default SecondLayout;

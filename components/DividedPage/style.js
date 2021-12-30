@@ -5,9 +5,11 @@ const Divide = styled.div`
     display: flex;
     padding: 15px;
     flex-direction: column;
+    gap: 30px;
   }
   display: flex;
   padding: 15px;
+  gap: 30px;
 `
 
 export {

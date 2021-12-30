@@ -30,7 +30,6 @@ const HeaderTop = ({ me, openLoginForm }) => {
       <Menu>
         {me ? <>
           <Link href="#"><MenuItem>고객센터</MenuItem></Link>
-          <Link href="/mypage"><MenuItem>마이페이지</MenuItem></Link>
           <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
         </>
         : <>

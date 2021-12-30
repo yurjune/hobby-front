@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import AppLayout from '../../components/AppLayout';
+import SecondLayout from '../components/AppLayout/SecondLayout';
 import DividedPage from '../../components/DividedPage';
 import useFetch from '../../hooks/useFetch';
 
@@ -21,9 +21,9 @@ const Edit = () => {
   if (exPost.UserId !== me?.id) return <div>당신은 작성자가 아닙니다</div>;
 
   return (
-    <AppLayout me={me}>
+    <SecondLayout me={me}>
       <DividedPage me={me} exPost={exPost} />
-    </AppLayout>
+    </SecondLayout>
   );
 };
 

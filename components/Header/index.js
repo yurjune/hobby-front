@@ -12,23 +12,21 @@ import { Box } from '../Common';
 import { Avatar } from '../PostCardBig/style';
 
 const Header = ({ me }) => {
+
   return (
     <Box bg="gold">
       <Wrapper>
         <Logo>로고</Logo>
         <Menu>
-          <Link href="/"><MenuItem>타이머</MenuItem></Link>
-          <MenuItem>랭킹</MenuItem>
-          <Link href="/community"><MenuItem>커뮤니티</MenuItem></Link>
+          <Link href="/"><MenuItem>커뮤니티</MenuItem></Link>
+          <Link href="/mypage"><MenuItem>마이페이지</MenuItem></Link>
           <Link href="/write"><MenuItem>글쓰기</MenuItem></Link>
         </Menu>
         {me && <> 
           <Box color="gold" w="30px" />
           <Profile>
             <Avatar />
-            <ProfileItem>{me.name}</ProfileItem>
-            <ProfileItem>01 : 24</ProfileItem>
-            <ProfileItem>수영</ProfileItem>
+            <ProfileItem>{`${me.name} 님 환영합니다!`}</ProfileItem>
           </Profile>
         </>}
       </Wrapper>

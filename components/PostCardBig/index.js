@@ -195,7 +195,7 @@ const PostCardBig = ({ me, postData }) => {
 
   return (<>
     { postData &&
-      <FlexC maxW="650px" m="0 auto" mb="100px" p="10px">
+      <FlexC maxW="650px" m="0 auto" mb="80px" p="10px">
         { me ?
           <>{ me.id === postData.User?.id
             ? <PostBar item={postData}>

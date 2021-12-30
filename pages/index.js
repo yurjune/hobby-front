@@ -1,80 +1,67 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
-import { Timer } from '../components/Timer';
+import PostCard from '../components/PostCard';
+import CategoryBar from '../components/CategoryBar';
 import useFetch from '../hooks/useFetch';
-import ContentsTable from '../components/ContentsTable';
 
-const Home = () => {
-  const [now, setNow] = useState(0);
-  const [hours, setHours] = useState(12);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-  const [isStop, setIsStop] = useState(true);
-  const timer = useRef(null);
+const Wrapper = styled.div`
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22%, 1fr));
+    padding: 10px;
+    gap: 15px;
+  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  padding: 10px;
+  margin-bottom: 80px;
+  gap: 15px;
+`
+const Community = () => {
+  const [category, setCategory] = useState([]);
+  const [postList, setPostList] = useState([]);
   const { data: me, error, isLoading } = useFetch('/user');
-  
-  if (error) return <div>에러 발생</div>;
-  // if (isLoading) return <div>로딩 중</div>;
-  
-  useEffect(() => {
-    setNow(JSON.parse(localStorage.getItem('time')));
-  }, []);
-  
-  useEffect(() => {
-    localStorage.setItem('time', JSON.stringify(now));
-    calculateTime(JSON.parse(localStorage.getItem('time')));
-  }, [now]);
+  const { data: postData, error: postError, isLoading: postIsLoading } = useFetch('/posts');
 
   useEffect(() => {
-    if (isStop) {
-      clearInterval(timer.current)
+    if (category.length !== 0) {
+      const result = postData?.filter(item => category.includes(item.category));
+      setPostList(result);
     } else {
-      timer.current = setInterval(() => {
-        setNow(prev => prev + 1);
-      }, 1000);
+      setPostList(postData);
     }
-  }, [isStop])
+  }, [postData, category]);
 
-  const calculateTime = (value) => {
-    let hours = parseInt(value / 3600)
-    let minutes = parseInt(value / 60) - (60 * hours);
-    let seconds = value - (3600 * hours) - (60 * minutes);
-    setHours(hours);
-    setMinutes(minutes);
-    setSeconds(seconds);
-  };
+  if (error) return <div>에러 발생</div>;
+  if (postError) return <div>에러 발생</div>;
+  if (postIsLoading) return <div>로딩 중...</div>;
 
-  const operateTimer = () => {
-    if (!me) return alert('먼저 로그인해 주세요');
-    if (isStop) return setIsStop(false);
-    return setIsStop(true);
+  const addCategory = (value) => {
+    if (category.includes(value)) return;
+    const result = category.concat(value);
+    setCategory(result);
   }
 
-  const stopTimer = () => {
-    const answer = confirm('정말로 초기화하시겠습니까?');
-    if (answer) {
-      localStorage.removeItem('time');
-      setNow(0);
-      setIsStop(true);
-    }
+  const removeCategory = (value) => () => {
+    const result = category.filter(item => item !== value);
+    setCategory(result);
   }
 
   return (
-    <>
-      <AppLayout me={me}>
-        <Timer
-          me={me}
-          hours={hours}
-          minutes={minutes}
-          seconds={seconds}
-          isStop={isStop}
-          operateTimer={operateTimer}
-          stopTimer={stopTimer}
-        />
-        <ContentsTable />
-      </AppLayout>
-    </>
+    <AppLayout me={me}>
+      <CategoryBar
+        category={category}
+        addCategory={addCategory}
+        removeCategory={removeCategory}
+      />
+      <Wrapper>
+        {postList?.map(item => (
+          <PostCard key={item.id} data={item} />
+        ))}
+      </Wrapper>
+    </AppLayout>
   );
 };
 
-export default Home;
+export default Community;
