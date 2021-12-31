@@ -10,10 +10,10 @@ import {
   ImageInput,
   TextArea,
 } from './style';
-
 import { FlexC, Button } from '../Common';
 import axios from 'axios';
 import useInput from '../../hooks/useInput';
+import { localhost } from '../Common/global';
 
 const iconStyle = {
   cursor: "pointer",
@@ -70,7 +70,7 @@ const WritingForm = ({ me, exPost }) => {
       });
       console.log(result);
       alert('작성이 완료되었습니다');
-      router.push(`/community`);
+      router.push(`/`);
     } catch (error) {
       console.error(error);
     }
@@ -90,7 +90,7 @@ const WritingForm = ({ me, exPost }) => {
       });
       console.log(result);
       alert('수정이 완료되었습니다');
-      router.push(`/community`);
+      router.push(`/`);
     } catch (error) {
       console.error(error);
     }
@@ -106,7 +106,7 @@ const WritingForm = ({ me, exPost }) => {
         <Grid>
           {imageList.map(item => (
             <GridItem key={item}>
-              <Picture url={`http://localhost:3060/${item}`} />
+              <Picture url={localhost(item)} />
             </GridItem>
           ))}
         </Grid>

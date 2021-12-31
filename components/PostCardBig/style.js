@@ -16,8 +16,11 @@ const Avatar = styled.div`
   height: ${props => props.w || "30px"};
   margin-right: ${props => props.mr};
   border-radius: ${props => props.radius || "15px"};
-  background-color: lightgray;
   align-self: center;
+  background-color: lightgray;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(${props => props.url});
 `
 const Paragraph = styled.div`
   word-break: break-all;

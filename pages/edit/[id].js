@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import SecondLayout from '../components/AppLayout/SecondLayout';
+import SecondLayout from '../../components/AppLayout/SecondLayout';
 import DividedPage from '../../components/DividedPage';
 import useFetch from '../../hooks/useFetch';
 

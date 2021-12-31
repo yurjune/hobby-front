@@ -42,6 +42,7 @@ export const Timer = ({ me }) => {
         setNow(prev => prev + 1);
       }, 1000);
     }
+    return () => clearInterval(timer.current);
   }, [isStop])
 
   const calculateTime = (value) => {

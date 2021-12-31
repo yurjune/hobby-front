@@ -8,8 +8,9 @@ import {
   Profile,
   ProfileItem,
 } from './style';
-import { Box } from '../Common';
 import { Avatar } from '../PostCardBig/style';
+import { Box } from '../Common';
+import { localhost } from '../Common/global';
 
 const Header = ({ me }) => {
 
@@ -25,7 +26,7 @@ const Header = ({ me }) => {
         {me && <> 
           <Box color="gold" w="30px" />
           <Profile>
-            <Avatar />
+            <Avatar url={localhost(me.Image?.src)} />
             <ProfileItem>{`${me.name} 님 환영합니다!`}</ProfileItem>
           </Profile>
         </>}

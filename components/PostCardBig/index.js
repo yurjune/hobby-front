@@ -15,7 +15,7 @@ import {
   MenuWrapper,
   iconStyle,
 } from './style';
-import { localhost } from '../PostCard';
+import { localhost } from '../Common/global';
 import CommentForm from './CommentForm';
 import { Menu } from '../CategoryMenu';
 
@@ -176,7 +176,6 @@ const PostCardBig = ({ me, postData }) => {
   };
   
   const onClickUserName = (userId) => () => router.push(``);
-  console.log(postData);
   
   const editPost = () => router.push(`/edit/${postData.id}`);
 
@@ -264,6 +263,7 @@ const PostCardBig = ({ me, postData }) => {
             )}
           </Box>
           { me && <CommentForm
+            me={me}
             item={postData}
             writing={comment}
             handle={handleComment}

@@ -9,10 +9,7 @@ import {
   iconStyle,
 } from '../PostCardBig/style';
 import { Flex, FlexC, Text } from '../Common';
-
-export const localhost = (value) => {
-  return `http://localhost:3060/${value}`;
-};
+import { localhost } from '../Common/global';
 
 const PostCard = ({ data }) => {
   const router = useRouter();
@@ -24,7 +21,7 @@ const PostCard = ({ data }) => {
         <Picture url={localhost(data.Images[0]?.src)} />
         <FlexC p="10px 5px">
           <Flex mb="15px">
-            <Avatar mr="15px" />
+            <Avatar mr="15px" url={localhost(data.User.Image?.src)} />
             <Text self="center">{data.User?.name}</Text>
           </Flex>
           <Paragraph>{data.content}</Paragraph>
