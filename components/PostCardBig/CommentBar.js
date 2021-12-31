@@ -7,6 +7,7 @@ import { Avatar, iconStyle } from './style';
 import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { localhost } from '../Common/global';
 
 const editComment = () => async() => {
   try {
@@ -73,9 +74,15 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
 };
 
 const CommentBody = ({ children, me, item }) => {
+  console.log(item)
   return (
     <Flex mb="20px" key={item.createdAt} flex="1">
-      <Avatar w="36px" radius="18px" mr="10px" />
+      <Avatar
+        w="36px"
+        radius="18px"
+        mr="10px"
+        url={localhost(item.User.Image?.src)}
+      />
       <FlexC flex="1">
         <Flex mt="4px" mb="8px" fontSize="14px">
           <Pointer mr="10px" weight="bold">{item.User?.name}</Pointer>

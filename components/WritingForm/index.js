@@ -101,7 +101,7 @@ const WritingForm = ({ me, exPost }) => {
   };
 
   return (
-    <FlexC p="15px" flex="2.3">
+    <FlexC p="15px" flex="3.5">
       {imageList.length >= 1 ? 
         <Grid>
           {imageList.map(item => (

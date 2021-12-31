@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/Link';
+import { useRouter } from 'next/router';
 import {
   Wrapper,
   Logo,
@@ -13,6 +14,12 @@ import { Box } from '../Common';
 import { localhost } from '../Common/global';
 
 const Header = ({ me }) => {
+  const router = useRouter();
+
+  const clickMenu = (value) => () => {
+    if (!me) return alert('먼저 로그인해주세요!')
+    router.push(value);
+  }
 
   return (
     <Box bg="gold">
@@ -20,8 +27,8 @@ const Header = ({ me }) => {
         <Logo>로고</Logo>
         <Menu>
           <Link href="/"><MenuItem>커뮤니티</MenuItem></Link>
-          <Link href="/mypage"><MenuItem>마이페이지</MenuItem></Link>
-          <Link href="/write"><MenuItem>글쓰기</MenuItem></Link>
+          <MenuItem onClick={clickMenu('/mypage')}>마이페이지</MenuItem>
+          <MenuItem onClick={clickMenu('/write')}>글쓰기</MenuItem>
         </Menu>
         {me && <> 
           <Box color="gold" w="30px" />

@@ -4,7 +4,11 @@ const Wrapper = styled.div`
   display: flex;
   gap: 1.5rem;
   justify-content: center;
-  margin: 40px 0 60px 0;
+  margin-bottom: 30px;
+  padding: 40px 15px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 10px;
+  box-shadow: 0px 6px 16px rgb(0 0 0 / 6%); /* x축 y축 blur color*/
 `
 const SmallWrapper = styled.div`
   display: flex;

@@ -50,30 +50,30 @@ const MyProfile = ({ me }) => {
     router.reload();
   };
 
-  return (<>
+  return (
     <FlexC flex="3" p="5px 20px">
       <Text fontSize="22px" mb="10px">개인정보 변경</Text>
       <Hr />
-    <Wrapper>
-      <FlexC mb="20px">
-        <Picture url={`${localhost(profileImage)}`}>
-          <FontAwesomeIcon icon={faPlus} size="lg" style={iconStyle} onClick={changeProfile} />
-        </Picture>
-        <Button w="100px" onClick={changeProfile}>사진 추가</Button>
-        <input type="file" ref={imageRef} onChange={onChangeImage} hidden />
-      </FlexC>
-      <DisabledForm value={email}>이메일 :</DisabledForm>
-      <Form value={name} handle={handleName}>닉네임 :</Form>
-      <Button w="60px" onClick={onSubmit}>수정</Button>
-    </Wrapper>
+      <Wrapper>
+        <FlexC mb="20px">
+          <Picture url={`${localhost(profileImage)}`}>
+            <FontAwesomeIcon icon={faPlus} size="lg" style={iconStyle} onClick={changeProfile} />
+          </Picture>
+          <Button w="100px" onClick={changeProfile}>사진 추가</Button>
+          <input type="file" ref={imageRef} onChange={onChangeImage} hidden />
+        </FlexC>
+        <DisabledForm value={email}>이메일 :</DisabledForm>
+        <Form value={name} handle={handleName}>닉네임 :</Form>
+        <Button w="60px" onClick={onSubmit}>수정</Button>
+      </Wrapper>
     </FlexC>
-  </>);
+  );
 };
 
-const Form = ({ children, value, handle }) => {
+export const Form = ({ children, value, handle, textWidth }) => {
   return (
     <Flex gap="10px">
-      <Text w="60px" lineHeight="28px">{children}</Text>
+      <Text w={textWidth || "80px"} lineHeight="28px">{children}</Text>
       <Input type="text" value={value} onChange={handle} />
     </Flex>
   )
@@ -82,7 +82,7 @@ const Form = ({ children, value, handle }) => {
 const DisabledForm = ({ children, value, handle }) => {
   return (
     <Flex gap="10px">
-      <Text w="60px" lineHeight="28px">{children}</Text>
+      <Text w="80px" lineHeight="28px">{children}</Text>
       <Input type="text" value={value} onChange={handle} disabled />
     </Flex>
   )

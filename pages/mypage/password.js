@@ -3,6 +3,7 @@ import { Divide } from '../../components/DividedPage/style';
 import SecondLayout from '../../components/AppLayout/SecondLayout';
 import SideMenu from '../../components/SideMenu';
 import useFetch from '../../hooks/useFetch';
+import Password from '../../components/MyProfile/password';
 
 const MyPage = () => {
   const { data: me, error, isLoading } = useFetch('/user');
@@ -14,6 +15,7 @@ const MyPage = () => {
     <SecondLayout me={me}>
       <Divide>
         <SideMenu />
+        <Password me={me} />
       </Divide>
     </SecondLayout>
   );
