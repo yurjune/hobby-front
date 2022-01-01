@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import {
-  Box,
   Grid,
   GridItem,
   Picture,
@@ -102,7 +101,7 @@ const WritingForm = ({ me, exPost }) => {
   };
 
   return (
-    <FlexC p="15px" flex="3.5">
+    <FlexC p="10px">
       {imageList.length >= 1 ? 
         <Grid>
           {imageList.map(item => (

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Divide } from '../../components/DividedPage/style';
 import SecondLayout from '../../components/AppLayout/SecondLayout';
-import SideMenu from '../../components/SideMenu';
 import useFetch from '../../hooks/useFetch';
 import MyInfo from '../../components/MyInfo';
+import InfoForm from '../../components/MyInfo/InfoForm';
 
 const MyPage = () => {
   const { data: me, error, isLoading } = useFetch('/user');
@@ -13,10 +12,9 @@ const MyPage = () => {
 
   return (
     <SecondLayout me={me}>
-      <Divide>
-        <SideMenu />
-        <MyInfo me={me} />
-      </Divide>
+      <MyInfo>
+        <InfoForm me={me} />
+      </MyInfo>
     </SecondLayout>
   );
 };

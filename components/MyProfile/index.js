@@ -25,46 +25,44 @@ const MyProfile = ({ me, user }) => {
 
   return (
     <Wrapper>
-      <Flex>
-        <FlexC mr="50px">
-          <Avatar
-            w="100px"
-            h="100px"
-            radius="50px"
-            url={localhost(user.Image?.src)}
-            mb="20px"
-          />
-          <Text fontSize="18px" lineHeight="34px">{user.name}</Text>
-        </FlexC>
-        <FlexC>
-          <Flex mb="20px">
-            <FlexC
-              h="80px"
-              p="10px"
-              justify="space-between"
-            >
-              <Text>게시글:</Text>
-              <Text>팔로워:</Text>
-              <Text>팔로잉:</Text>
-            </FlexC>
-            <FlexC
-              h="80px"
-              p="10px"
-              justify="space-between"
-            >
-              <Bold>{user.Posts?.length}</Bold>
-              <Bold>{user.Followers?.length}</Bold>
-              <Bold>{user.Followings?.length}</Bold>
-            </FlexC>
-          </Flex>
-          { me.id !== user.id && <>
-            {isFollowing
-            ? <Button onClick={onClickUnfollow}>언팔로우</Button>
-            : <Button onClick={onClickFollow}>팔로우</Button>
-            }
-          </>}
-        </FlexC>
-      </Flex>
+      <FlexC mr="50px">
+        <Avatar
+          w="100px"
+          h="100px"
+          radius="50px"
+          url={localhost(user.Image?.src)}
+          mb="20px"
+        />
+        <Text fontSize="18px" lineHeight="34px">{user.name}</Text>
+      </FlexC>
+      <FlexC>
+        <Flex mb="20px">
+          <FlexC
+            h="80px"
+            p="10px"
+            justify="space-between"
+          >
+            <Text>게시글:</Text>
+            <Text>팔로워:</Text>
+            <Text>팔로잉:</Text>
+          </FlexC>
+          <FlexC
+            h="80px"
+            p="10px"
+            justify="space-between"
+          >
+            <Bold>{user.Posts?.length}</Bold>
+            <Bold>{user.Followers?.length}</Bold>
+            <Bold>{user.Followings?.length}</Bold>
+          </FlexC>
+        </Flex>
+        { me.id !== user.id && <>
+          {isFollowing
+          ? <Button onClick={onClickUnfollow}>언팔로우</Button>
+          : <Button onClick={onClickFollow}>팔로우</Button>
+          }
+        </>}
+      </FlexC>
     </Wrapper>
   );
 };

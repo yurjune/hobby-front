@@ -1,5 +1,33 @@
 import styled from 'styled-components';
 
+const Divide = styled.div`
+  @media screen and (max-width: 686px) {
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    gap: 30px;
+  }
+  display: flex;
+  padding: 15px;
+  gap: 30px;
+`
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  height: 100%;
+  padding: 30px 25px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 10px;
+  box-shadow: 0px 6px 16px rgb(0 0 0 / 6%); /* x축 y축 blur color*/
+`
+const Hr = styled.hr`
+  width: 100%;
+  background-color: lightgray;
+  border: none;
+  height: 1px;
+  margin-bottom: 20px;
+`
 const Grid = styled.div`
   @media screen and (max-width: 450px) {
     display: grid;
@@ -54,6 +82,9 @@ const TextArea = styled.textarea`
 `
 
 export {
+  Divide,
+  Card,
+  Hr,
   Grid,
   GridItem,
   Picture,

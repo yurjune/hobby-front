@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 0 auto;
-  margin-bottom: 30px;
+  flex: 3.3;
+  margin: 10px 10px 30px 10px;
   padding: 30px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 10px;

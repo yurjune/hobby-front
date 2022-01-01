@@ -1,12 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Flex, FlexC, Box, Text, Button, } from '../Common';
+import { Flex, FlexC, Box, Text } from '../Common';
+import { Button } from '../Common/custom';
 import {
   Wrapper,
+  Contents,
   Input,
   Hr,
-  Picture,
-  iconStyle,
 } from './style';
 import useInput from '../../hooks/useInput';
 import axios from 'axios'
@@ -37,10 +37,10 @@ const Password = ({ me }) => {
   };
 
   return (<>
-    <FlexC flex="3" p="5px 20px">
+    <Wrapper>
       <Text fontSize="22px" mb="10px">비밀번호 변경</Text>
       <Hr />
-      <Wrapper>
+      <Contents>
         <PasswordForm
           value={oldPassword}
           handle={handleOldPassword}
@@ -63,8 +63,8 @@ const Password = ({ me }) => {
           비밀번호 확인 :
         </PasswordForm>
         <Button w="60px" onClick={onSubmit}>수정</Button>
-      </Wrapper>
-    </FlexC>
+      </Contents>
+    </Wrapper>
   </>);
 };
 

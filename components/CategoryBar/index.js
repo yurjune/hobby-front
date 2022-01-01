@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faSearch } from '@fortawesome/free-solid-svg-icons';
 import {
+  Wrapper,
   Select,
   Menu,
+  SearchWrapper1,
+  SearchWrapper2,
   Search,
   arrowIconStyle,
   searchIconStyle,
@@ -16,7 +19,7 @@ export const dropdown = [
   '피아노',
   '러닝',
   'LOL'
-]
+];
 
 const CategoryBar = ({ category, addCategory, removeCategory }) => {
   const [isOpened, setIsOpened] = useState(false);
@@ -35,9 +38,9 @@ const CategoryBar = ({ category, addCategory, removeCategory }) => {
 
   return (
     <>
-      <Flex>
+      <Wrapper>
         <Select>
-          <Box mr="15px">카테고리</Box>
+          <Box mr="10px">카테고리</Box>
           <FontAwesomeIcon icon={faChevronDown} onClick={onClickIcon} style={arrowIconStyle} />
           {isOpened ?
             <Menu left="10px" top="60px">
@@ -45,9 +48,11 @@ const CategoryBar = ({ category, addCategory, removeCategory }) => {
             </Menu>
           : ""}
         </Select>
-        <Search />
-        <FontAwesomeIcon icon={faSearch} style={searchIconStyle} />
-      </Flex>
+        <SearchWrapper2>
+          <Search />
+          <FontAwesomeIcon icon={faSearch} style={searchIconStyle} />
+        </SearchWrapper2>
+      </Wrapper>
       <Flex p="10px">
         {category.map(item => <Button key={item} mr="10px" onClick={removeCategory(item)}>{item}</Button>)}
       </Flex>

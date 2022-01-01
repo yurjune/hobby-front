@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import SecondLayout from '../../components/AppLayout/SecondLayout';
-import DividedPage from '../../components/DividedPage';
+import WritingPage from '../../components/WritingPage';
 import useFetch from '../../hooks/useFetch';
 
 const Edit = () => {
@@ -22,7 +22,7 @@ const Edit = () => {
 
   return (
     <SecondLayout me={me}>
-      <DividedPage me={me} exPost={exPost} />
+      <WritingPage me={me} exPost={exPost} />
     </SecondLayout>
   );
 };

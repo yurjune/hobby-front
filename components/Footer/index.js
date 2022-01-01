@@ -1,19 +1,21 @@
 import React from 'react';
-import { FlexC, Flex, Box } from '../Common';
-import { headerWidth } from '../AppLayout/style';
-import { Hr } from '../SideCard/style';
+import {
+  Wrapper,
+} from './style';
+import { FlexC, Flex, Text } from '../Common';
+import { softgray } from '../Common/color';
+import { Hr } from '../WritingPage/style';
 
 const Footer = () => {
   return (
-    <FlexC
-      h="150px"
-      maxW={headerWidth}
-      m="0 auto"
-      flex="1"
-    >
+    <Wrapper>
       <Hr />
-      <Box>회사소개 채용방침 인재모집</Box>
-    </FlexC>
+      <Flex p="10px">
+        <Text mr="20px">회사소개</Text>
+        <Text mr="20px">채용방침</Text>
+        <Text mr="20px">인재모집</Text>
+      </Flex>
+    </Wrapper>
   );
 };
 

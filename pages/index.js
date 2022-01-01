@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
   padding: 10px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   gap: 15px;
 `
 

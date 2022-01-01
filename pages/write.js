@@ -1,6 +1,6 @@
 import React from 'react';
 import SecondLayout from '../components/AppLayout/SecondLayout';
-import DividedPage from '../components/DividedPage';
+import WritingPage from '../components/WritingPage';
 import useFetch from '../hooks/useFetch';
 
 const Write = () => {
@@ -10,7 +10,7 @@ const Write = () => {
 
   return (
     <SecondLayout me={me}>
-      <DividedPage me={me} />
+      <WritingPage me={me} />
     </SecondLayout>
   );
 };

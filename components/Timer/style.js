@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: 1.3rem;
   justify-content: center;
-  margin-bottom: 30px;
+  margin: 10px 10px 30px 10px;
   padding: 40px 15px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 10px;
@@ -17,7 +17,7 @@ const SmallWrapper = styled.div`
 `
 const Time = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.7rem;
 `
 const Count = styled.div`
   display: flex;

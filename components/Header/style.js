@@ -1,31 +1,34 @@
 import styled from 'styled-components';
 import { headerWidth } from '../AppLayout/style';
-import { sideGap } from '../AppLayout/style';
+import { darkgray } from '../Common/color';
 
 const Wrapper = styled.div`
   display: flex;
   max-width: ${headerWidth};
+  height: 50px;
   align-items: center;
   justify-content: flex-end;
   margin: 0 auto;
   margin-bottom: 20px;
   position: relative;
+  background-color: gold;
 `
 const Logo = styled.div`
   font-size: 20px;
+  font-weight: bold;
+  color: ${darkgray};
   position: absolute;
   left: 10px;
 `
 const Menu = styled.ul`
   display: flex;
-  background-color: gold;
 `
 const MenuItem = styled.li`
   padding: 1em 1.5em;
   text-align: center;
   cursor: pointer;
   font-weight: bold;
-  color: #555;
+  color: ${darkgray};
   transition: 0.5s;
   &:hover {
     background-color: crimson;
@@ -40,8 +43,12 @@ const ProfileItem = styled.li`
   text-align: center;
   cursor: pointer;
   font-weight: bold;
-  color: #555;
+  color: ${darkgray};
 `
+const iconStyle = {
+  "marginRight": "10px",
+  "cursor": "pointer",
+}
 
 export {
   Wrapper,
@@ -50,4 +57,5 @@ export {
   MenuItem,
   Profile,
   ProfileItem,
+  iconStyle,
 }

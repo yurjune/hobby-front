@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Card,
   Hr,
-  Wrapper,
 } from './style';
 import { FlexC, Text } from '../Common';
 import { SmallTimer } from '../Timer';
@@ -32,13 +32,13 @@ const SideCard = ({ exPost }) => {
   };
 
   return (
-    <Wrapper>
+    <Card>
       <Text fontSize="20px">나의 기록! 🔥</Text>
       <SmallTimer hours={hours} minutes={minutes} seconds={seconds} />
       <Hr />
       <Text mb="16px" size="18px">{date || '오늘의 날짜'}</Text>
       <Text mb="16px" size="18px">{`카테고리: ${category || '없음'}`}</Text>
-    </Wrapper>
+    </Card>
   );
 };
 
