@@ -5,6 +5,8 @@ import { faHeart as faHeartSolid, faEllipsisV }  from '@fortawesome/free-solid-s
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import useInput from '../../hooks/useInput';
+import useFollow from '../../hooks/useFollow';
+import useLike from '../../hooks/useLike';
 import PostBar from './PostBar';
 import CommentBar from './CommentBar';
 import { FlexC, Flex, Box, Text, } from '../Common';
@@ -21,17 +23,28 @@ import CommentForm from './CommentForm';
 import { Menu } from '../CategoryMenu';
 
 const PostCardBig = ({ me, postData }) => {
+  const router = useRouter();
   const [comment, handleComment, setComment] = useInput('');
   const [reply, handleReply, setReply] = useInput('');
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [isOpenComment, setIsOpenComment] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isOpenComment, setIsOpenComment] = useState(false);
   const [replyTargetId, setReplyTargetId] = useState('');
 
   const [commentList, setCommentList] = useState([]);
   const [previewComments, setPreviewComments] = useState([]);
-  const router = useRouter();
+
+  const {
+    onClickFollow,
+    onClickUnfollow,
+  } = useFollow(me, postData?.UserId);
+
+  const {
+    likePost,
+    unlikePost,
+  } = useLike(me, postData?.UserId, setIsLiked);
 
   useEffect(() => { // 댓글을 댓글과 답글로 분류
     if (!postData) return;
@@ -68,9 +81,9 @@ const PostCardBig = ({ me, postData }) => {
     if (result.length >= 1) return setIsLiked(true);
   }, [postData]);
 
-  const submitComment = (target) => async () => {
+  const submitComment = () => async () => {
     try {
-      const result = await axios.post(`/comment`, {
+      await axios.post(`/comment`, {
         userId: me.id,
         postId: postData.id,
         content: comment,
@@ -84,7 +97,7 @@ const PostCardBig = ({ me, postData }) => {
 
   const submitReply = (target) => async () => {
     try {
-      const result = await axios.post(`/comment/reply`, {
+      await axios.post(`/comment/reply`, {
         userId: me.id,
         postId: postData.id,
         content: reply,
@@ -110,57 +123,6 @@ const PostCardBig = ({ me, postData }) => {
       setIsOpenComment(true);
     } else {
       setIsOpenComment(false);
-    }
-  };
-
-  const onClickFollow = async () => {
-    try {
-      if (!me) return alert('먼저 로그인해주세요');
-      const result = await axios.patch('/user/follow', {
-        followerId: me.id,
-        followingId: postData.UserId,
-      });
-      alert(`${result.data.name}님을 팔로우하였습니다`);
-      router.reload();
-    } catch (error) {
-      alert(error.response.data);
-    }
-  };
-
-  const onClickUnfollow = async () => {
-    try {
-      if (!me) return alert('먼저 로그인해주세요');
-      const result = await axios.delete(
-        `/user/follow?followingId=${postData.UserId}&followerId=${me.id}`
-      );
-      alert(`${result.data.name}님을 언팔로우하였습니다`);
-      router.reload();
-    } catch (error) {
-      alert(error.response.data);
-    }
-  };
-
-  const likePost = async () => {
-    try {
-      if (!me) return alert('먼저 로그인해주세요');
-      const result = await axios.patch(
-        `/post/like?postId=${postData.id}&likerId=${me.id}`
-      );
-      if (result.data === 'success') setIsLiked(true);
-    } catch(error) {
-      alert(error.response.data);
-    }
-  };
-
-  const unlikePost = async () => {
-    try {
-      if (!me) return alert('먼저 로그인해주세요');
-      const result = await axios.patch(
-        `/post/unlike?postId=${postData.id}&likerId=${me.id}`
-      );
-      if (result.data === 'success') setIsLiked(false);
-    } catch(error) {
-      alert(error.response.data);
     }
   };
 

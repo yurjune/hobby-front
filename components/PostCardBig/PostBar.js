@@ -5,7 +5,6 @@ import { Avatar } from '../Common/custom';
 import { localhost } from '../Common/global';
 
 const PostBar = ({ children, item, clickUser }) => {
-  console.log(item)
   return (
     <Flex mb="20px" pos="relative">
       <Avatar

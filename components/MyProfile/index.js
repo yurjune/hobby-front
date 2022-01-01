@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Wrapper,
   Text,
@@ -7,13 +7,26 @@ import {
 import { Flex, FlexC, Box } from '../Common';
 import { Button, Avatar } from '../Common/custom';
 import { localhost } from '../Common/global';
+import useFollow from '../../hooks/useFollow';
 
-const MyProfile = ({ user }) => {
-  console.log(user)
+const MyProfile = ({ me, user }) => {
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const {
+    onClickFollow,
+    onClickUnfollow,
+  } = useFollow(me, user.id);
+
+  useEffect(() => { // 팔로우 확인
+    if (!user || !me) return;
+    const result = user.Followers.filter(item => item.id === me.id);
+    if (result.length >= 1) return setIsFollowing(true);
+  }, []);
+
   return (
     <Wrapper>
       <Flex>
-        <FlexC mr="30px">
+        <FlexC mr="50px">
           <Avatar
             w="100px"
             h="100px"
@@ -44,8 +57,13 @@ const MyProfile = ({ user }) => {
               <Bold>{user.Followings?.length}</Bold>
             </FlexC>
           </Flex>
+          { me.id !== user.id && <>
+            {isFollowing
+            ? <Button onClick={onClickUnfollow}>언팔로우</Button>
+            : <Button onClick={onClickFollow}>팔로우</Button>
+            }
+          </>}
         </FlexC>
-
       </Flex>
     </Wrapper>
   );

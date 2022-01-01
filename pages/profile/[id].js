@@ -36,7 +36,7 @@ const Profile = () => {
 
   return (
     <SecondLayout me={me}>
-      <MyProfile user={user} />
+      <MyProfile me={me} user={user} />
       <Wrapper>
         {posts.map(post => (<PostCard key={post.id} data={post} />))}
       </Wrapper>
