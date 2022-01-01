@@ -1,9 +1,7 @@
 import React from 'react';
-import { Flex, Button } from '../Common';
-import { 
-  Avatar,
-  Comment,
-} from './style';
+import { Comment } from './style';
+import { Flex } from '../Common';
+import { Button, Avatar } from '../Common/custom';
 import { localhost } from '../Common/global';
 
 const CommentForm = ({ me, item, writing, submit, handle }) => {

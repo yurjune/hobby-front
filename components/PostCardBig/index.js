@@ -7,7 +7,8 @@ import { useRouter } from 'next/router';
 import useInput from '../../hooks/useInput';
 import PostBar from './PostBar';
 import CommentBar from './CommentBar';
-import { FlexC, Flex, Box, Text, Button } from '../Common';
+import { FlexC, Flex, Box, Text, } from '../Common';
+import { Button } from '../Common/custom';
 import { 
   Paragraph,
   Picture,
@@ -175,7 +176,7 @@ const PostCardBig = ({ me, postData }) => {
     }
   };
   
-  const onClickUserName = (userId) => () => router.push(``);
+  const clickUser = (userId) => () => router.push(`/profile/${userId}`);
   
   const editPost = () => router.push(`/edit/${postData.id}`);
 
@@ -197,7 +198,7 @@ const PostCardBig = ({ me, postData }) => {
       <FlexC maxW="650px" m="0 auto" mb="80px" p="10px">
         { me ?
           <>{ me.id === postData.User?.id
-            ? <PostBar item={postData}>
+            ? <PostBar item={postData} clickUser={clickUser} >
                 <MenuWrapper>
                   <FontAwesomeIcon size="lg" icon={faEllipsisV} style={iconStyle} onClick={onClickMenu} />
                   { isOpenMenu &&
@@ -208,14 +209,14 @@ const PostCardBig = ({ me, postData }) => {
                   }
                 </MenuWrapper>
               </PostBar>
-            : <PostBar item={postData}>
+            : <PostBar item={postData} clickUser={clickUser} >
                 {isFollowing
                   ? <Button h="35px" self="center" onClick={onClickUnfollow}>언팔로우</Button>
                   : <Button h="35px" self="center" onClick={onClickFollow}>팔로우</Button>
                 }
               </PostBar>
           }</>
-          : <PostBar item={postData} />
+          : <PostBar item={postData} clickUser={clickUser} />
         }
         <Picture mb="20px" url={localhost(postData.Images[0]?.src)} />
         <FlexC>
@@ -247,6 +248,7 @@ const PostCardBig = ({ me, postData }) => {
                 reply={reply}
                 handleReply={handleReply}
                 submitReply={submitReply}
+                clickUser={clickUser}
               />
             )}
             { isOpenComment && commentList.map(item => 
@@ -259,6 +261,7 @@ const PostCardBig = ({ me, postData }) => {
                 reply={reply}
                 handleReply={handleReply}
                 submitReply={submitReply}
+                clickUser={clickUser}
               />
             )}
           </Box>

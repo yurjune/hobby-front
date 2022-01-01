@@ -8,7 +8,8 @@ import {
   arrowIconStyle,
   searchIconStyle,
 } from './style';
-import { Flex, Box, Button } from '../Common';
+import { Flex, Box } from '../Common';
+import { Button } from '../Common/custom';
 
 export const dropdown = [
   '수영',

@@ -14,7 +14,8 @@ import {
   Forgot,
   iconStyle,
 } from './style';
-import { Flex, Button } from '../Common';
+import { Flex } from '../Common';
+import { Button } from '../Common/custom';
 
 axios.defaults.baseURL = 'http://localhost:3060';
 axios.defaults.withCredentials = true;

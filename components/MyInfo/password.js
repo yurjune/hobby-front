@@ -22,10 +22,10 @@ const Password = ({ me }) => {
       return alert('비밀번호를 입력해 주세요!');
     }
     if (oldPassword === password) {
-      return alert('새로운 비밀번호를 입력해 주세요!')
+      return alert('새로운 비밀번호를 입력해 주세요!');
     }
     if (password !== passwordCheck) {
-      return alert('비밀번호와 비밀번호 확인이 다릅니다!')
+      return alert('비밀번호와 비밀번호 확인이 다릅니다!');
     }
     const result = await axios.post('/user/password', {
       userId: me.id,

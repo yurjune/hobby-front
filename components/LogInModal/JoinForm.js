@@ -13,7 +13,7 @@ import {
   Input,
   iconStyle,
 } from './style';
-import { Button } from '../Common';
+import { Button } from '../Common/custom';
 
 axios.defaults.baseURL = 'http://localhost:3060';
 axios.defaults.withCredentials = true;

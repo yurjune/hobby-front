@@ -11,17 +11,6 @@ const Picture = styled.div`
   background-image: url(${props => props.url});
   margin-bottom: ${props => props.mb};
 `
-const Avatar = styled.div`
-  width: ${props => props.w || "30px"};
-  height: ${props => props.w || "30px"};
-  margin-right: ${props => props.mr};
-  border-radius: ${props => props.radius || "15px"};
-  align-self: center;
-  background-color: lightgray;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(${props => props.url});
-`
 const Paragraph = styled.div`
   word-break: break-all;
   margin-bottom: ${props => props.mb || "20px"};
@@ -61,7 +50,6 @@ const iconStyle = {
 
 export {
   Picture,
-  Avatar,
   Paragraph,
   Comment,
   ShowComment,

@@ -10,7 +10,8 @@ import {
   ImageInput,
   TextArea,
 } from './style';
-import { FlexC, Button } from '../Common';
+import { FlexC } from '../Common';
+import { Button } from '../Common/custom';
 import axios from 'axios';
 import useInput from '../../hooks/useInput';
 import { localhost } from '../Common/global';

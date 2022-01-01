@@ -3,11 +3,12 @@ import axios from 'axios';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FlexC, Flex, Box, Bold, Text, Pointer } from '../Common';
-import { Avatar, iconStyle } from './style';
+import { Avatar } from '../Common/custom';
+import { localhost } from '../Common/global';
+import { iconStyle } from './style';
 import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { localhost } from '../Common/global';
 
 const editComment = () => async() => {
   try {
@@ -27,7 +28,7 @@ const deleteComment = (target) => async () => {
   }
 };
 
-const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply, submitReply }) => {
+const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply, submitReply, clickUser }) => {
   const [isOpenReplyBar, setIsOpenReplyBar] = useState(false);
 
   const showReplies = () => {
@@ -39,7 +40,7 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
   };
 
   return (<>
-    <CommentBody me={me} item={item}>
+    <CommentBody me={me} item={item} clickUser={clickUser}>
       { me && <Pointer onClick={openReplyForm(item.id)}>답글 쓰기</Pointer> }
     </CommentBody>
     { item.Son && item.Son.length >= 1 &&
@@ -67,13 +68,13 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
     { isOpenReplyBar && item.Son.length >= 1 && item.Son.map(son =>
       <Flex key={son.createdAt} flex="1">
         <Box w="46px" />
-        <CommentBody me={me} item={son} />
+        <CommentBody me={me} item={son} clickUser={clickUser} />
       </Flex>
     )}
   </>)
 };
 
-const CommentBody = ({ children, me, item }) => {
+const CommentBody = ({ children, me, item, clickUser }) => {
   console.log(item)
   return (
     <Flex mb="20px" key={item.createdAt} flex="1">
@@ -82,10 +83,11 @@ const CommentBody = ({ children, me, item }) => {
         radius="18px"
         mr="10px"
         url={localhost(item.User.Image?.src)}
+        onClick={clickUser(item.User.id)}
       />
       <FlexC flex="1">
         <Flex mt="4px" mb="8px" fontSize="14px">
-          <Pointer mr="10px" weight="bold">{item.User?.name}</Pointer>
+          <Pointer mr="10px" weight="bold" onClick={clickUser(item.User.id)}>{item.User?.name}</Pointer>
           <Text>{item.content}</Text>
           { me && item.User?.id === me.id &&
             <Flex flex="1" justify="flex-end">

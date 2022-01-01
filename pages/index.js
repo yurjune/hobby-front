@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   margin-bottom: 80px;
   gap: 15px;
 `
+
 const Community = () => {
   const [category, setCategory] = useState([]);
   const [postList, setPostList] = useState([]);

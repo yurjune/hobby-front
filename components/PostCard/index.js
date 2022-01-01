@@ -4,10 +4,10 @@ import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
 import { useRouter } from 'next/router';
 import {
   Picture,
-  Avatar,
   Paragraph,
   iconStyle,
 } from '../PostCardBig/style';
+import { Avatar } from '../Common/custom';
 import { Flex, FlexC, Text } from '../Common';
 import { localhost } from '../Common/global';
 
