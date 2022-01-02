@@ -45,7 +45,7 @@ const PostCardBig = ({ me, postData }) => {
   const {
     likePost,
     unlikePost,
-  } = useLike(me, postData?.UserId, setIsLiked);
+  } = useLike(me, postData?.id, setIsLiked);
 
   useEffect(() => { // 댓글을 댓글과 답글로 분류
     if (!postData) return;
@@ -80,7 +80,7 @@ const PostCardBig = ({ me, postData }) => {
     if (!postData || !me) return;
     const result = postData.Likers.filter(item => item.id === me.id)
     if (result.length >= 1) return setIsLiked(true);
-  }, [postData]);
+  }, [postData, isLiked]);
 
   const submitComment = () => async () => {
     try {
