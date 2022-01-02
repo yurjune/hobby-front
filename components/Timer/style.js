@@ -10,11 +10,6 @@ const Wrapper = styled.div`
   border-radius: 10px;
   box-shadow: 0px 6px 16px rgb(0 0 0 / 6%); /* x축 y축 blur color*/
 `
-const SmallWrapper = styled.div`
-  display: flex;
-  gap: 1.5rem;
-  margin: 30px 0;
-`
 const Time = styled.div`
   display: flex;
   gap: 0.7rem;
@@ -22,11 +17,23 @@ const Time = styled.div`
 const Count = styled.div`
   display: flex;
   align-self: center;
-  font-size: 30px;
+  font-size: ${props => props.fontSize || "30px"};
+`
+const PostWrapper = styled.div`
+  display: flex;
+  gap: 0.3rem;
+  align-self: center;
+  font-size: 16px;
+`
+const SideWrapper = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  margin: 30px 0;
 `
 export {
   Wrapper,
-  SmallWrapper,
   Count,
-  Time
+  Time,
+  PostWrapper,
+  SideWrapper,
 }

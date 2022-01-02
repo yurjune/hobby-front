@@ -10,11 +10,11 @@ import {
 import { Avatar } from '../Common/custom';
 import { Flex, FlexC, Text } from '../Common';
 import { localhost } from '../Common/global';
+import { PostTimer } from '../Timer';
 
 const PostCard = ({ data }) => {
   const router = useRouter();
   const onClickCard = () => router.push(`/social/${data.id}`);
-
   return (
     <>{ data &&
       <FlexC cursor="pointer" onClick={onClickCard}>
@@ -22,7 +22,8 @@ const PostCard = ({ data }) => {
         <FlexC p="10px 5px">
           <Flex mb="15px">
             <Avatar mr="15px" url={localhost(data.User.Image?.src)} />
-            <Text self="center">{data.User?.name}</Text>
+            <Text self="center" flex="1">{data.User?.name}</Text>
+            <PostTimer time={data.time} />
           </Flex>
           <Paragraph>{data.content}</Paragraph>
           <Flex>

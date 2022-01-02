@@ -21,6 +21,7 @@ import {
 import { localhost } from '../Common/global';
 import CommentForm from './CommentForm';
 import { Menu } from '../CategoryMenu';
+import { PostTimer } from '../Timer';
 
 const PostCardBig = ({ me, postData }) => {
   const router = useRouter();
@@ -148,7 +149,7 @@ const PostCardBig = ({ me, postData }) => {
       if (isDelete) {
         const result = await axios.delete(`/post?postId=${postData.id}`);
         alert(result.data);
-        router.push('/community')
+        router.push('/');
       }
     } catch (error) {
       alert(error.response.data);
@@ -183,13 +184,16 @@ const PostCardBig = ({ me, postData }) => {
         <Picture mb="20px" url={localhost(postData.Images[0]?.src)} />
         <FlexC>
           <Flex mb="20px">
-            { me && isLiked
-            ? <FontAwesomeIcon size="lg" icon={faHeartSolid} style={iconStyle} onClick={unlikePost} />
-            : <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} onClick={likePost} />
-            }
-            <Text self="center" mr="20px">{postData.Likers?.length}</Text>
-            <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} onClick={clickComment} />
-            <Text self="center" mr="20px">{postData.Comments?.length}</Text>
+            <Flex flex="1">
+              { me && isLiked
+              ? <FontAwesomeIcon size="lg" icon={faHeartSolid} style={iconStyle} onClick={unlikePost} />
+              : <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} onClick={likePost} />
+              }
+              <Text self="center" mr="20px">{postData.Likers?.length}</Text>
+              <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} onClick={clickComment} />
+              <Text self="center" mr="20px">{postData.Comments?.length}</Text>
+            </Flex>
+            <PostTimer time={postData.time} fontSize="18px" />
           </Flex>
           <Paragraph mb="30px">
             <a>{postData.User?.name}</a>{postData.content}

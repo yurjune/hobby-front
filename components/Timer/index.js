@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle, faStopCircle, faPauseCircle } from '@fortawesome/free-regular-svg-icons';
 import {
   Wrapper,
-  SmallWrapper,
   Count,
   Time,
+  PostWrapper,
+  SideWrapper,
 } from './style';
+import { Flex, Text } from '../Common';
 
 const iconStyle = {
   cursor: "pointer",
@@ -44,6 +46,14 @@ export const Timer = ({ me }) => {
     }
     return () => clearInterval(timer.current);
   }, [isStop])
+
+  useEffect(() => {
+    setIsStop(JSON.parse(localStorage.getItem('isStop')));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('isStop', JSON.stringify(isStop));
+  }, [isStop]);
 
   const calculateTime = (value) => {
     let hours = parseInt(value / 3600)
@@ -90,9 +100,63 @@ export const Timer = ({ me }) => {
   );
 };
 
-export const SmallTimer = ({ hours, minutes, seconds }) => {
+export const PostTimer = ({ time, fontSize }) => {
+  const [now, setNow] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  
+  useEffect(() => {
+    setNow(time);
+  }, [time]);
+
+  useEffect(() => {
+    calculateTime(now);
+  }, [now]);
+
+  const calculateTime = (value) => {
+    let hours = parseInt(value / 3600)
+    let minutes = parseInt(value / 60) - (60 * hours);
+    let seconds = value - (3600 * hours) - (60 * minutes);
+    setHours(hours);
+    setMinutes(minutes);
+    setSeconds(seconds);
+  };
+
   return (
-    <SmallWrapper>
+    <PostWrapper>
+      { hours > 0 && <Text fontSize={fontSize}>{`${hours}시간`}</Text> }
+      <Text fontSize={fontSize}>{`${minutes}분`}</Text>
+      <Text fontSize={fontSize}>{`${seconds}초`}</Text>
+    </PostWrapper>
+  );
+};
+
+export const SideTimer = ({ time }) => {
+  const [now, setNow] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  
+  useEffect(() => {
+    setNow(time);
+  }, [time]);
+
+  useEffect(() => {
+    calculateTime(now);
+  }, [now]);
+
+  const calculateTime = (value) => {
+    let hours = parseInt(value / 3600)
+    let minutes = parseInt(value / 60) - (60 * hours);
+    let seconds = value - (3600 * hours) - (60 * minutes);
+    setHours(hours);
+    setMinutes(minutes);
+    setSeconds(seconds);
+  };
+
+  return (
+    <SideWrapper>
       <Time>
         <Count>{convertTime(hours)}</Count>
         <Count>:</Count>
@@ -100,6 +164,6 @@ export const SmallTimer = ({ hours, minutes, seconds }) => {
         <Count>:</Count>
         <Count>{convertTime(seconds)}</Count>
       </Time>
-    </SmallWrapper>
+    </SideWrapper>
   );
 };

@@ -26,6 +26,7 @@ const iconStyle = {
 const WritingForm = ({ me, exPost }) => {
   const [imageList, setImageList] = useState([]);
   const [text, onChangeText, setText] = useInput('');
+  const [now, setNow] = useState(0);
   const category = '수영';
   const fileRef = useRef(null);
   const router = useRouter();
@@ -38,6 +39,12 @@ const WritingForm = ({ me, exPost }) => {
         const array = exPost.Images.map(item => item.src);
         setImageList(array);
       }
+    }
+  }, [exPost]);
+
+  useEffect(() => {
+    if (!exPost) {
+      setNow(JSON.parse(localStorage.getItem('time')));
     }
   }, [exPost]);
 
@@ -67,9 +74,11 @@ const WritingForm = ({ me, exPost }) => {
         category,
         content: text,
         image: imageList,
+        time: now,
       });
       console.log(result);
       alert('작성이 완료되었습니다');
+      localStorage.removeItem('time');
       router.push(`/`);
     } catch (error) {
       console.error(error);
