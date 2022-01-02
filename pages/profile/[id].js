@@ -5,6 +5,7 @@ import SecondLayout from '../../components/AppLayout/SecondLayout';
 import useFetch from '../../hooks/useFetch';
 import PostCard from '../../components/PostCard';
 import MyProfile from '../../components/MyProfile';
+import useTimer from '../../hooks/useTimer';
 
 const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
@@ -21,6 +22,8 @@ const Wrapper = styled.div`
 `
 
 const Profile = () => {
+  useTimer();
+
   const router = useRouter();
   const { id } = router.query;
   const { data: me, error, isLoading } = useFetch('/user');

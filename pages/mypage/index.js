@@ -3,8 +3,11 @@ import SecondLayout from '../../components/AppLayout/SecondLayout';
 import useFetch from '../../hooks/useFetch';
 import MyInfo from '../../components/MyInfo';
 import InfoForm from '../../components/MyInfo/InfoForm';
+import useTimer from '../../hooks/useTimer';
 
 const MyPage = () => {
+  useTimer();
+
   const { data: me, error, isLoading } = useFetch('/user');
 
   if (error) return <div>에러 발생</div>;
