@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import SecondLayout from '../../components/AppLayout/SecondLayout';
@@ -6,6 +6,8 @@ import useFetch from '../../hooks/useFetch';
 import PostCard from '../../components/PostCard';
 import MyProfile from '../../components/MyProfile';
 import useTimer from '../../hooks/useTimer';
+import useInfinite from '../../hooks/useInfinite';
+import { limit } from '../../hooks/useInfinite';
 
 const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
@@ -26,22 +28,38 @@ const Profile = () => {
 
   const router = useRouter();
   const { id } = router.query;
-  const { data: me, error, isLoading } = useFetch('/user');
+  const { data: me, error:meError, isLoading: meIsLoading } = useFetch('/user');
   const { data: user, error: userError, isLoading: userIsLoading } = useFetch(
     `/user/person?userId=${id}`
   );
-  const { data: posts, error: postsError, isLoading: postsIsLoading } = useFetch(
-    `/posts/profile?userId=${id}`
-  );
+  const { data, error, size, setSize, mutate } = useInfinite('/posts/profile', null, id);
 
-  if (error || userError || postsError) return <div>에러 발생</div>;
-  if (userIsLoading || postsIsLoading) return <div>로딩 중...</div>;
+  const loadMorePosts = () => {
+    setSize(size + 1);
+  };
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
+        if (data[data.length - 1].length >= limit) {
+          loadMorePosts();
+        }
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [data]);
+
+  if (meError || userError || error) return <div>에러 발생</div>;
+  if (userIsLoading) return <div>로딩 중...</div>;
 
   return (
     <SecondLayout me={me}>
       <MyProfile me={me} user={user} />
       <Wrapper>
-        {posts.map(post => (<PostCard key={post.id} data={post} />))}
+        {data && data.map(item => item.map(post => (<PostCard key={post.id} data={post} />)))}
       </Wrapper>
     </SecondLayout>
   );
