@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
 
 const Home = () => {
   const { data: me, error: meError, isLoading: meIsLoading } = useFetch('/user');
-  const { data, error, size, setSize } = useInfinite('/posts');
+  const { data, error, size, setSize, mutate } = useInfinite('/posts');
 
   const loadMorePosts = () => {
     setSize(size + 1);
@@ -52,7 +52,9 @@ const Home = () => {
         <SearchBar />
       </Flex>
       <Wrapper>
-        {data && data.map(item => item.map(post => (<PostCard key={post.id} data={post} />)))}
+        {data && data.map(item => item.map(post => (
+          <PostCard key={post.id} me={me} postData={post} mutate={mutate} />
+        )))}
       </Wrapper>
       {/* <Flex p="10px" justify="flex-end">
         <Button onClick={loadMorePosts}>더 보기</Button>

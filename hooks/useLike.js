@@ -1,12 +1,19 @@
+import { useEffect } from 'react';
 import axios from 'axios';
 
-const useLike = (me, postId, setIsLiked, mutate) => {
+const useLike = (me, postData, setIsLiked, mutate) => {
+
+  useEffect(() => { // 좋아요 확인
+    if (!me || !postData) return;
+    const result = postData.Likers.filter(item => item.id === me.id)
+    if (result.length >= 1) return setIsLiked(true);
+  }, [postData]);
 
   const likePost = async () => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
-        `/post/like?postId=${postId}&likerId=${me.id}`
+        `/post/like?postId=${postData.id}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(true);
       mutate();
@@ -19,7 +26,7 @@ const useLike = (me, postId, setIsLiked, mutate) => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
-        `/post/unlike?postId=${postId}&likerId=${me.id}`
+        `/post/unlike?postId=${postData.id}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(false);
       mutate();
