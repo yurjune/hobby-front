@@ -7,7 +7,6 @@ axios.defaults.withCredentials = true;
 const useInfinite = (address, lastId) => {
 
   const getKey = (pageIndex, previousPageData) => {
-    console.log('pageIndex:', pageIndex);
     if (previousPageData && !previousPageData.length) return null; // 끝에 도달
     return `${address}?page=${pageIndex}&limit=4?lastId=${lastId}`;
   }

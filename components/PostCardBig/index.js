@@ -19,7 +19,7 @@ import {
   MenuWrapper,
   iconStyle,
 } from './style';
-import { localhost } from '../Common/global';
+import { localhost, selectionSort } from '../Common/global';
 import CommentForm from './CommentForm';
 import { Menu } from '../CategoryMenu';
 import { PostTimer } from '../Timer';
@@ -53,13 +53,15 @@ const PostCardBig = ({ me, postData, mutate }) => {
     const replyIdList = [];
     postData.Comments.map(comment => comment.Son.map(son => replyIdList.push(son.id)));
 
-    const comment = [];
-    postData.Comments.forEach(item => {
-      if (!replyIdList.includes(item.id)) {
-        comment.push(item);
-      }
+    const comments = [];
+    postData.Comments.forEach(item => { // 답글 제외
+      if (!replyIdList.includes(item.id)) comments.push(item);
     });
-    setCommentList(comment);
+    const sortedComments = selectionSort(comments); // 댓글 id순서대로 정렬
+    sortedComments.map(item => { // 댓글의 답글 id순서대로 정렬
+      item.Son = selectionSort(item.Son);
+    });
+    setCommentList(sortedComments);
   }, [postData]);
 
   useEffect(() => {

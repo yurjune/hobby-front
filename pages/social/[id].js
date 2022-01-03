@@ -23,7 +23,7 @@ const Social = () => {
   return (
     <AppLayout me={me}>
       {data && data.map(item => item.map(post => (
-        <PostCardBig me={me} postData={post} mutate={mutate} />
+        <PostCardBig key={post.id} me={me} postData={post} mutate={mutate} />
       )))}
       <Flex maxW="650px" m="0 auto" p="10px" justify="flex-end">
         <Button onClick={loadMorePosts}>더 보기</Button>
