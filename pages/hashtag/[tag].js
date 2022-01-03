@@ -1,21 +1,20 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import AppLayout from '../../components/AppLayout';
-import PostCardBig from '../../components/PostCardBig';
-import useFetch from '../../hooks/useFetch';
-import useTimer from '../../hooks/useTimer';
-import useInfinite from '../../hooks/useInfinite';
+import PostCard from '../../components/PostCard';
 import { Flex } from '../../components/Common';
-import { Button } from '../../components/Common/custom';
+import SearchBar from '../../components/SearchBar';
+import useFetch from '../../hooks/useFetch';
+import useInfinite from '../../hooks/useInfinite';
 import { limit } from '../../hooks/useInfinite';
+import { Wrapper } from '../index';
 
-const Social = () => {
-  useTimer();
-
+const Hashtag = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { tag } = router.query;
   const { data: me, error: meError, isLoading: meIsLoading } = useFetch('/user');
-  const { data, error, size, setSize, mutate } = useInfinite('/posts/detail', id);
+  
+  const { data, error, size, setSize, mutate } = useInfinite('/posts/hashtag', null, null, tag);
 
   const loadMorePosts = () => {
     setSize(size + 1);
@@ -40,14 +39,14 @@ const Social = () => {
 
   return (
     <AppLayout me={me}>
-      {data && data.map(item => item.map(post => (
-        <PostCardBig key={post.id} me={me} postData={post} mutate={mutate} />
-      )))}
-      {/* <Flex maxW="650px" m="0 auto" p="10px" justify="flex-end">
-        <Button onClick={loadMorePosts}>더 보기</Button>
-      </Flex> */}
+      <Flex p="10px" mb="20px" justify="flex-end">
+        <SearchBar />
+      </Flex>
+      <Wrapper>
+        {data && data.map(item => item.map(post => (<PostCard key={post.id} data={post} />)))}
+      </Wrapper>
     </AppLayout>
   );
 };
 
-export default Social;
+export default Hashtag;

@@ -13,7 +13,7 @@ const Edit = () => {
   
   const { data: exPost, error: exPostError, isLoading: exPostIsLoading } = useFetch(
     `/post/editpost?postId=${id}`
-    );
+  );
 
   if (error) return <div>에러 발생</div>;
   if (exPostError) return <div>에러 발생</div>;

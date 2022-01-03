@@ -14,12 +14,12 @@ const SearchBar = () => {
   const router = useRouter();
 
   const doSearch = () => {
-
+    router.push(`/hashtag/${value}`);
   };
 
   return (
     <Flex>
-      <Search type="text" value={value} onChange={handleValue} />
+      <Search type="text" value={value} onChange={handleValue} placeholder="해시태그 검색: #빼고 입력" />
       <FontAwesomeIcon icon={faSearch} style={searchIconStyle} onClick={doSearch} />
     </Flex>
   );

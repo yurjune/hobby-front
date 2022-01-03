@@ -6,11 +6,11 @@ axios.defaults.withCredentials = true;
 
 export const limit = 4;
 
-const useInfinite = (address, lastId, userId) => {
+const useInfinite = (address, lastId, userId, tag) => {
 
   const getKey = (pageIndex, previousPageData) => {
     if (previousPageData && !previousPageData.length) return null; // 끝에 도달
-    return `${address}?page=${pageIndex}&limit=${limit}&lastId=${lastId}&userId=${userId}`;
+    return `${address}?page=${pageIndex}&limit=${limit}&lastId=${lastId}&userId=${userId}&tag=${encodeURIComponent(tag)}`;
   }
   const fetcher = (url) => axios.get(url).then((result) => result.data);
 

@@ -9,7 +9,7 @@ import { Flex } from '../components/Common';
 import SearchBar from '../components/SearchBar';
 import { limit } from '../hooks/useInfinite';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(22%, 1fr));
