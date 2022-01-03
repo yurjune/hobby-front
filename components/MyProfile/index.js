@@ -56,11 +56,13 @@ const MyProfile = ({ me, user }) => {
             <Bold>{user.Followings?.length}</Bold>
           </FlexC>
         </Flex>
-        { me.id !== user.id && <>
-          {isFollowing
-          ? <Button onClick={onClickUnfollow}>언팔로우</Button>
-          : <Button onClick={onClickFollow}>팔로우</Button>
-          }
+        { me && <>
+          { me.id !== user.id && <>
+            {isFollowing
+              ? <Button onClick={onClickUnfollow}>언팔로우</Button>
+              : <Button onClick={onClickFollow}>팔로우</Button>
+            }
+          </>}
         </>}
       </FlexC>
     </Wrapper>
