@@ -23,20 +23,38 @@ const Community = () => {
   const [category, setCategory] = useState([]);
   const [postList, setPostList] = useState([]);
   const { data: me, error, isLoading } = useFetch('/user');
-  const { data: postData, error: postError, isLoading: postIsLoading } = useFetch('/posts');
+  const { data: postsData, error: postsError, isLoading: postsIsLoading } = useFetch('/posts');
 
   useEffect(() => {
     if (category.length !== 0) {
-      const result = postData?.filter(item => category.includes(item.category));
+      const result = postsData?.filter(item => category.includes(item.category));
       setPostList(result);
     } else {
-      setPostList(postData);
+      setPostList(postsData);
     }
-  }, [postData, category]);
+  }, [postsData, category]);
+
+  // useEffect(() => {
+
+  // }, []);
+
+  // useEffect(() => {
+  //   function onScroll() {
+  //     // console.log(
+  //     //   window.scrollY, // 문서가 얼마나 스크롤됬는지
+  //     //   document.documentElement.clientHeight, // 화면에 보이는 높이
+  //     //   document.documentElement.scrollHeight, // 요소의 전체 높이
+  //     // );
+  //   }
+  //   window.addEventListener('scroll', onScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', onScroll);
+  //   };
+  // }, []);
 
   if (error) return <div>에러 발생</div>;
-  if (postError) return <div>에러 발생</div>;
-  if (postIsLoading) return <div>로딩 중...</div>;
+  if (postsError) return <div>에러 발생</div>;
+  if (postsIsLoading) return <div>로딩 중...</div>;
 
   const addCategory = (value) => {
     if (category.includes(value)) return;

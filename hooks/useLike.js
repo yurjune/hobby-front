@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const useLike = (me, userId, setIsLiked) => {
+const useLike = (me, postId, setIsLiked) => {
 
   const likePost = async () => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
-        `/post/like?postId=${userId}&likerId=${me.id}`
+        `/post/like?postId=${postId}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(true);
     } catch(error) {
@@ -18,7 +18,7 @@ const useLike = (me, userId, setIsLiked) => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
-        `/post/unlike?postId=${userId}&likerId=${me.id}`
+        `/post/unlike?postId=${postId}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(false);
     } catch(error) {

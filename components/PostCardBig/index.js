@@ -71,13 +71,13 @@ const PostCardBig = ({ me, postData }) => {
   }, [postData, commentList]);
 
   useEffect(() => { // 팔로우 확인
-    if (!postData || !me) return;
+    if (!me || !postData) return;
     const result = postData.User.Followers.filter(item => item.id === me.id)
     if (result.length >= 1) return setIsFollowing(true);
   }, [postData]);
 
   useEffect(() => { // 좋아요 확인
-    if (!postData || !me) return;
+    if (!me || !postData) return;
     const result = postData.Likers.filter(item => item.id === me.id)
     if (result.length >= 1) return setIsLiked(true);
   }, [postData, isLiked]);
