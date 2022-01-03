@@ -58,6 +58,7 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
       <Flex>
         <Box w="46px" />
         <CommentForm
+          me={me}
           item={item}
           writing={reply}
           handle={handleReply}
@@ -75,7 +76,6 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
 };
 
 const CommentBody = ({ children, me, item, clickUser }) => {
-  console.log(item)
   return (
     <Flex mb="20px" key={item.createdAt} flex="1">
       <Avatar
