@@ -16,9 +16,7 @@ const Hashtag = () => {
   
   const { data, error, size, setSize, mutate } = useInfinite('/posts/hashtag', null, null, tag);
 
-  const loadMorePosts = () => {
-    setSize(size + 1);
-  };
+  const loadMorePosts = () => setSize(size + 1);
 
   useEffect(() => {
     const onScroll = () => {

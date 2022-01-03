@@ -27,9 +27,7 @@ const Home = () => {
   const { data: me, error: meError, isLoading: meIsLoading } = useFetch('/user');
   const { data, error, size, setSize, mutate } = useInfinite('/posts');
 
-  const loadMorePosts = () => {
-    setSize(size + 1);
-  };
+  const loadMorePosts = () => setSize(size + 1);
 
   useEffect(() => {
     const onScroll = () => {
@@ -44,7 +42,7 @@ const Home = () => {
   }, [data]);
 
   if (meError || error) return <div>에러 발생</div>;
-  console.log('data:', data);
+  // console.log('data:', data);
 
   return (
     <AppLayout me={me}>

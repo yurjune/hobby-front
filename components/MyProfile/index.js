@@ -9,19 +9,23 @@ import { Button, Avatar } from '../Common/custom';
 import { localhost } from '../Common/global';
 import useFollow from '../../hooks/useFollow';
 
-const MyProfile = ({ me, user }) => {
+const MyProfile = ({ me, user, mutate }) => {
   const [isFollowing, setIsFollowing] = useState(false);
 
   const {
     onClickFollow,
     onClickUnfollow,
-  } = useFollow(me, user.id);
+  } = useFollow(me, user.id, mutate);
 
   useEffect(() => { // 팔로우 확인
     if (!user || !me) return;
     const result = user.Followers.filter(item => item.id === me.id);
-    if (result.length >= 1) return setIsFollowing(true);
-  }, []);
+    if (result.length >= 1) {
+      setIsFollowing(true)
+    } else {
+      setIsFollowing(false);
+    }
+  }, [user, me]);
 
   return (
     <Wrapper>

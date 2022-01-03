@@ -4,9 +4,13 @@ import axios from 'axios';
 const useLike = (me, postData, setIsLiked, mutate) => {
 
   useEffect(() => { // 좋아요 확인
-    if (!me || !postData) return;
+    if (!me || !postData || !postData.Likers) return;
     const result = postData.Likers.filter(item => item.id === me.id)
-    if (result.length >= 1) return setIsLiked(true);
+    if (result.length >= 1) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
   }, [postData]);
 
   const likePost = async () => {
@@ -15,8 +19,7 @@ const useLike = (me, postData, setIsLiked, mutate) => {
       const result = await axios.patch(
         `/post/like?postId=${postData.id}&likerId=${me.id}`
       );
-      if (result.data === 'success') setIsLiked(true);
-      mutate();
+      if (result.data === 'success') mutate();
     } catch(error) {
       alert(error.response.data);
     }
@@ -28,8 +31,7 @@ const useLike = (me, postData, setIsLiked, mutate) => {
       const result = await axios.patch(
         `/post/unlike?postId=${postData.id}&likerId=${me.id}`
       );
-      if (result.data === 'success') setIsLiked(false);
-      mutate();
+      if (result.data === 'success') mutate();
     } catch(error) {
       alert(error.response.data);
     }

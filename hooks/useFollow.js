@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
 
-const useFollow = (me, userId) => {
-  const router = useRouter();
+const useFollow = (me, userId, mutate) => {
 
   const onClickFollow = async () => {
     try {
@@ -12,7 +10,7 @@ const useFollow = (me, userId) => {
         followingId: userId,
       });
       alert(`${result.data.name}님을 팔로우하였습니다`);
-      router.reload();
+      mutate();
     } catch (error) {
       alert(error.response.data);
     }
@@ -25,7 +23,7 @@ const useFollow = (me, userId) => {
         `/user/follow?followingId=${userId}&followerId=${me.id}`
       );
       alert(`${result.data.name}님을 언팔로우하였습니다`);
-      router.reload();
+      mutate();
     } catch (error) {
       alert(error.response.data);
     }

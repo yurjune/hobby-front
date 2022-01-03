@@ -17,9 +17,7 @@ const Social = () => {
   const { data: me, error: meError, isLoading: meIsLoading } = useFetch('/user');
   const { data, error, size, setSize, mutate } = useInfinite('/posts/detail', id);
 
-  const loadMorePosts = () => {
-    setSize(size + 1);
-  };
+  const loadMorePosts = () => setSize(size + 1);
 
   useEffect(() => {
     const onScroll = () => {

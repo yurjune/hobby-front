@@ -29,14 +29,12 @@ const Profile = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data: me, error:meError, isLoading: meIsLoading } = useFetch('/user');
-  const { data: user, error: userError, isLoading: userIsLoading } = useFetch(
+  const { data: user, error: userError, isLoading: userIsLoading, mutate: userMutate } = useFetch(
     `/user/person?userId=${id}`
   );
   const { data, error, size, setSize, mutate } = useInfinite('/posts/profile', null, id);
 
-  const loadMorePosts = () => {
-    setSize(size + 1);
-  };
+  const loadMorePosts = () => setSize(size + 1);
 
   useEffect(() => {
     const onScroll = () => {
@@ -55,9 +53,11 @@ const Profile = () => {
 
   return (
     <SecondLayout me={me}>
-      <MyProfile me={me} user={user} />
+      <MyProfile me={me} user={user} mutate={userMutate} />
       <Wrapper>
-        {data && data.map(item => item.map(post => (<PostCard key={post.id} data={post} />)))}
+        {data && data.map(item => item.map(post => (
+          <PostCard key={post.id} me={me} postData={post} mutate={mutate} />
+        )))}
       </Wrapper>
     </SecondLayout>
   );

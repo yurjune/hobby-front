@@ -41,7 +41,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
   const {
     onClickFollow,
     onClickUnfollow,
-  } = useFollow(me, postData?.UserId);
+  } = useFollow(me, postData?.UserId, mutate);
 
   const {
     likePost,
@@ -74,9 +74,13 @@ const PostCardBig = ({ me, postData, mutate }) => {
   }, [postData, commentList]);
 
   useEffect(() => { // 팔로우 확인
-    if (!me || !postData) return;
-    const result = postData.User.Followers.filter(item => item.id === me.id)
-    if (result.length >= 1) return setIsFollowing(true);
+    if (!me || !postData || !postData.User) return;
+    const result = postData.User.Followers.filter(item => item.id === me.id);
+    if (result.length >= 1) {
+      setIsFollowing(true)
+    } else {
+      setIsFollowing(false);
+    }
   }, [postData]);
 
   const submitComment = () => async () => {
