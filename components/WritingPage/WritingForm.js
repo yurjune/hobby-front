@@ -27,7 +27,6 @@ const WritingForm = ({ me, exPost }) => {
   const [imageList, setImageList] = useState([]);
   const [text, onChangeText, setText] = useInput('');
   const [now, setNow] = useState(0);
-  const category = '수영';
   const fileRef = useRef(null);
   const router = useRouter();
 
@@ -70,7 +69,6 @@ const WritingForm = ({ me, exPost }) => {
       // if (!imageList.length) return alert("이미지를 첨부해 주세요!");
       const result = await axios.post('/post', {
         id: me.id,
-        category,
         content: text,
         image: imageList,
         time: now,
@@ -91,7 +89,6 @@ const WritingForm = ({ me, exPost }) => {
       const result = await axios.patch(`/post/editpost`, {
         userId: me.id,
         postId: exPost.id,
-        category,
         content: text,
         image: imageList,
       });

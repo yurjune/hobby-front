@@ -9,7 +9,6 @@ import { SideTimer } from '../Timer';
 const SideCard = ({ exPost }) => {
   const [now, setNow] = useState(0);
   const date = exPost?.createdAt.slice(0, 10);
-  const category = exPost?.category;
 
   useEffect(() => {
     if (exPost) return setNow(exPost.time);
@@ -22,7 +21,6 @@ const SideCard = ({ exPost }) => {
       <SideTimer time={now} />
       <Hr />
       <Text mb="16px" size="18px">{date || '오늘의 날짜'}</Text>
-      <Text mb="16px" size="18px">{`카테고리: ${category || '없음'}`}</Text>
     </Card>
   );
 };

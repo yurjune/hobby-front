@@ -17,11 +17,11 @@ import {
   Paragraph,
   ShowComment,
   MenuWrapper,
+  Menu,
   iconStyle,
 } from './style';
 import { localhost, selectionSort } from '../Common/global';
 import CommentForm from './CommentForm';
-import { Menu } from '../CategoryMenu';
 import { PostTimer } from '../Timer';
 
 const PostCardBig = ({ me, postData, mutate }) => {

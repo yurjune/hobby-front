@@ -48,7 +48,23 @@ const MenuWrapper = styled.div`
   align-items: center;
   jusitfy-contents: center;
 `
-
+const Menu = styled.ul`
+  position: absolute;
+  left: ${props => props.left};
+  right: ${props => props.right};
+  top: ${props => props.top};
+  border: 1px solid gold;
+  border-radius: 5px;
+  li {
+    background-color: gold;
+    cursor: pointer;
+    padding: 10px 15px;
+  }
+  li:hover {
+    background-color: crimson;
+    transition: 0.3s;
+  }
+`
 const iconStyle = {
   "marginRight": "10px", 
   "cursor": "pointer",
@@ -61,5 +77,6 @@ export {
   Comment,
   ShowComment,
   MenuWrapper,
+  Menu,
   iconStyle,
 }
