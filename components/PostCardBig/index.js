@@ -80,7 +80,7 @@ const PostCardBig = ({ me, postData }) => {
     if (!me || !postData) return;
     const result = postData.Likers.filter(item => item.id === me.id)
     if (result.length >= 1) return setIsLiked(true);
-  }, [postData, isLiked]);
+  }, [postData]);
 
   const submitComment = () => async () => {
     try {
