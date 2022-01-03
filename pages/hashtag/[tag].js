@@ -39,7 +39,9 @@ const Hashtag = () => {
         <SearchBar />
       </Flex>
       <Wrapper>
-        {data && data.map(item => item.map(post => (<PostCard key={post.id} data={post} />)))}
+        {data && data.map(item => item.map(post => (
+          <PostCard key={post.id} me={me} postData={post} mutate={mutate} />
+        )))}
       </Wrapper>
     </AppLayout>
   );
