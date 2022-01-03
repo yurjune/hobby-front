@@ -66,9 +66,8 @@ const WritingForm = ({ me, exPost }) => {
 
   const onSubmit = async () => {
     try {
-      if (!text) {
-        return alert("본문을 입력해 주세요!");
-      }
+      if (!text) return alert("본문을 입력해 주세요!");
+      if (!imageList.length) return alert("이미지를 첨부해 주세요!");
       const result = await axios.post('/post', {
         id: me.id,
         category,
@@ -87,9 +86,8 @@ const WritingForm = ({ me, exPost }) => {
 
   const onEdit = async () => {
     try {
-      if (!text) {
-        return alert("본문을 입력해 주세요!");
-      }
+      if (!text) return alert("본문을 입력해 주세요!");
+      if (!imageList.length) return alert("이미지를 첨부해 주세요!");
       const result = await axios.patch(`/post/editpost`, {
         userId: me.id,
         postId: exPost.id,

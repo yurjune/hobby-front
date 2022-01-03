@@ -58,7 +58,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
       if (!replyIdList.includes(item.id)) comments.push(item);
     });
     const sortedComments = selectionSort(comments); // 댓글 id순서대로 정렬
-    sortedComments.map(item => { // 댓글의 답글 id순서대로 정렬
+    sortedComments.map(item => { // 답글 id순서대로 정렬
       item.Son = selectionSort(item.Son);
     });
     setCommentList(sortedComments);

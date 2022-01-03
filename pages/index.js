@@ -6,6 +6,7 @@ import useFetch from '../hooks/useFetch';
 import useInfinite from '../hooks/useInfinite';
 import { Button } from '../components/Common/custom';
 import { Flex } from '../components/Common';
+import SearchBar from '../components/SearchBar';
 
 const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
@@ -38,6 +39,9 @@ const Home = () => {
 
   return (
     <AppLayout me={me}>
+      <Flex p="10px" mb="20px" justify="flex-end">
+        <SearchBar />
+      </Flex>
       <Wrapper>
         {data && data.map(item => item.map(post => (<PostCard key={post.id} data={post} />)))}
       </Wrapper>

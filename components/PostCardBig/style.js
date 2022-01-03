@@ -12,7 +12,6 @@ const Picture = styled.div`
   border-radius: 15px;
   height: 0px;
   padding-bottom: 100%;
-  background-color: gold;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

@@ -5,11 +5,7 @@ import {
   Wrapper,
   Select,
   Menu,
-  SearchWrapper1,
-  SearchWrapper2,
-  Search,
   arrowIconStyle,
-  searchIconStyle,
 } from './style';
 import { Flex, Box } from '../Common';
 import { Button } from '../Common/custom';
@@ -48,10 +44,6 @@ const CategoryBar = ({ category, addCategory, removeCategory }) => {
             </Menu>
           : ""}
         </Select>
-        <SearchWrapper2>
-          <Search />
-          <FontAwesomeIcon icon={faSearch} style={searchIconStyle} />
-        </SearchWrapper2>
       </Wrapper>
       <Flex p="10px">
         {category.map(item => <Button key={item} mr="10px" onClick={removeCategory(item)}>{item}</Button>)}
