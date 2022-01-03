@@ -8,7 +8,7 @@ const Social = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data: me, error, isLoading } = useFetch('/user');
-  const { data: postData, postError, postIsLoading } = useFetch(`/post?id=${id}`);
+  const { data: postData, postError, postIsLoading, mutate } = useFetch(`/post?id=${id}`);
   
   if (error) return <div>에러 발생</div>;
   if (postError) return <div>에러 발생</div>;
@@ -17,7 +17,7 @@ const Social = () => {
 
   return (
     <AppLayout me={me}>
-      <PostCardBig me={me} postData={postData} />
+      <PostCardBig me={me} postData={postData} mutate={mutate} />
     </AppLayout>
   );
 };

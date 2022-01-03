@@ -38,7 +38,6 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
       setIsOpenReplyBar(true);
     }
   };
-
   return (<>
     <CommentBody me={me} item={item} clickUser={clickUser}>
       { me && <Pointer onClick={openReplyForm(item.id)}>답글 쓰기</Pointer> }

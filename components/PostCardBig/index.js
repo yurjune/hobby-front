@@ -23,7 +23,7 @@ import CommentForm from './CommentForm';
 import { Menu } from '../CategoryMenu';
 import { PostTimer } from '../Timer';
 
-const PostCardBig = ({ me, postData }) => {
+const PostCardBig = ({ me, postData, mutate }) => {
   const router = useRouter();
   const [comment, handleComment, setComment] = useInput('');
   const [reply, handleReply, setReply] = useInput('');
@@ -45,7 +45,7 @@ const PostCardBig = ({ me, postData }) => {
   const {
     likePost,
     unlikePost,
-  } = useLike(me, postData?.id, setIsLiked);
+  } = useLike(me, postData?.id, setIsLiked, mutate);
 
   useEffect(() => { // 댓글을 댓글과 답글로 분류
     if (!postData) return;
@@ -91,6 +91,7 @@ const PostCardBig = ({ me, postData }) => {
       });
       alert('댓글이 등록되었습니다!');
       setComment('');
+      mutate();
     } catch (error) {
       alert(error.response.data);
     }
@@ -106,6 +107,7 @@ const PostCardBig = ({ me, postData }) => {
       });
       alert('대댓글이 등록되었습니다!');
       setReply('');
+      mutate();
     } catch (error) {
       alert(error.response.data);
     }

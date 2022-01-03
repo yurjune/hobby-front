@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const useLike = (me, postId, setIsLiked) => {
+const useLike = (me, postId, setIsLiked, mutate) => {
 
   const likePost = async () => {
     try {
@@ -9,6 +9,7 @@ const useLike = (me, postId, setIsLiked) => {
         `/post/like?postId=${postId}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(true);
+      mutate();
     } catch(error) {
       alert(error.response.data);
     }
@@ -21,6 +22,7 @@ const useLike = (me, postId, setIsLiked) => {
         `/post/unlike?postId=${postId}&likerId=${me.id}`
       );
       if (result.data === 'success') setIsLiked(false);
+      mutate();
     } catch(error) {
       alert(error.response.data);
     }
