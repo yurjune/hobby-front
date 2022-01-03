@@ -20,10 +20,10 @@ const PostCard = ({ data }) => {
   return (
     <>{ data &&
       <FlexC cursor="pointer">
-        <Picture url={localhost(data.Images[0]?.src)} onClick={onClickCard} />
+        <Picture url={data.Images && localhost(data.Images[0]?.src)} onClick={onClickCard} />
         <FlexC p="10px 5px" onClick={onClickCard}>
           <Flex mb="15px">
-            <Avatar mr="15px" url={localhost(data.User.Image?.src)} />
+            <Avatar mr="15px" url={localhost(data.User?.Image?.src)} />
             <Text self="center" flex="1">{data.User?.name}</Text>
             <PostTimer time={data.time} />
           </Flex>
