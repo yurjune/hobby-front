@@ -16,18 +16,19 @@ import useLike from '../../hooks/useLike';
 const PostCard = ({ data }) => {
   const router = useRouter();
   const onClickCard = () => router.push(`/social/${data.id}`);
+  const onClickUser = () => router.push(`/profile/${data.UserId}`);
 
   return (
     <>{ data &&
       <FlexC cursor="pointer" mb="20px">
         <Picture url={data.Images && localhost(data.Images[0]?.src)} onClick={onClickCard} />
-        <FlexC p="10px 5px" onClick={onClickCard}>
-          <Flex mb="15px">
+        <FlexC p="10px 5px">
+          <Flex mb="15px" onClick={onClickUser}>
             <Avatar mr="15px" url={localhost(data.User?.Image?.src)} />
             <Text self="center" flex="1">{data.User?.name}</Text>
             <PostTimer time={data.time} />
           </Flex>
-          <Paragraph>{data.content}</Paragraph>
+          <Paragraph onClick={onClickCard}>{data.content}</Paragraph>
         </FlexC>
         <Flex p="0 5px" mb="10px">
           <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} />

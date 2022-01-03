@@ -41,9 +41,7 @@ const Profile = () => {
   useEffect(() => {
     const onScroll = () => {
       if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
-        if (data[data.length - 1].length >= limit) {
-          loadMorePosts();
-        }
+        if (data[data.length - 1].length >= limit) loadMorePosts();
       }
     };
     window.addEventListener('scroll', onScroll);
