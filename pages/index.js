@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
 import PostCard from '../components/PostCard';
@@ -24,7 +24,11 @@ const Wrapper = styled.div`
 const Home = () => {
   const { data: me, error: meError, isLoading: meIsLoading } = useFetch('/user');
   const { data, error, size, setSize } = useInfinite('/posts');
-  
+
+  useEffect(() => {
+
+  });
+
   const loadMorePosts = () => {
     setSize(size + 1);
   };

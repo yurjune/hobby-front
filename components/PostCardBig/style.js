@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 650px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 10px;
+`
 const Picture = styled.div`
   border-radius: 15px;
   height: 0px;
@@ -36,7 +44,6 @@ const ShowComment = styled.div`
   color: #808080;
   cursor: pointer;
 `
-
 const MenuWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -49,6 +56,7 @@ const iconStyle = {
 };
 
 export {
+  Wrapper,
   Picture,
   Paragraph,
   Comment,

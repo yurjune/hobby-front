@@ -19,7 +19,7 @@ const PostCard = ({ data }) => {
 
   return (
     <>{ data &&
-      <FlexC cursor="pointer">
+      <FlexC cursor="pointer" mb="20px">
         <Picture url={data.Images && localhost(data.Images[0]?.src)} onClick={onClickCard} />
         <FlexC p="10px 5px" onClick={onClickCard}>
           <Flex mb="15px">

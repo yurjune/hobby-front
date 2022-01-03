@@ -12,8 +12,9 @@ import CommentBar from './CommentBar';
 import { FlexC, Flex, Box, Text, } from '../Common';
 import { Button } from '../Common/custom';
 import { 
-  Paragraph,
+  Wrapper,
   Picture,
+  Paragraph,
   ShowComment,
   MenuWrapper,
   iconStyle,
@@ -160,7 +161,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
 
   return (<>
     { postData &&
-      <FlexC maxW="650px" m="0 auto" mb="40px" p="10px">
+      <Wrapper>
         { me ?
           <>{ me.id === postData.User?.id
             ? <PostBar item={postData} clickUser={clickUser} >
@@ -241,7 +242,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
             submit={submitComment}
           />}
         </FlexC>
-      </FlexC>
+      </Wrapper>
     }
   </>);
 };
