@@ -8,4 +8,8 @@ const useDayjs = (date) => {
   return dayjs(date).fromNow();
 };
 
+export const useToday = () => {
+  return dayjs();
+}
+
 export default useDayjs;

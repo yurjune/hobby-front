@@ -5,9 +5,11 @@ import {
 } from './style';
 import { FlexC, Text } from '../Common';
 import { SideTimer } from '../Timer';
+import { useToday } from '../../hooks/useDayjs';
 
 const SideCard = ({ exPost }) => {
   const [now, setNow] = useState(0);
+  const [today, setToday] = useState('');
   const date = exPost?.createdAt.slice(0, 10);
 
   useEffect(() => {
@@ -15,12 +17,20 @@ const SideCard = ({ exPost }) => {
     setNow(JSON.parse(localStorage.getItem('time')));
   }, []);
 
+  useEffect(() => {
+    const theDay = useToday();
+    const year = theDay.year();
+    const month = theDay.month();
+    const date = theDay.date();
+    setToday(`${year}년 ${month + 1}월 ${date}일`);
+  }, []);
+
   return (
     <Card>
       <Text fontSize="20px">나의 기록! 🔥</Text>
       <SideTimer time={now} />
       <Hr />
-      <Text mb="16px" size="18px">{date || '오늘의 날짜'}</Text>
+      <Text mb="16px" size="18px">{date || today}</Text>
     </Card>
   );
 };
