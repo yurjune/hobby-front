@@ -1,9 +1,13 @@
 import * as React from 'react';
+import Head from 'next/head';
 import { Reset } from 'styled-reset';
 import { SWRConfig } from 'swr';
 
 const App = ({ Component, pageProps }) => {
   return (<>
+    <Head>
+      <title>커뮤니티</title>
+    </Head>
     <Reset />
     <SWRConfig 
       value={{

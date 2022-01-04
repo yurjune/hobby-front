@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
+import Head from 'next/head';
 import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
 import PostCard from '../components/PostCard';
 import useFetch from '../hooks/useFetch';
 import useInfinite from '../hooks/useInfinite';
-import { Button } from '../components/Common/custom';
 import { Flex } from '../components/Common';
 import SearchBar from '../components/SearchBar';
 import { limit } from '../hooks/useInfinite';
@@ -44,7 +44,10 @@ const Home = () => {
   if (meError || error) return <div>에러 발생</div>;
   // console.log('data:', data);
 
-  return (
+  return (<>
+    <Head>
+      <title>커뮤니티</title>
+    </Head>
     <AppLayout me={me}>
       <Flex p="10px" mb="20px" justify="flex-end">
         <SearchBar />
@@ -54,11 +57,8 @@ const Home = () => {
           <PostCard key={post.id} me={me} postData={post} mutate={mutate} />
         )))}
       </Wrapper>
-      {/* <Flex p="10px" justify="flex-end">
-        <Button onClick={loadMorePosts}>더 보기</Button>
-      </Flex> */}
     </AppLayout>
-  );
+  </>);
 };
 
 // export async function getServerSideProps() {

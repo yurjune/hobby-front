@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Head from 'next/head';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import SecondLayout from '../../components/AppLayout/SecondLayout';
@@ -51,7 +52,10 @@ const Profile = () => {
   if (meError || userError || error) return <div>에러 발생</div>;
   if (userIsLoading) return <div>로딩 중...</div>;
 
-  return (
+  return (<>
+    <Head>
+      <title>프로필</title>
+    </Head>
     <SecondLayout me={me}>
       <MyProfile me={me} user={user} mutate={userMutate} />
       <Wrapper>
@@ -60,7 +64,7 @@ const Profile = () => {
         )))}
       </Wrapper>
     </SecondLayout>
-  );
+  </>);
 };
 
 export default Profile;

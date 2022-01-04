@@ -10,25 +10,15 @@ import {
   Profile,
   ProfileItem,
   Hamburger,
-  iconStyle,
 } from './style';
 import { Avatar } from '../Common/custom';
-import { FlexC, Box, Text } from '../Common';
+import { Box } from '../Common';
 import { localhost } from '../Common/global';
 import SideNav from '../SideNav';
 
 const Header = ({ me }) => {
   const router = useRouter();
-  const [isDesktop, setIsDesktop] = useState(true);
   const [isHamburger, setIsHamburger] = useState(false);
-
-  useEffect(() => {
-    if (window.innerWidth > 868) {
-      setIsDesktop(true);
-    } else {
-      setIsDesktop(false)
-    }
-  }, []);
 
   const clickMenu = (value) => () => {
     if (!me) return alert('먼저 로그인해주세요!')
@@ -36,6 +26,8 @@ const Header = ({ me }) => {
   }
 
   const clickUser = (userId) => () => router.push(`/profile/${userId}`);
+
+  const goMain = () => router.push('/');
 
   const clickHamburger = () => {
     if (isHamburger) return setIsHamburger(false);
@@ -45,10 +37,10 @@ const Header = ({ me }) => {
   return (<>
     <Box bg="gold">
       <Wrapper>
-        <Logo>로고</Logo>
+        <Logo onClick={goMain}>로고</Logo>
         <Desktop>
           <Menu>
-            <MenuItem onClick={() => router.push('/')}>커뮤니티</MenuItem>
+            <MenuItem onClick={goMain}>커뮤니티</MenuItem>
             <MenuItem onClick={clickMenu(`/profile/${me?.id}`)}>내 프로필</MenuItem>
             <MenuItem onClick={clickMenu('/mypage')}>마이페이지</MenuItem>
             <MenuItem onClick={clickMenu('/write')}>글쓰기</MenuItem>
