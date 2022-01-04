@@ -1,3 +1,3 @@
 export const gray = "#dddddd";
-export const softgray = "#22222280";
+export const softgray = "#efeae3";
 export const darkgray = "#555";

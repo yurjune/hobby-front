@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
@@ -14,7 +14,7 @@ import {
   Forgot,
   iconStyle,
 } from './style';
-import { Flex } from '../Common';
+import { Flex, Text } from '../Common';
 import { Button } from '../Common/custom';
 
 axios.defaults.baseURL = 'http://localhost:3060';
@@ -23,6 +23,7 @@ axios.defaults.withCredentials = true;
 const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
   const [email, handleEmail] = useInput('');
   const [password, handlePassword] = useInput('');
+  const [isWrong, setIsWrong] = useState(false);
   const router = useRouter();
 
   const onClickLogin = async () => {
@@ -46,6 +47,7 @@ const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
       alert(result.data);
     }
     catch (error) {
+      setIsWrong(true);
       console.error(error);
     }
   };
@@ -58,6 +60,7 @@ const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
           <Input type="text" placeholder="example@email.com" value={email} onChange={handleEmail} />
           <Label>비밀번호</Label>
           <Input type="password" placeholder="******" value={password} onChange={handlePassword} />
+          { isWrong && <Text color="red" mb="20px" fontSize="14px">이메일 또는 비밀번호가 잘못되었습니다</Text>}
           <Flex>
             <Button mr="5px" onClick={onClickLogin}>로그인</Button>
             <Button onClick={() => setOpenJoinPage(true)}>회원가입</Button>

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Box = styled.div`
-  align-self: ${props => props.self};
   flex: ${props => props.flex};
+  align-self: ${props => props.self};
   width: ${props => props.w};
   max-width: ${props => props.maxW};
   height: ${props => props.h};
@@ -21,6 +21,8 @@ const Box = styled.div`
   font-weight: ${props => props.weight};
   color: ${props => props.color};
   background-color: ${props => props.bg};
+  float: ${props => props.float};
+  align: ${props => props.align};
   cursor: ${props => props.cursor};
 `
 const Flex = styled(Box)`

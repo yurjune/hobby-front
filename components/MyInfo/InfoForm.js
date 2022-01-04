@@ -11,6 +11,7 @@ import {
   Input,
   Hr,
   Picture,
+  FormWrapper,
   iconStyle,
 } from './style';
 import useInput from '../../hooks/useInput';
@@ -54,7 +55,7 @@ const InfoForm = ({ me }) => {
     <Wrapper>
       <Text fontSize="22px" mb="10px">개인정보 변경</Text>
       <Hr />
-      <Contents>
+      <Contents w="270px">
         <FlexC mb="20px">
           <Picture url={`${localhost(profileImage)}`}>
             <FontAwesomeIcon icon={faPlus} size="lg" style={iconStyle} onClick={changeProfile} />
@@ -64,7 +65,7 @@ const InfoForm = ({ me }) => {
         </FlexC>
         <DisabledForm value={email}>이메일 :</DisabledForm>
         <Form value={name} handle={handleName}>닉네임 :</Form>
-        <Button w="60px" onClick={onSubmit}>수정</Button>
+        <Button w="60px" self="end" onClick={onSubmit}>수정</Button>
       </Contents>
     </Wrapper>
   );
@@ -72,19 +73,19 @@ const InfoForm = ({ me }) => {
 
 export const Form = ({ children, value, handle, textWidth }) => {
   return (
-    <Flex gap="10px">
+    <FormWrapper>
       <Text w={textWidth || "80px"} lineHeight="28px">{children}</Text>
       <Input type="text" value={value} onChange={handle} />
-    </Flex>
+    </FormWrapper>
   )
 }
 
 const DisabledForm = ({ children, value, handle }) => {
   return (
-    <Flex gap="10px">
+    <FormWrapper>
       <Text w="80px" lineHeight="28px">{children}</Text>
       <Input type="text" value={value} onChange={handle} disabled />
-    </Flex>
+    </FormWrapper>
   )
 }
 

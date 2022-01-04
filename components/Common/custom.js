@@ -34,8 +34,16 @@ const Avatar = styled.div`
   background-image: url(${props => props.url});
   cursor: pointer;
 `
+const Hr = styled.hr`
+  width: 100%;
+  background-color: ${props => props.color || "lightgray"};
+  border: none;
+  height: 1px;
+  margin-bottom: ${props => props.mb};
+`
 
 export {
   Button,
   Avatar,
+  Hr,
 }

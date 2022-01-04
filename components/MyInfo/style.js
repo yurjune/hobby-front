@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 `
 const Contents = styled.div`
   display: flex;
-  width: 370px;
+  width: ${props => props.w};
   flex-direction: column;
   gap: 30px;
 `
@@ -63,6 +63,11 @@ const Picture = styled.div`
   background-image: url(${props => props.url});
   background-color: ${props => props.color};
 `
+const FormWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+`
 const iconStyle = {
   cursor: "pointer",
   color: "white",
@@ -79,5 +84,6 @@ export {
   Input,
   Hr,
   Picture,
+  FormWrapper,
   iconStyle,
 }

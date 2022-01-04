@@ -7,6 +7,7 @@ import {
   Contents,
   Input,
   Hr,
+  FormWrapper,
 } from './style';
 import useInput from '../../hooks/useInput';
 import axios from 'axios'
@@ -40,7 +41,7 @@ const Password = ({ me }) => {
     <Wrapper>
       <Text fontSize="22px" mb="10px">비밀번호 변경</Text>
       <Hr />
-      <Contents>
+      <Contents w="350px">
         <PasswordForm
           value={oldPassword}
           handle={handleOldPassword}
@@ -62,7 +63,7 @@ const Password = ({ me }) => {
         >
           비밀번호 확인 :
         </PasswordForm>
-        <Button w="60px" onClick={onSubmit}>수정</Button>
+        <Button w="60px" self="end" onClick={onSubmit}>수정</Button>
       </Contents>
     </Wrapper>
   </>);
@@ -70,10 +71,10 @@ const Password = ({ me }) => {
 
 const PasswordForm = ({ children, value, handle }) => {
   return (
-    <Flex gap="10px">
+    <FormWrapper>
       <Text w="120px" lineHeight="28px">{children}</Text>
       <Input type="password" value={value} onChange={handle} />
-    </Flex>
+    </FormWrapper>
   )
 }
 

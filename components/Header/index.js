@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/Link';
 import { useRouter } from 'next/router';
 import {
   Wrapper,
@@ -15,10 +14,12 @@ import { Flex, Box, Text } from '../Common';
 import { localhost } from '../Common/global';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import SideNav from '../SideNav';
 
 const Header = ({ me }) => {
   const router = useRouter();
   const [isDesktop, setIsDesktop] = useState(true);
+  const [isHamburger, setIsHamburger] = useState(false);
 
   useEffect(() => {
     if (window.innerWidth > 868) {
@@ -35,13 +36,18 @@ const Header = ({ me }) => {
 
   const clickUser = (userId) => () => router.push(`/profile/${userId}`);
 
-  return (
+  const clickHamburger = () => {
+    if (isHamburger) return setIsHamburger(false);
+    setIsHamburger(true);
+  }
+
+  return (<>
     <Box bg="gold">
       <Wrapper>
         <Logo>로고</Logo>
         {isDesktop ? (<>
           <Menu>
-            <Link href="/"><MenuItem>커뮤니티</MenuItem></Link>
+            <MenuItem onClick={() => router.push('/')}>커뮤니티</MenuItem>
             <MenuItem onClick={clickMenu(`/profile/${me?.id}`)}>내 프로필</MenuItem>
             <MenuItem onClick={clickMenu('/mypage')}>마이페이지</MenuItem>
             <MenuItem onClick={clickMenu('/write')}>글쓰기</MenuItem>
@@ -58,14 +64,13 @@ const Header = ({ me }) => {
           { me && <>
             <Avatar mr="15px" url={localhost(me.Image?.src)} onClick={clickUser(me.id)} />
             <Text mr="30px" cursor="pointer" onClick={clickUser(me.id)}>{me.name}</Text>
-            <FontAwesomeIcon size="lg" icon={faBars} style={iconStyle} />
-          </>
-          }
-        </>)
-      }
+          </>}
+          <FontAwesomeIcon size="lg" icon={faBars} style={iconStyle} onClick={clickHamburger} />
+        </>)}
       </Wrapper>
+    { isHamburger && <SideNav me={me} clickHamburger={clickHamburger} /> }
     </Box>
-  );
+  </>);
 };
 
 export default Header;
