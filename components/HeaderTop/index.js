@@ -21,7 +21,8 @@ const HeaderTop = ({ me, openLoginForm }) => {
         time,
       });
       localStorage.removeItem('time');
-      return router.reload('/');
+      localStorage.setItem('isStop', JSON.stringify(true));
+      return router.push('/');
     }
   };
 

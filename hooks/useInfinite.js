@@ -15,7 +15,7 @@ const useInfinite = (address, lastId, userId, tag) => {
   const fetcher = (url) => axios.get(url).then((result) => result.data);
 
   const { data, error, size, setSize, mutate } = useSWRInfinite(
-    getKey, fetcher, { refreshInterval: 0, initialSize: 1 }
+    getKey, fetcher, { refreshInterval: 0, initialSize: 2 }
   );
 
   return {

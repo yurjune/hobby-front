@@ -24,13 +24,14 @@ export const Wrapper = styled.div`
   gap: 15px;
 `
 
-const Home = ({ prePosts }) => {
+const Home = () => {
   const { data: me, error: meError, isLoading: meIsLoading } = useFetch('/user');
   const { data, error, size, setSize, mutate } = useInfinite('/posts');
 
   const loadMorePosts = () => setSize(size + 1);
 
   useEffect(() => {
+    if (!data) return;
     const onScroll = () => {
       if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
         if (data[data.length - 1].length >= limit) loadMorePosts();
@@ -42,10 +43,7 @@ const Home = ({ prePosts }) => {
     };
   }, [data]);
 
-  console.log(prePosts)
-
   if (meError || error) return <div>에러 발생</div>;
-  // console.log('data:', data);
 
   return (<>
     <Head>
@@ -56,11 +54,6 @@ const Home = ({ prePosts }) => {
         <SearchBar />
       </Flex>
       <Wrapper>
-        {prePosts.map(post => (
-          <PostCard key={post.id} me={me} postData={post} mutate={mutate} />
-        ))}
-      </Wrapper>
-      <Wrapper>
         {data && data.map(item => item.map(post => (
           <PostCard key={post.id} me={me} postData={post} mutate={mutate} />
         )))}
@@ -69,11 +62,11 @@ const Home = ({ prePosts }) => {
   </>);
 };
 
-export async function getServerSideProps() {
-  const prePosts = await axios.get(`/posts/pre`);
-  return {
-    props: { prePosts: prePosts.data }
-  }
-}
+// export async function getServerSideProps() {
+//   const prePosts = await axios.get(`/posts/pre`);
+//   return {
+//     props: { prePosts: prePosts.data }
+//   }
+// }
 
 export default Home;
