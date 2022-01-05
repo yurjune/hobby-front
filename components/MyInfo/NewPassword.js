@@ -12,7 +12,7 @@ import {
 import useInput from '../../hooks/useInput';
 import axios from 'axios'
 
-const PasswordForm = ({ me }) => {
+const NewPassword = ({ me }) => {
   const router = useRouter();
   const [oldPassword, handleOldPassword] = useInput('');
   const [password, handlePassword] = useInput('');
@@ -78,4 +78,4 @@ const PasswordForm = ({ children, value, handle }) => {
   )
 }
 
-export default PasswordForm;
+export default NewPassword;
