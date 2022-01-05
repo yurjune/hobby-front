@@ -1,7 +1,8 @@
 import useSWRInfinite from 'swr/infinite';
 import axios from 'axios';
+import { backend } from '../components/Common/global';
 
-axios.defaults.baseURL = 'http://localhost:3060';
+axios.defaults.baseURL = backend;
 axios.defaults.withCredentials = true;
 
 export const limit = 4;

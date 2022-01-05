@@ -1,5 +1,7 @@
+export const backend = `http://3.35.135.161`;
+
 export const localhost = (value) => {
-  return `http://localhost:3060/${value}`;
+  return `${backend}/${value}`;
 };
 
 // 선택정렬
