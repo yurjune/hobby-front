@@ -29,6 +29,7 @@ const Logo = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: ${darkgray};
+  cursor: pointer;
   position: absolute;
   left: 10px;
 `

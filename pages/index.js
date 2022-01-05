@@ -8,6 +8,7 @@ import useInfinite from '../hooks/useInfinite';
 import { Flex } from '../components/Common';
 import SearchBar from '../components/SearchBar';
 import { limit } from '../hooks/useInfinite';
+import axios from 'axios';
 
 export const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
@@ -23,7 +24,7 @@ export const Wrapper = styled.div`
   gap: 15px;
 `
 
-const Home = () => {
+const Home = ({ prePosts }) => {
   const { data: me, error: meError, isLoading: meIsLoading } = useFetch('/user');
   const { data, error, size, setSize, mutate } = useInfinite('/posts');
 
@@ -41,6 +42,8 @@ const Home = () => {
     };
   }, [data]);
 
+  console.log(prePosts)
+
   if (meError || error) return <div>에러 발생</div>;
   // console.log('data:', data);
 
@@ -53,6 +56,11 @@ const Home = () => {
         <SearchBar />
       </Flex>
       <Wrapper>
+        {prePosts.map(post => (
+          <PostCard key={post.id} me={me} postData={post} mutate={mutate} />
+        ))}
+      </Wrapper>
+      <Wrapper>
         {data && data.map(item => item.map(post => (
           <PostCard key={post.id} me={me} postData={post} mutate={mutate} />
         )))}
@@ -61,13 +69,11 @@ const Home = () => {
   </>);
 };
 
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`https://.../data`)
-//   const data = await res.json()
-
-//   // Pass data to the page via props
-//   return { props: { data } }
-// }
+export async function getServerSideProps() {
+  const prePosts = await axios.get(`/posts/pre`);
+  return {
+    props: { prePosts: prePosts.data }
+  }
+}
 
 export default Home;
