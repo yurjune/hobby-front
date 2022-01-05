@@ -8,20 +8,13 @@ import {
   Picture,
   ImageInput,
   TextArea,
+  iconStyle,
 } from './style';
 import { FlexC } from '../Common';
 import { Button } from '../Common/custom';
 import axios from 'axios';
 import useInput from '../../hooks/useInput';
 import { localhost } from '../Common/global';
-
-const iconStyle = {
-  cursor: "pointer",
-  color: "white",
-  position: "absolute",
-  left: "42%",
-  top: "42%",
-};
 
 const WritingForm = ({ me, exPost }) => {
   const [imageList, setImageList] = useState([]);
@@ -66,7 +59,7 @@ const WritingForm = ({ me, exPost }) => {
   const onSubmit = async () => {
     try {
       if (!text) return alert("본문을 입력해 주세요!");
-      // if (!imageList.length) return alert("이미지를 첨부해 주세요!");
+      if (!imageList.length) return alert("이미지를 첨부해 주세요!");
       const result = await axios.post('/post', {
         id: me.id,
         content: text,
@@ -76,6 +69,7 @@ const WritingForm = ({ me, exPost }) => {
       console.log(result);
       alert('작성이 완료되었습니다');
       localStorage.removeItem('time');
+      localStorage.setItem('isStop', JSON.stringify(true));
       router.push(`/`);
     } catch (error) {
       console.error(error);

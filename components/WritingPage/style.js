@@ -80,6 +80,13 @@ const TextArea = styled.textarea`
     outline: none;
   }
 `
+const iconStyle = {
+  cursor: "pointer",
+  color: "white",
+  position: "absolute",
+  left: "42%",
+  top: "42%",
+};
 
 export {
   Divide,
@@ -90,4 +97,5 @@ export {
   Picture,
   ImageInput,
   TextArea,
+  iconStyle,
 }
