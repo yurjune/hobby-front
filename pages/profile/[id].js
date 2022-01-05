@@ -38,6 +38,7 @@ const Profile = () => {
   const loadMorePosts = () => setSize(size + 1);
 
   useEffect(() => {
+    if (!data) return;
     const onScroll = () => {
       if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
         if (data[data.length - 1].length >= limit) loadMorePosts();
