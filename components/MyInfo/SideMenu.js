@@ -7,7 +7,7 @@ import {
 
 const Menu = [
   { name: '개인정보 변경', url: '/'},
-  { name: '비밀번호 변경', url: '/password'},
+  { name: '비밀번호 변경', url: '/changepassword'},
 ];
 
 const SideMenu = () => {

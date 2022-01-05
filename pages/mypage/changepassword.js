@@ -6,7 +6,7 @@ import MyInfo from '../../components/MyInfo';
 import Password from '../../components/MyInfo/Password';
 import useTimer from '../../hooks/useTimer';
 
-const MyPage = () => {
+const ChangePassword = () => {
   useTimer();
 
   const { data: me, error, isLoading } = useFetch('/user');
@@ -26,4 +26,4 @@ const MyPage = () => {
   </>);
 };
 
-export default MyPage;
+export default ChangePassword;
