@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
 import HeaderTop from '../HeaderTop';
-import LoginModal from '../LoginModal';
+import LoginBox from '../LoginBox';
 import {
   Grid,
   GridHeader,
@@ -26,7 +26,7 @@ const SecondLayout = ({ children, me }) => {
       <GridItem>{children}</GridItem>
       {isOpened ? 
         <GridItem>
-          <LoginModal closeLoginForm={closeLoginForm} />
+          <LoginBox closeLoginForm={closeLoginForm} />
         </GridItem>
       : ""}
       <GridFooter><Footer /></GridFooter>

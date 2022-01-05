@@ -3,7 +3,7 @@ import Head from 'next/head';
 import SecondLayout from '../../components/AppLayout/SecondLayout';
 import useFetch from '../../hooks/useFetch';
 import MyInfo from '../../components/MyInfo';
-import Password from '../../components/MyInfo/Password';
+import PasswordForm from '../../components/MyInfo/PasswordForm';
 import useTimer from '../../hooks/useTimer';
 
 const ChangePassword = () => {
@@ -20,7 +20,7 @@ const ChangePassword = () => {
     </Head>
     <SecondLayout me={me}>
       <MyInfo>
-        <Password me={me} />
+        <PasswordForm me={me} />
       </MyInfo>
     </SecondLayout>
   </>);
