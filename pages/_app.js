@@ -7,6 +7,7 @@ const App = ({ Component, pageProps }) => {
   return (<>
     <Head>
       <title>커뮤니티</title>
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
     </Head>
     <Reset />
     <SWRConfig 
