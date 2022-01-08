@@ -5,9 +5,6 @@ import { SWRConfig } from 'swr';
 
 const App = ({ Component, pageProps }) => {
   return (<>
-    <Head>
-      <title>커뮤니티</title>
-    </Head>
     <Reset />
     <SWRConfig 
       value={{
