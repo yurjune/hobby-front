@@ -1,4 +1,4 @@
-export const backend = `http://3.35.135.161`;
+export const backend = `http://ec2-3-35-203-10.ap.northeast-2.compute.amazonaws.com:3000`;
 
 export const localhost = (value) => {
   return `${backend}/${value}`;
