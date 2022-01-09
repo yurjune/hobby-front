@@ -24,7 +24,9 @@ const AppLayout = ({ children, me }) => {
         <HeaderTop me={me} openLoginForm={openLoginForm} />
         <Header me={me} />
       </GridHeader>
-      {/* <GridItem><Timer me={me} /></GridItem> */}
+      <GridItem>
+        <Timer me={me} />
+      </GridItem>
       <GridItem2>{children}</GridItem2>
       {isOpened ? 
         <GridItem>

@@ -37,7 +37,7 @@ const Header = ({ me }) => {
   return (<>
     <Box bg="gold">
       <Wrapper>
-        <Logo onClick={goMain}>로고!</Logo>
+        <Logo onClick={goMain}>로고</Logo>
         <Desktop>
           <Menu>
             <MenuItem onClick={goMain}>커뮤니티</MenuItem>
