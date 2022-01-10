@@ -1,8 +1,8 @@
 export const backend = `http://ec2-3-35-204-10.ap-northeast-2.compute.amazonaws.com:3000`;
-export const backend2 = `http://ec2-3-37-120-204.ap-northeast-2.compute.amazonaws.com:3000`;
+export const newUrl = `http://ec2-3-37-120-204.ap-northeast-2.compute.amazonaws.com:3000`;
 
 export const localhost = (value) => {
-  return `${backend2}/${value}`;
+  return `${newUrl}/${value}`;
 };
 
 export const isLoadMorePosts = () => {
