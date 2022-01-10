@@ -9,6 +9,7 @@ import MyProfile from '../../components/MyProfile';
 import useTimer from '../../hooks/useTimer';
 import useInfinite from '../../hooks/useInfinite';
 import { limit } from '../../hooks/useInfinite';
+import { isLoadMorePosts } from '../../components/Common/global';
 
 const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
@@ -40,9 +41,7 @@ const Profile = () => {
   useEffect(() => {
     if (!data) return;
     const onScroll = () => {
-      if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
-        if (data[data.length - 1].length >= limit) loadMorePosts();
-      }
+      if (isLoadMorePosts() && data[data.length - 1].length >= limit) loadMorePosts();
     };
     window.addEventListener('scroll', onScroll);
     return () => {

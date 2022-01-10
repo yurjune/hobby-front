@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch';
 import useTimer from '../../hooks/useTimer';
 import useInfinite from '../../hooks/useInfinite';
 import { limit } from '../../hooks/useInfinite';
+import { isLoadMorePosts } from '../../components/Common/global';
 
 const Social = () => {
   useTimer();
@@ -21,9 +22,7 @@ const Social = () => {
   useEffect(() => {
     if (!data) return;
     const onScroll = () => {
-      if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
-        if (data[data.length - 1].length >= limit) loadMorePosts();
-      }
+      if (isLoadMorePosts() && data[data.length - 1].length >= limit) loadMorePosts();
     };
     window.addEventListener('scroll', onScroll);
     return () => {

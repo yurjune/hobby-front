@@ -8,7 +8,7 @@ import useInfinite from '../hooks/useInfinite';
 import { Flex } from '../components/Common';
 import SearchBar from '../components/SearchBar';
 import { limit } from '../hooks/useInfinite';
-import axios from 'axios';
+import { isLoadMorePosts } from '../components/Common/global';
 
 export const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
@@ -33,9 +33,7 @@ const Home = () => {
   useEffect(() => {
     if (!data) return;
     const onScroll = () => {
-      if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
-        if (data[data.length - 1].length >= limit) loadMorePosts();
-      }
+      if (isLoadMorePosts() && data[data.length - 1].length >= limit) loadMorePosts();
     };
     window.addEventListener('scroll', onScroll);
     return () => {

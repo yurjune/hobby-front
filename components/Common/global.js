@@ -4,6 +4,10 @@ export const localhost = (value) => {
   return `${backend}/${value}`;
 };
 
+export const isLoadMorePosts = () => {
+  return window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 50;
+}
+
 // 선택정렬
 export function selectionSort(array) {
   for (let i = 0; i < array.length; i++) {
