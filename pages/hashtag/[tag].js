@@ -8,7 +8,7 @@ import useFetch from '../../hooks/useFetch';
 import useInfinite from '../../hooks/useInfinite';
 import { limit } from '../../hooks/useInfinite';
 import { Wrapper } from '../index';
-import { isLoadMorePosts } from '../components/Common/global';
+import { isLoadMorePosts } from '../../components/Common/global';
 
 const Hashtag = () => {
   const router = useRouter();
