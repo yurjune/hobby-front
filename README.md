@@ -9,7 +9,9 @@
 
 ## :sunny: 사용 기술
 
-#### 백엔드:
+백엔드:
+<br/>
+<br/>
 <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/><a/>
 <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=Express&logoColor=white"/><a/>
 <img src="https://img.shields.io/badge/MYSQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/><a/>
@@ -17,16 +19,18 @@
 + MYSQL을 DB로 사용하였습니다.
 <br/>
 
-#### 프론트엔드:
-  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/><a/>
-  <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=Next.js&logoColor=white"/><a/>
-  <img src="https://img.shields.io/badge/styled components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/><a/>
+프론트엔드:
+<br/>
+<br/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/><a/>
+<img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=Next.js&logoColor=white"/><a/>
+<img src="https://img.shields.io/badge/styled components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/><a/>
 + React와 Next.js를 사용하여 화면단을 구성하였습니다.  
 + Redux나 Mobx등의 상태관리 라이브러리 대신 SWR을 사용하였습니다.  
 + css-in-js 방식으로 Styled-Components를 사용하였습니다.
 <br/>
 
-#### 배포:  
+배포:
 + Amazon Web Service를 통해 배포하였습니다.
 <br/>
 
