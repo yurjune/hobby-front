@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartSolid }  from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
+import { Paragraph } from './style';
 import {
   Picture,
-  Paragraph,
   iconStyle,
 } from '../PostCardBig/style';
 import { Avatar } from '../Common/custom';
@@ -17,6 +17,11 @@ import useLike from '../../hooks/useLike';
 const PostCard = ({ me, postData, mutate }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
+  const [isLong, setIsLong] = useState(false);
+
+  useEffect(() => {
+    if (postData.content.length >= 50) setIsLong(true);
+  }, [postData])
 
   const onClickCard = () => router.push(`/social/${postData.id}`);
   const onClickUser = () => router.push(`/profile/${postData.UserId}`);
@@ -36,7 +41,10 @@ const PostCard = ({ me, postData, mutate }) => {
             <Text self="center" flex="1">{postData.User?.name}</Text>
             <PostTimer time={postData.time} />
           </Flex>
-          <Paragraph onClick={onClickCard}>{postData.content}</Paragraph>
+          { isLong
+          ? <Paragraph onClick={onClickCard}>{`${postData.content.slice(0, 50)}...`}</Paragraph>
+          : <Paragraph onClick={onClickCard}>{postData.content}</Paragraph>
+          }
         </FlexC>
         <Flex p="0 5px" mb="10px">
           { isLiked

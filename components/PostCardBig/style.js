@@ -21,6 +21,7 @@ const Picture = styled.div`
 const Paragraph = styled.div`
   word-break: break-all;
   margin-bottom: ${props => props.mb || "20px"};
+  line-height: 1.5rem;
   a {
     font-weight: bold;
     margin-right: 15px;

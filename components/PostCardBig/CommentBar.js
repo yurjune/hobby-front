@@ -17,12 +17,12 @@ const editComment = () => async() => {
   }
 };
 
-const deleteComment = (target) => async () => {
+const deleteComment = (target, mutate) => async () => {
   try {
     const isDelete = confirm('정말로 삭제하시겠습니까?');
     if (!isDelete) return;
-    const result = await axios.delete(`/comment?commentId=${target.id}`);
-    alert(result.data);
+    await axios.delete(`/comment?commentId=${target.id}`);
+    mutate();
   } catch (error) {
     alert(error.response.data);
   }

@@ -1,20 +1,19 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import axios from 'axios';
 import {
   Wrapper,
   Menu,
   MenuItem,
 } from './style';
 
-import axios from 'axios';
-
 const HeaderTop = ({ me, openLoginForm }) => {
   const router = useRouter();
+
   const onClickLogout = async () => {
     const result = await axios.get('/auth/logout');
     if (result.data === 'ok') {
-      alert('로그아웃 되었습니다');
       const time = JSON.parse(localStorage.getItem('time'));
       await axios.patch('/user/time', {
         userId: me.id,

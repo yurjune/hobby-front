@@ -151,7 +151,6 @@ const PostCardBig = ({ me, postData, mutate }) => {
       const isDelete = confirm('정말 삭제하시겠습니까?');
       if (isDelete) {
         const result = await axios.delete(`/post?postId=${postData.id}`);
-        alert(result.data);
         router.push('/');
       }
     } catch (error) {
@@ -212,6 +211,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
                 key={item.createdAt}
                 item={item}
                 me={me}
+                mutate={mutate}
                 replyTargetId={replyTargetId}
                 openReplyForm={openReplyForm}
                 reply={reply}
@@ -225,6 +225,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
                 key={item.createdAt}
                 item={item}
                 me={me}
+                mutate={mutate}
                 replyTargetId={replyTargetId}
                 openReplyForm={openReplyForm}
                 reply={reply}
