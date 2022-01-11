@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   display: flex;
   gap: 1.3rem;
   justify-content: center;
-  margin: 10px 10px 30px 10px;
+  margin: 10px 10px 20px 10px;
   padding: 40px 15px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 10px;

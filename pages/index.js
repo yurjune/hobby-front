@@ -48,7 +48,7 @@ const Home = () => {
       <title>커뮤니티</title>
     </Head>
     <AppLayout me={me}>
-      <Flex p="10px" mb="20px" justify="flex-end">
+      <Flex p="10px" mb="10px" justify="flex-end">
         <SearchBar />
       </Flex>
       <Wrapper>
