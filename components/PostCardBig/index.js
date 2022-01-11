@@ -90,7 +90,6 @@ const PostCardBig = ({ me, postData, mutate }) => {
         postId: postData.id,
         content: comment,
       });
-      alert('댓글이 등록되었습니다!');
       setComment('');
       mutate();
     } catch (error) {
@@ -106,7 +105,6 @@ const PostCardBig = ({ me, postData, mutate }) => {
         content: reply,
         commentId: target.id,
       });
-      alert('대댓글이 등록되었습니다!');
       setReply('');
       mutate();
     } catch (error) {
