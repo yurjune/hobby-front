@@ -10,13 +10,6 @@ import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const editComment = () => async() => {
-  try {
-  } catch (error) {
-    alert(error.response.data);
-  }
-};
-
 const deleteComment = (target, mutate) => async () => {
   try {
     const isDelete = confirm('정말로 삭제하시겠습니까?');
@@ -24,11 +17,12 @@ const deleteComment = (target, mutate) => async () => {
     await axios.delete(`/comment?commentId=${target.id}`);
     mutate();
   } catch (error) {
-    alert(error.response.data);
+    if (error.response?.data) return alert(error.response.data);
+    console.error(error);
   }
 };
 
-const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply, submitReply, clickUser }) => {
+const CommentBar = ({ me, item, mutate, replyTargetId, openReplyForm, reply, handleReply, submitReply, clickUser }) => {
   const [isOpenReplyBar, setIsOpenReplyBar] = useState(false);
   const showReplies = () => {
     if (isOpenReplyBar) {
@@ -39,7 +33,7 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
   };
 
   return (<>
-    <CommentBody me={me} item={item} clickUser={clickUser}>
+    <CommentBody me={me} item={item} clickUser={clickUser} mutate={mutate}>
       { me && <Pointer onClick={openReplyForm(item.id)}>답글 쓰기</Pointer> }
     </CommentBody>
     { item.Son && item.Son.length >= 1 &&
@@ -68,13 +62,13 @@ const CommentBar = ({ me, item, replyTargetId, openReplyForm, reply, handleReply
     { isOpenReplyBar && item.Son.length >= 1 && item.Son.map(son =>
       <Flex key={son.createdAt} flex="1">
         <Box w="46px" />
-        <CommentBody me={me} item={son} clickUser={clickUser} />
+        <CommentBody me={me} item={son} clickUser={clickUser} mutate={mutate} />
       </Flex>
     )}
   </>)
 };
 
-const CommentBody = ({ children, me, item, clickUser }) => {
+const CommentBody = ({ children, me, item, clickUser, mutate }) => {
   return (
     <Flex mb="20px" key={item.createdAt} flex="1">
       <Avatar
@@ -90,8 +84,8 @@ const CommentBody = ({ children, me, item, clickUser }) => {
           <Text>{item.content}</Text>
           { me && item.User?.id === me.id &&
             <Flex flex="1" justify="flex-end">
-              <FontAwesomeIcon icon={faEdit} size="sm" style={iconStyle} onClick={editComment(item)} />
-              <FontAwesomeIcon icon={faTimes} size="sm" style={iconStyle} onClick={deleteComment(item)} />
+              <FontAwesomeIcon icon={faEdit} size="sm" style={iconStyle} />
+              <FontAwesomeIcon icon={faTimes} size="sm" style={iconStyle} onClick={deleteComment(item, mutate)} />
             </Flex>
           }
         </Flex>
