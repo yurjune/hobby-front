@@ -1,27 +1,33 @@
 # ⚽️ 하비
 
 ## :sunny: 서비스 소개
-
-하비는 일상에서 취미활동을 할 때 활동한 시간을 측정하여 사진과 글과 함께 업로드하여 유저간 소통하는 커뮤니티 사이트입니다.
+⚽️ 하비는 일상에서 취미활동을 할 때 활동한 시간을 측정하여 사진과 글과 함께 업로드하여 유저간 소통하는 커뮤니티 사이트입니다.
 
 주소: http://hobbysns.tk
 <br/>
 <br/>
 
 ## :sunny: 사용 기술
-#### 백엔드:  
+
+#### 백엔드:
+<img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/><a/>
+<img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=Express&logoColor=white"/><a/>
+<img src="https://img.shields.io/badge/MYSQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/><a/>
 + Node.js의 express를 사용하여 API서버를 구축하였습니다.  
 + MYSQL을 DB로 사용하였습니다.
 <br/>
 
-#### 프론트엔드:  
+#### 프론트엔드:
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/><a/>
+  <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=Next.js&logoColor=white"/><a/>
+  <img src="https://img.shields.io/badge/styled components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/><a/>
 + React와 Next.js를 사용하여 화면단을 구성하였습니다.  
 + Redux나 Mobx등의 상태관리 라이브러리 대신 SWR을 사용하였습니다.  
-+ css-in-js 방식으로 Styled-Components를 사용하였습니다.  
++ css-in-js 방식으로 Styled-Components를 사용하였습니다.
 <br/>
 
 #### 배포:  
-+ Amazon Web Service를 통해 배포하였습니다.  
++ Amazon Web Service를 통해 배포하였습니다.
 <br/>
 
 ## :sunny: 주요 페이지
@@ -72,9 +78,10 @@
 <br/>
 
 ## :sunny: 반응형 구현
-모바일, 태블릿, 데스트탑 화면에 맞게 반응형으로 제작하였습니다.
++ 모바일, 태블릿, 데스트탑 화면에 맞게 반응형으로 제작하였습니다.
 <br/>
-
-<image src="https://user-images.githubusercontent.com/84958904/148899877-ed14677f-1592-49ba-81d6-cdfec2ca3028.png" width="300" height="600"/>
+<p align="center">
+  <image src="https://user-images.githubusercontent.com/84958904/148899877-ed14677f-1592-49ba-81d6-cdfec2ca3028.png" width="300" height="600"/>
+</p>
 <br/>
 <br/>
