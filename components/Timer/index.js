@@ -127,7 +127,7 @@ export const PostTimer = ({ time, fontSize }) => {
     <PostWrapper>
       { hours > 0 && <Text fontSize={fontSize}>{`${hours}시간`}</Text> }
       <Text fontSize={fontSize}>{`${minutes}분`}</Text>
-      <Text fontSize={fontSize}>{`${seconds}초`}</Text>
+      { !hours && <Text fontSize={fontSize}>{`${seconds}초`}</Text> }
     </PostWrapper>
   );
 };
