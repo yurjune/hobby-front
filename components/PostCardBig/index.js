@@ -20,7 +20,7 @@ import {
   Menu,
   iconStyle,
 } from './style';
-import { localhost, selectionSort } from '../Common/global';
+import { requestToServer, selectionSort } from '../Common/global';
 import CommentForm from './CommentForm';
 import { PostTimer } from '../Timer';
 
@@ -184,7 +184,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
           }</>
           : <PostBar item={postData} clickUser={clickUser} />
         }
-        <Picture mb="20px" url={localhost(postData.Images[0]?.src)} />
+        <Picture mb="20px" url={requestToServer(postData.Images[0]?.src)} />
         <FlexC>
           <Flex mb="20px">
             <Flex flex="1">

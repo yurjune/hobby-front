@@ -15,7 +15,7 @@ import {
   iconStyle,
 } from './style';
 import useInput from '../../hooks/useInput';
-import { localhost } from '../Common/global';
+import { requestToServer } from '../Common/global';
 
 const InfoForm = ({ me }) => {
   const router = useRouter();
@@ -57,7 +57,7 @@ const InfoForm = ({ me }) => {
       <Hr />
       <Contents w="270px">
         <FlexC mb="20px">
-          <Picture url={`${localhost(profileImage)}`}>
+          <Picture url={`${requestToServer(profileImage)}`}>
             <FontAwesomeIcon icon={faPlus} size="lg" style={iconStyle} onClick={changeProfile} />
           </Picture>
           <Button w="100px" onClick={changeProfile}>사진 추가</Button>

@@ -4,7 +4,7 @@ import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FlexC, Flex, Box, Bold, Text, Pointer } from '../Common';
 import { Avatar } from '../Common/custom';
-import { localhost } from '../Common/global';
+import { requestToServer } from '../Common/global';
 import { iconStyle } from './style';
 import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
@@ -81,7 +81,7 @@ const CommentBody = ({ children, me, item, clickUser }) => {
         w="36px"
         radius="18px"
         mr="10px"
-        url={localhost(item.User.Image?.src)}
+        url={requestToServer(item.User.Image?.src)}
         onClick={clickUser(item.User.id)}
       />
       <FlexC flex="1">

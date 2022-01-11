@@ -10,7 +10,7 @@ import {
 } from '../PostCardBig/style';
 import { Avatar } from '../Common/custom';
 import { Flex, FlexC, Text } from '../Common';
-import { localhost } from '../Common/global';
+import { requestToServer } from '../Common/global';
 import { PostTimer } from '../Timer';
 import useLike from '../../hooks/useLike';
 
@@ -29,10 +29,10 @@ const PostCard = ({ me, postData, mutate }) => {
   return (
     <>{ postData &&
       <FlexC cursor="pointer" mb="20px">
-        <Picture url={postData.Images && localhost(postData.Images[0]?.src)} onClick={onClickCard} />
+        <Picture url={postData.Images && requestToServer(postData.Images[0]?.src)} onClick={onClickCard} />
         <FlexC p="10px 5px">
           <Flex mb="15px" onClick={onClickUser}>
-            <Avatar mr="15px" url={localhost(postData.User?.Image?.src)} />
+            <Avatar mr="15px" url={requestToServer(postData.User?.Image?.src)} />
             <Text self="center" flex="1">{postData.User?.name}</Text>
             <PostTimer time={postData.time} />
           </Flex>

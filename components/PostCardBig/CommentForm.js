@@ -2,7 +2,7 @@ import React from 'react';
 import { Comment } from './style';
 import { Flex } from '../Common';
 import { Button, Avatar } from '../Common/custom';
-import { localhost } from '../Common/global';
+import { requestToServer } from '../Common/global';
 
 const CommentForm = ({ me, item, writing, submit, handle }) => {
   return (<>
@@ -12,7 +12,7 @@ const CommentForm = ({ me, item, writing, submit, handle }) => {
           w="36px"
           radius="18px"
           mr="10px"
-          url={localhost(me.Image?.src)}
+          url={requestToServer(me.Image?.src)}
         />
         <Comment placeholder="댓글을 남겨주세요" value={writing} onChange={handle} />
         <Button h="35px" self="center" onClick={submit(item)}>게시</Button>

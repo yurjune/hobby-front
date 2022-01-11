@@ -1,6 +1,7 @@
-export const backend = `http://hobbysns.tk:3000`;
+export const backend = process.env.NODE_ENV === 'production' ? 'http://hobbysns.tk:3000' : 'http://localhost:3000';
+// export const backend = 'http://hobbysns.tk:3000';
 
-export const localhost = (value) => {
+export const requestToServer = (value) => {
   return `${backend}/${value}`;
 };
 

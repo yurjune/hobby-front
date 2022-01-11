@@ -13,7 +13,7 @@ import {
 } from './style';
 import { Avatar } from '../Common/custom';
 import { Box } from '../Common';
-import { localhost } from '../Common/global';
+import { requestToServer } from '../Common/global';
 import SideNav from '../SideNav';
 
 const Header = ({ me }) => {
@@ -37,7 +37,7 @@ const Header = ({ me }) => {
   return (<>
     <Box bg="gold">
       <Wrapper>
-        <Logo onClick={goMain}>로고ㅎㅎㅎ</Logo>
+        <Logo onClick={goMain}>하비</Logo>
         <Desktop>
           <Menu>
             <MenuItem onClick={goMain}>커뮤니티</MenuItem>
@@ -47,14 +47,14 @@ const Header = ({ me }) => {
           </Menu>
           {me && <> 
             <Profile onClick={clickUser(me.id)}>
-              <Avatar url={localhost(me.Image?.src)} />
+              <Avatar url={requestToServer(me.Image?.src)} />
               <ProfileItem>{`${me.name} 님 환영합니다!`}</ProfileItem>
             </Profile>
           </>}
         </Desktop>
         <Mobile>
           { me && <>
-            <Avatar url={localhost(me.Image?.src)} onClick={clickUser(me.id)} />
+            <Avatar url={requestToServer(me.Image?.src)} onClick={clickUser(me.id)} />
             <ProfileItem onClick={clickUser(me.id)}>{me.name}</ProfileItem>
           </>}
           <Hamburger onClick={clickHamburger}>

@@ -14,7 +14,7 @@ import { FlexC } from '../Common';
 import { Button } from '../Common/custom';
 import axios from 'axios';
 import useInput from '../../hooks/useInput';
-import { localhost } from '../Common/global';
+import { requestToServer } from '../Common/global';
 
 const WritingForm = ({ me, exPost }) => {
   const [imageList, setImageList] = useState([]);
@@ -104,7 +104,7 @@ const WritingForm = ({ me, exPost }) => {
         <Grid>
           {imageList.map(item => (
             <GridItem key={item}>
-              <Picture url={localhost(item)} />
+              <Picture url={requestToServer(item)} />
             </GridItem>
           ))}
         </Grid>

@@ -2,7 +2,7 @@ import React from 'react';
 import { FlexC, Flex, Bold, Text, Button } from '../Common';
 import useDayjs from '../../hooks/useDayjs';
 import { Avatar } from '../Common/custom';
-import { localhost } from '../Common/global';
+import { requestToServer } from '../Common/global';
 
 const PostBar = ({ children, item, clickUser }) => {
   return (
@@ -11,7 +11,7 @@ const PostBar = ({ children, item, clickUser }) => {
         w="36px"
         radius="18px"
         mr="10px"
-        url={localhost(item.User.Image?.src)}
+        url={requestToServer(item.User.Image?.src)}
         onClick={clickUser(item.User.id)}
       />
       <FlexC flex="1">

@@ -17,9 +17,6 @@ import {
 import { Flex, Text } from '../Common';
 import { Button } from '../Common/custom';
 
-axios.defaults.baseURL = 'http://localhost:3060';
-axios.defaults.withCredentials = true;
-
 const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
   const [email, handleEmail] = useInput('');
   const [password, handlePassword] = useInput('');

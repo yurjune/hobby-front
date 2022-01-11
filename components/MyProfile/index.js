@@ -6,7 +6,7 @@ import {
 } from './style';
 import { Flex, FlexC, Box } from '../Common';
 import { Button, Avatar } from '../Common/custom';
-import { localhost } from '../Common/global';
+import { requestToServer } from '../Common/global';
 import useFollow from '../../hooks/useFollow';
 
 const MyProfile = ({ me, user, mutate }) => {
@@ -34,7 +34,7 @@ const MyProfile = ({ me, user, mutate }) => {
           w="100px"
           h="100px"
           radius="50px"
-          url={localhost(user.Image?.src)}
+          url={requestToServer(user.Image?.src)}
           mb="20px"
         />
         <Text fontSize="18px" lineHeight="34px">{user.name}</Text>
