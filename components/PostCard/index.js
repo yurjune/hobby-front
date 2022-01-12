@@ -37,9 +37,9 @@ const PostCard = ({ me, postData, mutate }) => {
         <Picture url={postData.Images && requestToServer(postData.Images[0]?.src)} onClick={onClickCard} />
         <FlexC p="10px 5px">
           <Flex mb="15px" onClick={onClickUser}>
-            <Avatar mr="15px" url={requestToServer(postData.User?.Image?.src)} />
+            <Avatar mr="10px" url={requestToServer(postData.User?.Image?.src)} />
             <Text self="center" flex="1">{postData.User?.name}</Text>
-            <PostTimer time={postData.time} />
+            <PostTimer time={postData.time} fontSize="14px" />
           </Flex>
           { isLong
           ? <Paragraph onClick={onClickCard}>{`${postData.content.slice(0, 50)}...`}</Paragraph>

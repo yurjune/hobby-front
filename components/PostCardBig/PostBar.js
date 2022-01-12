@@ -10,14 +10,15 @@ const PostBar = ({ children, item, clickUser }) => {
       <Avatar
         w="36px"
         radius="18px"
-        mr="10px"
+        mr="14px"
         url={requestToServer(item.User.Image?.src)}
         onClick={clickUser(item.User.id)}
       />
       <FlexC flex="1">
         <Bold
-          mt="4px"
+          mt="2px"
           mb="8px"
+          fontSize="15px"
           cursor="pointer"
           onClick={clickUser(item.User.id)}
         >

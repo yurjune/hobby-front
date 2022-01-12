@@ -193,7 +193,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
               <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} onClick={clickComment} />
               <Text self="center" mr="20px">{postData.Comments?.length}</Text>
             </Flex>
-            <PostTimer time={postData.time} fontSize="18px" />
+            <PostTimer time={postData.time} fontSize="16px" />
           </Flex>
           <Paragraph mb="30px">
             <a>{postData.User?.name}</a>{postData.content}

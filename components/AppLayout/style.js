@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import "@fontsource/roboto";
+import "@fontsource/nanum-gothic";
 
 // export const headerWidth = `calc(100% - 120px)`;
 export const headerWidth = `1200px`;
@@ -9,12 +11,14 @@ const Grid = styled.div`
   grid-template-columns: 1fr minmax(auto, ${layoutWidth}) 1fr;
   grid-template-rows: auto auto 1fr auto;
   min-height: 100vh;
+  font-family: "Roboto", "Nanum Gothic";
 `
 const GridHeader = styled.div`
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 2;
+  font-family: "Malgun Gothic";
 `
 const GridItem = styled.div`
   grid-column-start: 2;
