@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlexC, Flex, Bold, Text, Button } from '../Common';
+import { FlexC, Flex, Bold, Text } from '../Common';
 import useDayjs from '../../hooks/useDayjs';
 import { Avatar } from '../Common/custom';
 import { requestToServer } from '../Common/global';

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FlexC, Flex, Box, Bold, Text, Pointer } from '../Common';
+import { FlexC, Flex, Box, Text, Pointer } from '../Common';
 import { Avatar } from '../Common/custom';
 import { requestToServer } from '../Common/global';
 import { iconStyle } from './style';
@@ -10,30 +9,22 @@ import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const deleteComment = (target, mutate) => async () => {
-  try {
-    const isDelete = confirm('정말로 삭제하시겠습니까?');
-    if (!isDelete) return;
-    await axios.delete(`/comment?commentId=${target.id}`);
-    mutate();
-  } catch (error) {
-    if (error.response?.data) return alert(error.response.data);
-    console.error(error);
-  }
-};
-
-const CommentBar = ({ me, item, mutate, replyTargetId, openReplyForm, reply, handleReply, submitReply, clickUser }) => {
-  const [isOpenReplyBar, setIsOpenReplyBar] = useState(false);
-  const showReplies = () => {
-    if (isOpenReplyBar) {
-      setIsOpenReplyBar(false);
-    } else {
-      setIsOpenReplyBar(true);
-    }
-  };
+const CommentBar = ({ item, commentBarProps }) => {
+  const {
+    me,
+    reply,
+    handleReply,
+    replyTargetId,
+    isOpenReplyBar,
+    openReplyForm,
+    submitReply,
+    showReplies,
+    clickUser,
+    deleteComment,
+  } = commentBarProps;
 
   return (<>
-    <CommentBody me={me} item={item} clickUser={clickUser} mutate={mutate}>
+    <CommentBody me={me} item={item} clickUser={clickUser} deleteComment={deleteComment}>
       { me && <Pointer onClick={openReplyForm(item.id)}>답글 쓰기</Pointer> }
     </CommentBody>
     { item.Son && item.Son.length >= 1 &&
@@ -62,13 +53,13 @@ const CommentBar = ({ me, item, mutate, replyTargetId, openReplyForm, reply, han
     { isOpenReplyBar && item.Son.length >= 1 && item.Son.map(son =>
       <Flex key={son.createdAt} flex="1">
         <Box w="46px" />
-        <CommentBody me={me} item={son} clickUser={clickUser} mutate={mutate} />
+        <CommentBody me={me} item={son} clickUser={clickUser} deleteComment={deleteComment} />
       </Flex>
     )}
   </>)
 };
 
-const CommentBody = ({ children, me, item, clickUser, mutate }) => {
+const CommentBody = ({ children, me, item, clickUser, deleteComment }) => {
   return (
     <Flex mb="20px" key={item.createdAt} flex="1">
       <Avatar
@@ -85,7 +76,7 @@ const CommentBody = ({ children, me, item, clickUser, mutate }) => {
           { me && item.User?.id === me.id &&
             <Flex flex="1" justify="flex-end">
               <FontAwesomeIcon icon={faEdit} size="sm" style={iconStyle} />
-              <FontAwesomeIcon icon={faTimes} size="sm" style={iconStyle} onClick={deleteComment(item, mutate)} />
+              <FontAwesomeIcon icon={faTimes} size="sm" style={iconStyle} onClick={deleteComment(item)} />
             </Flex>
           }
         </Flex>

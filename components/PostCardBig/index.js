@@ -1,42 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as faHeartSolid, faEllipsisV }  from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import useInput from '../../hooks/useInput';
 import useFollow from '../../hooks/useFollow';
 import useLike from '../../hooks/useLike';
-import PostBar from './PostBar';
-import CommentBar from './CommentBar';
-import { FlexC, Flex, Box, Text, } from '../Common';
-import { Button } from '../Common/custom';
-import { 
-  Wrapper,
-  Picture,
-  Paragraph,
-  ShowComment,
-  MenuWrapper,
-  Menu,
-  iconStyle,
-} from './style';
-import { requestToServer, selectionSort } from '../Common/global';
-import CommentForm from './CommentForm';
-import { PostTimer } from '../Timer';
+import { selectionSort } from '../Common/global';
+import PostCardBigView from './PostCardBigView';
 
 const PostCardBig = ({ me, postData, mutate }) => {
-  const router = useRouter();
   const [comment, handleComment, setComment] = useInput('');
-  const [reply, handleReply, setReply] = useInput('');
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [isOpenComment, setIsOpenComment] = useState(false);
-  const [replyTargetId, setReplyTargetId] = useState('');
-
   const [commentList, setCommentList] = useState([]);
   const [previewComments, setPreviewComments] = useState([]);
+  
+  const [reply, handleReply, setReply] = useInput('');
+  const [replyTargetId, setReplyTargetId] = useState('');
+  
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isOpenComment, setIsOpenComment] = useState(false);
+  const [isOpenReplyBar, setIsOpenReplyBar] = useState(false);
+
+  const router = useRouter();
 
   const {
     onClickFollow,
@@ -112,34 +97,29 @@ const PostCardBig = ({ me, postData, mutate }) => {
     }
   };
 
-  const openReplyForm = (value) => () => {
-    if (value === replyTargetId) {
-      setReplyTargetId('')
-    } else {
-      setReplyTargetId(value);
-    }
+  const showComments = () => {
+    if (!isOpenComment) return setIsOpenComment(true);
+    setIsOpenComment(false);
   };
 
-  const showComments = () => {
-    if (isOpenComment === false) {
-      setIsOpenComment(true);
-    } else {
-      setIsOpenComment(false);
-    }
+  const showReplies = () => {
+    if (isOpenReplyBar) return setIsOpenReplyBar(false);
+    setIsOpenReplyBar(true);
+  };
+
+  const openReplyForm = (value) => () => {
+    if (value === replyTargetId) return setReplyTargetId('');
+    setReplyTargetId(value);
+  };
+
+  const onClickMenu = () => {
+    if (!isOpenMenu) return setIsOpenMenu(true);
+    setIsOpenMenu(false);
   };
 
   const clickComment = () => {
     if (!me) alert('먼저 로그인해주세요');
   };
-
-  const onClickMenu = () => {
-    if (isOpenMenu === false) {
-      setIsOpenMenu(true);
-    } else {
-      setIsOpenMenu(false);
-    }
-  };
-  
   const clickUser = (userId) => () => router.push(`/profile/${userId}`);
   
   const editPost = () => router.push(`/edit/${postData.id}`);
@@ -148,7 +128,7 @@ const PostCardBig = ({ me, postData, mutate }) => {
     try {
       const isDelete = confirm('정말 삭제하시겠습니까?');
       if (isDelete) {
-        const result = await axios.delete(`/post?postId=${postData.id}`);
+        await axios.delete(`/post?postId=${postData.id}`);
         router.push('/');
       }
     } catch (error) {
@@ -156,94 +136,58 @@ const PostCardBig = ({ me, postData, mutate }) => {
     }
   };
 
-  return (<>
-    { postData &&
-      <Wrapper>
-        { me ?
-          <>{ me.id === postData.User?.id
-            ? <PostBar item={postData} clickUser={clickUser} >
-                <MenuWrapper>
-                  <FontAwesomeIcon size="lg" icon={faEllipsisV} style={iconStyle} onClick={onClickMenu} />
-                  { isOpenMenu &&
-                    <Menu top="40px" right="15px">
-                      <li onClick={editPost}>수정</li>
-                      <li onClick={deletePost}>삭제</li>
-                    </Menu>
-                  }
-                </MenuWrapper>
-              </PostBar>
-            : <PostBar item={postData} clickUser={clickUser} >
-                {isFollowing
-                  ? <Button h="35px" self="center" onClick={onClickUnfollow}>언팔로우</Button>
-                  : <Button h="35px" self="center" onClick={onClickFollow}>팔로우</Button>
-                }
-              </PostBar>
-          }</>
-          : <PostBar item={postData} clickUser={clickUser} />
-        }
-        <Picture mb="20px" url={requestToServer(postData.Images[0]?.src)} />
-        <FlexC>
-          <Flex mb="20px">
-            <Flex flex="1">
-              { me && isLiked
-              ? <FontAwesomeIcon size="lg" icon={faHeartSolid} style={iconStyle} onClick={unlikePost} />
-              : <FontAwesomeIcon size="lg" icon={faHeart} style={iconStyle} onClick={likePost} />
-              }
-              <Text self="center" mr="20px">{postData.Likers?.length}</Text>
-              <FontAwesomeIcon size="lg" icon={faComment} style={iconStyle} onClick={clickComment} />
-              <Text self="center" mr="20px">{postData.Comments?.length}</Text>
-            </Flex>
-            <PostTimer time={postData.time} fontSize="16px" />
-          </Flex>
-          <Paragraph mb="30px">
-            <a>{postData.User?.name}</a>{postData.content}
-          </Paragraph>
-            { postData.Comments?.length >= 2 &&
-              <ShowComment onClick={showComments}>
-                { isOpenComment ? `댓글 접기` : `댓글 ${postData.Comments.length}개 모두 보기`}
-              </ShowComment>
-            }
-          <Box mb="10px">
-            { !isOpenComment && previewComments.length >=1 && previewComments.map(item =>
-              <CommentBar
-                key={item.createdAt}
-                item={item}
-                me={me}
-                mutate={mutate}
-                replyTargetId={replyTargetId}
-                openReplyForm={openReplyForm}
-                reply={reply}
-                handleReply={handleReply}
-                submitReply={submitReply}
-                clickUser={clickUser}
-              />
-            )}
-            { isOpenComment && commentList.map(item => 
-              <CommentBar
-                key={item.createdAt}
-                item={item}
-                me={me}
-                mutate={mutate}
-                replyTargetId={replyTargetId}
-                openReplyForm={openReplyForm}
-                reply={reply}
-                handleReply={handleReply}
-                submitReply={submitReply}
-                clickUser={clickUser}
-              />
-            )}
-          </Box>
-          { me && <CommentForm
-            me={me}
-            item={postData}
-            writing={comment}
-            handle={handleComment}
-            submit={submitComment}
-          />}
-        </FlexC>
-      </Wrapper>
+  const deleteComment = (target) => async () => {
+    try {
+      const isDelete = confirm('정말로 삭제하시겠습니까?');
+      if (!isDelete) return;
+      await axios.delete(`/comment?commentId=${target.id}`);
+      mutate();
+    } catch (error) {
+      if (error.response?.data) return alert(error.response.data);
+      console.error(error);
     }
-  </>);
+  };
+
+  const props = {
+    me,
+    postData,
+    comment,
+    handleComment,
+    commentList,
+    previewComments,
+    isFollowing,
+    isLiked,
+    isOpenMenu,
+    isOpenComment,
+    onClickFollow,
+    onClickUnfollow,
+    likePost,
+    unlikePost,
+    submitComment,
+    showComments,
+    clickUser,
+    clickComment,
+    onClickMenu,
+    editPost,
+    deletePost,
+  }
+
+  const commentBarProps = {
+    me,
+    reply,
+    handleReply,
+    replyTargetId,
+    isOpenReplyBar,
+    openReplyForm,
+    submitReply,
+    showReplies,
+    clickUser,
+    deleteComment,
+  }
+
+  return (
+    <PostCardBigView props={props} commentBarProps={commentBarProps}/>
+  );
 };
 
 export default PostCardBig;
