@@ -8,6 +8,7 @@ import { selectionSort } from '../Common/global';
 import PostCardBigView from './PostCardBigView';
 
 const PostCardBig = ({ me, postData, mutate }) => {
+  console.log('Index rendered');
   const [comment, handleComment, setComment] = useInput('');
   const [commentList, setCommentList] = useState([]);
   const [previewComments, setPreviewComments] = useState([]);

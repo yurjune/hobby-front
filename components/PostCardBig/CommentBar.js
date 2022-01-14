@@ -9,7 +9,8 @@ import useDayjs from '../../hooks/useDayjs';
 import CommentForm from './CommentForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const CommentBar = ({ item, commentBarProps }) => {
+const CommentBar = React.memo(({ item, commentBarProps }) => {
+  console.log('CommentBar rendered');
   const {
     me,
     reply,
@@ -57,9 +58,10 @@ const CommentBar = ({ item, commentBarProps }) => {
       </Flex>
     )}
   </>)
-};
+});
 
-const CommentBody = ({ children, me, item, clickUser, deleteComment }) => {
+const CommentBody = React.memo(({ children, me, item, clickUser, deleteComment }) => {
+  console.log('CommentBody rendered');
   return (
     <Flex mb="20px" key={item.createdAt} flex="1">
       <Avatar
@@ -87,6 +89,6 @@ const CommentBody = ({ children, me, item, clickUser, deleteComment }) => {
       </FlexC>
     </Flex>
   )
-};
+});
 
 export default CommentBar;

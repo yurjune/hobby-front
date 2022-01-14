@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const useLike = (me, postData, setIsLiked, mutate) => {
@@ -13,7 +13,7 @@ const useLike = (me, postData, setIsLiked, mutate) => {
     }
   }, [postData]);
 
-  const likePost = async () => {
+  const likePost = useCallback(async () => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
@@ -23,9 +23,9 @@ const useLike = (me, postData, setIsLiked, mutate) => {
     } catch(error) {
       alert(error.response.data);
     }
-  };
+  }, [me, postData]);
 
-  const unlikePost = async () => {
+  const unlikePost = useCallback(async () => {
     try {
       if (!me) return alert('먼저 로그인해주세요');
       const result = await axios.patch(
@@ -35,7 +35,7 @@ const useLike = (me, postData, setIsLiked, mutate) => {
     } catch(error) {
       alert(error.response.data);
     }
-  };
+  }, [me, postData]);
 
   return {
     likePost,

@@ -4,7 +4,8 @@ import { Flex } from '../Common';
 import { Button, Avatar } from '../Common/custom';
 import { requestToServer } from '../Common/global';
 
-const CommentForm = ({ me, item, writing, submit, handle }) => {
+const CommentForm = React.memo(({ me, item, writing, submit, handle }) => {
+  console.log('CommentForm rendered');
   return (<>
     { me &&
       <Flex mb="20px" flex="1">
@@ -19,6 +20,6 @@ const CommentForm = ({ me, item, writing, submit, handle }) => {
       </Flex>
     }
   </>);
-};
+});
 
 export default CommentForm;

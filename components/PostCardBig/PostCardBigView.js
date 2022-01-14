@@ -20,6 +20,7 @@ import CommentForm from './CommentForm';
 import { PostTimer } from '../Timer';
 
 const PostCardBigView = ({ props, commentBarProps }) => {
+  console.log('View rendered');
   const {
     me,
     postData,
