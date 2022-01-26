@@ -14,8 +14,9 @@ import {
   Forgot,
   iconStyle,
 } from './style';
-import { Flex, Text } from '../Common';
+import { Flex, Text, Box } from '../Common';
 import { Button } from '../Common/custom';
+import { requestToServer } from '../Common/global';
 
 const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
   const [email, handleEmail] = useInput('');
@@ -48,6 +49,16 @@ const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
       console.error(error);
     }
   };
+
+  const onClickGoogle = async () => {
+    try {
+      await axios.get('/auth/kakao');
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Modal>
       <ModalBody>
@@ -58,10 +69,16 @@ const LoginForm = ({ closeLoginForm, setOpenJoinPage }) => {
           <Label>비밀번호</Label>
           <Input type="password" placeholder="******" value={password} onChange={handlePassword} />
           { isWrong && <Text color="red" mb="20px" fontSize="14px">이메일 또는 비밀번호가 잘못되었습니다</Text>}
-          <Flex>
+          <Flex mb="20px">
             <Button mr="5px" onClick={onClickLogin}>로그인</Button>
             <Button onClick={() => setOpenJoinPage(true)}>회원가입</Button>
           </Flex>
+          {/* <img
+            src={requestToServer('google-button.png')}
+            onClick={onClickGoogle}
+            width="150px"
+            cursor="pointer"
+          /> */}
           <Forgot>Forgot Password?</Forgot>
           <FontAwesomeIcon icon={faTimes} style={iconStyle} onClick={closeLoginForm} />
         </ModalContents>

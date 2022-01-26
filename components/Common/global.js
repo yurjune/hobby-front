@@ -1,5 +1,4 @@
-export const backend = process.env.NODE_ENV === 'production' ? 'http://hobbysns.tk:3000' : 'http://localhost:3000';
-// export const backend = 'http://hobbysns.tk:3000';
+export const backend = process.env.NODE_ENV === 'production' ? 'http://ec2-13-209-33-201.ap-northeast-2.compute.amazonaws.com:3000' : 'http://localhost:3000';
 
 export const requestToServer = (value) => {
   return `${backend}/${value}`;
