@@ -41,8 +41,6 @@ const Home = () => {
     };
   }, [data]);
 
-  if (meError || error) return <div>에러 발생</div>;
-
   return (<>
     <Head>
       <title>커뮤니티</title>
